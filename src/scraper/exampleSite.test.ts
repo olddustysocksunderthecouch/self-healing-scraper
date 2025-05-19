@@ -4,9 +4,17 @@ import puppeteer, { Browser, Page } from 'puppeteer';
 import { scrape, SELECTORS } from './exampleSite';
 import { ScrapeResult } from './types';
 
-// Mock the timestamp for consistent testing
-const mockDate = new Date('2023-01-01T12:00:00Z');
-jest.spyOn(global, 'Date').mockImplementation(() => mockDate as any);
+// Set a fixed date for testing
+const FIXED_DATE = '2023-01-01T12:00:00Z';
+const mockDate = new Date(FIXED_DATE);
+
+// Mock for Date
+jest.spyOn(global, 'Date').mockImplementation((...args: any[]) => {
+  if (args.length === 0) {
+    return mockDate;
+  }
+  return new (Function.prototype.bind.apply(Date, [null].concat(args) as any))();
+});
 
 describe('exampleSite Scraper', () => {
   let browser: Browser;
@@ -14,37 +22,58 @@ describe('exampleSite Scraper', () => {
   let fixtureHtml: string;
 
   beforeAll(async () => {
-    // Load the fixture HTML
-    fixtureHtml = fs.readFileSync(
-      path.join(__dirname, '../../tests/fixtures/exampleSite.html'),
-      'utf-8'
-    );
+    // Load the fixture HTML only once
+    try {
+      fixtureHtml = fs.readFileSync(
+        path.join(__dirname, '../../tests/fixtures/exampleSite.html'),
+        'utf-8'
+      );
+    } catch (error) {
+      console.error('Failed to load fixture HTML:', error);
+      throw error;
+    }
 
-    // Launch browser for tests
-    browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    try {
+      // Launch browser for tests
+      browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      });
+    } catch (error) {
+      console.error('Failed to launch browser:', error);
+      throw error;
+    }
   });
 
   afterAll(async () => {
-    await browser.close();
+    if (browser) {
+      await browser.close();
+    }
   });
 
   beforeEach(async () => {
-    // Create a new page for each test
-    page = await browser.newPage();
-    await page.setContent(fixtureHtml);
+    try {
+      // Create a new page for each test
+      page = await browser.newPage();
 
-    // Mock page.goto to use our fixture instead
-    jest.spyOn(Page.prototype, 'goto').mockImplementation(async () => {
+      // Load the fixture HTML into the page
       await page.setContent(fixtureHtml);
-      return {} as any;
-    });
+
+      // Mock page.goto to use our fixture instead
+      jest.spyOn(Page.prototype, 'goto').mockImplementation(async () => {
+        await page.setContent(fixtureHtml);
+        return { ok: () => true } as any;
+      });
+    } catch (error) {
+      console.error('Failed in beforeEach:', error);
+      throw error;
+    }
   });
 
   afterEach(async () => {
-    await page.close();
+    if (page) {
+      await page.close().catch((e) => console.error('Error closing page:', e));
+    }
     jest.restoreAllMocks();
   });
 

@@ -10,5 +10,11 @@ module.exports = {
   coverageDirectory: 'coverage',
   collectCoverageFrom: ['src/**/*.ts', '!src/**/*.d.ts', '!src/**/index.ts'],
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
-  testTimeout: 10000, // Puppeteer tests may need more time
+  testTimeout: 30000, // Increased timeout for Puppeteer tests
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.json',
+    },
+  },
 };

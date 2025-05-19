@@ -1,0 +1,27 @@
+{
+  "name": "self-healing-scraper",
+  "version": "0.1.0",
+  "description": "A robust web scraping framework with built-in self-healing capabilities powered by AI",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/cli/selfheal.ts",
+    "test": "jest"
+  },
+  "keywords": [
+    "web-scraping",
+    "self-healing",
+    "ai",
+    "automation"
+  ],
+  "author": "Self-Healing Scraper Contributors",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/self-healing-scraper.git"
+  }
+}

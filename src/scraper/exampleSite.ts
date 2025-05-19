@@ -10,7 +10,6 @@ import { BaseScraper } from './BaseScraper.js';
 import { Page } from 'puppeteer';
 
 class ExampleSiteScraper extends BaseScraper<ExampleScrapeResult> {
-  // eslint-disable-next-line @typescript-eslint/require-await
   protected async extractData(
     page: Page,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

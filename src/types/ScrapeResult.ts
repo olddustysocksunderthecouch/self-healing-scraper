@@ -21,6 +21,5 @@ export interface ScrapeResult {
   /** ISO timestamp (UTC) when the data was captured */
   timestamp: string;
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
   [key: string]: unknown; // Allow extensions while keeping strong guarantees above
 }

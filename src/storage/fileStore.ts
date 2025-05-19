@@ -22,7 +22,7 @@ export class FileStore implements StorageAdapter {
   }
 
   async save(ts: Date, data: ScrapeResult): Promise<void> {
-    const siteId = this.resolveSiteId(data);
+    const siteId = this.resolveSiteId();
     const file = this.filePath(siteId);
 
     await fs.mkdir(this.baseDir, { recursive: true });
@@ -62,7 +62,7 @@ export class FileStore implements StorageAdapter {
   // Internal helpers
   // ------------------------------------------------------------------
 
-  private resolveSiteId(data: ScrapeResult): string {
+  private resolveSiteId(): string {
     // Prefer explicit environment variable, otherwise fall back to hardcoded
     // "default" identifier so reads & writes remain symmetrical.
     if (process.env.SCRAPE_SITE_ID) return process.env.SCRAPE_SITE_ID;

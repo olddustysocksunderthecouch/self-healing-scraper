@@ -14,7 +14,12 @@ async function main(): Promise<void> {
   if (command === 'scrape') {
     try {
       // Optional URL can be passed as second argument
-      const url = args[1];
+      // Extract optional flags (currently only --heal)
+      const healFlag = args.includes('--heal');
+
+      // Filter out flags from positional args list to get URL
+      const positional = args.filter((a) => !a.startsWith('--'));
+      const url = positional[1];
       console.log('Starting scraper...');
 
       const result = await scrape(url);
@@ -30,8 +35,20 @@ async function main(): Promise<void> {
       console.log(JSON.stringify({ ...result, drift }, null, 2));
 
       if (drift) {
-        console.warn(`⚠️  Drift detected for ${siteId}. Healing orchestrator should be triggered.`);
-        process.exitCode = 2; // dedicated exit code meaning "drift"
+        console.warn(`⚠️  Drift detected for ${siteId}.`);
+
+        if (healFlag) {
+          console.log('🩹  --heal flag supplied – invoking healing orchestrator…');
+
+          const { HealingOrchestrator } = await import('../healer/healOrchestrator.js');
+          const orchestrator = new HealingOrchestrator();
+          const healed = await orchestrator.heal();
+
+          process.exitCode = healed ? 0 : 3; // 3 → healing failed
+        } else {
+          console.warn('Healing orchestrator not run (missing --heal flag).');
+          process.exitCode = 2; // dedicated exit code meaning "drift"
+        }
       } else {
         console.log('✅  Scrape successful, no drift detected.');
         process.exitCode = 0;
@@ -46,7 +63,10 @@ async function main(): Promise<void> {
 Self-Healing Scraper CLI
 ------------------------
 Usage:
-  selfheal scrape [url]    Scrape the target URL and output JSON result
+  selfheal scrape [url] [--heal]    Scrape the target URL and output JSON result.
+                                   When --heal is provided, the script
+                                   automatically triggers the LLM repair
+                                   pipeline upon drift detection.
     `);
     process.exit(1);
   }

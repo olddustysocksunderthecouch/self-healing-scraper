@@ -1,75 +1,47 @@
-import puppeteer from 'puppeteer';
-import type { Browser, Page } from 'puppeteer';
-
-export interface ScrapeResult {
-  title: string;
-  price: string;
-  description: string;
-  imageUrl: string;
-  timestamp: string;
-}
+import type { ScrapeResult as ExampleScrapeResult } from '../types/ScrapeResult.js';
+import { BaseScraper } from './BaseScraper.js';
 
 /**
- * Scrapes data from the example product page
- * @param url URL to scrape, defaults to a demo product page
- * @returns Promise resolving to structured scrape result
+ * Example implementation for a generic e-commerce product page.
+ *
+ * The selectors map to classes present in the fixture HTML residing under
+ * `tests/fixtures/exampleSite.html`.
  */
-export async function scrape(url = 'https://example.com/product'): Promise<ScrapeResult> {
-  let browser: Browser | null = null;
+import { Page } from 'puppeteer';
 
-  try {
-    // Launch browser
-    browser = await puppeteer.launch({
-      headless: true,
-    });
+class ExampleSiteScraper extends BaseScraper<ExampleScrapeResult> {
+  // eslint-disable-next-line @typescript-eslint/require-await
+  protected async extractData(
+    page: Page,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _url: string,
+  ): Promise<Partial<ExampleScrapeResult>> {
+    const [title, price, description, imageUrl] = await Promise.all([
+      this.extractText(page, '.product-title'),
+      this.extractText(page, '.product-price'),
+      this.extractText(page, '.product-description'),
+      this.extractAttribute(page, '.product-image', 'src'),
+    ]);
 
-    const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle2' });
-
-    // Extract data using selectors
-    const title = await extractText(page, '.product-title');
-    const price = await extractText(page, '.product-price');
-    const description = await extractText(page, '.product-description');
-    const imageUrl = await extractAttribute(page, '.product-image', 'src');
-
-    // Return structured data
     return {
       title,
       price,
       description,
       imageUrl,
-      timestamp: new Date().toISOString(),
     };
-  } finally {
-    // Ensure browser closes even if an error occurs
-    if (browser) {
-      await browser.close();
-    }
   }
 }
 
-/**
- * Helper function to extract text content from a selector
- */
-async function extractText(page: Page, selector: string): Promise<string> {
-  try {
-    await page.waitForSelector(selector, { timeout: 5000 });
-    return page.$eval(selector, (element) => element.textContent?.trim() || '');
-  } catch (error) {
-    console.error(`Failed to extract text from selector: ${selector}`, error);
-    return '';
-  }
+/* ------------------------------------------------------------------------- */
+/* Public API                                                                */
+/* ------------------------------------------------------------------------- */
+
+const scraper = new ExampleSiteScraper();
+
+// Keep the original function-style API so existing imports in tests & CLI do
+// not break. This thin wrapper just forwards to the new class.
+export async function scrape(url = 'https://example.com/product'): Promise<ExampleScrapeResult> {
+  return scraper.scrape(url);
 }
 
-/**
- * Helper function to extract an attribute from an element
- */
-async function extractAttribute(page: Page, selector: string, attribute: string): Promise<string> {
-  try {
-    await page.waitForSelector(selector, { timeout: 5000 });
-    return page.$eval(selector, (element, attr) => element.getAttribute(attr) || '', attribute);
-  } catch (error) {
-    console.error(`Failed to extract attribute ${attribute} from selector: ${selector}`, error);
-    return '';
-  }
-}
+export type { ExampleScrapeResult as ScrapeResult };

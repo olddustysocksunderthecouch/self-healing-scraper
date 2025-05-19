@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
 import { scrape } from '../scraper/exampleSite.js';
+import { getFileStore } from '../storage/fileStore.js';
+import { DriftValidator } from '../validator/index.js';
+
+const store = getFileStore();
+const validator = new DriftValidator();
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
@@ -14,9 +19,24 @@ async function main(): Promise<void> {
 
       const result = await scrape(url);
 
+      // Persist result
+      await store.save(new Date(), result);
+
+      // Drift validation
+      const siteId = process.env.SCRAPE_SITE_ID ?? 'exampleSite';
+      const drift = validator.update(siteId, result, ['title', 'price', 'description', 'imageUrl']);
+
       // Log the result as formatted JSON
-      console.log(JSON.stringify(result, null, 2));
-      process.exit(0);
+      console.log(JSON.stringify({ ...result, drift }, null, 2));
+
+      if (drift) {
+        console.warn(`⚠️  Drift detected for ${siteId}. Healing orchestrator should be triggered.`);
+        process.exitCode = 2; // dedicated exit code meaning "drift"
+      } else {
+        console.log('✅  Scrape successful, no drift detected.');
+        process.exitCode = 0;
+      }
+      return;
     } catch (error) {
       console.error('Error during scraping:', error);
       process.exit(1);

@@ -9,4 +9,6 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   collectCoverageFrom: ['src/**/*.ts', '!src/**/*.d.ts', '!src/**/index.ts'],
+  modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  testTimeout: 10000, // Puppeteer tests may need more time
 };

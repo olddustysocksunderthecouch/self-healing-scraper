@@ -80,6 +80,6 @@ Goal: Finalise docs, contribution workflows, and project presentation.
 
 - [ ] 6.1 Fill in **AGENTS.md** with full ruleset for LLM agents (prompt guidelines, safety, etc.).
 - [ ] 6.2 Complete **ARCHITECTURE.md** appendices (Rules, Agent Architecture, Integration Points, Troubleshooting).
-- [ ] 6.3 Expand **README.md** with quick-start, docker instructions, and GIF demo.
+  - [x] 6.3 Expand **README.md** with quick-start, docker instructions, and GIF demo. (2025-05-19)
 - [ ] 6.4 Add **ISSUE / PR templates** and **CODE_OF_CONDUCT.md** to `.github/`.
 - [ ] 6.5 Publish initial blog post & tweetstorm announcing v0.1.

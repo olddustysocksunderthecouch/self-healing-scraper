@@ -58,16 +58,39 @@ async function main(): Promise<void> {
       console.error('Error during scraping:', error);
       process.exit(1);
     }
+  } else if (command === 'setup' || command === 'scraper-setup') {
+    const siteId = args[1];
+    const url = args[2];
+
+    if (!siteId || !url) {
+      console.error('Usage: selfheal setup <siteId> <url>');
+      process.exit(1);
+      return;
+    }
+
+    try {
+      const { SetupOrchestrator } = await import('../healer/setupOrchestrator.js');
+      const orchestrator = new SetupOrchestrator();
+      const ok = await orchestrator.setup(siteId, url);
+      process.exitCode = ok ? 0 : 4; // 4 = setup failed
+      return;
+    } catch (err) {
+      console.error('Setup failed:', err);
+      process.exit(1);
+      return;
+    }
   } else {
     console.log(`
 Self-Healing Scraper CLI
 ------------------------
 Usage:
-  selfheal scrape [url] [--heal]    Scrape the target URL and output JSON result.
-                                   When --heal is provided, the script
-                                   automatically triggers the LLM repair
-                                   pipeline upon drift detection.
-    `);
+  selfheal scrape <url> [--heal]      Scrape the target URL and output JSON.
+                                     With --heal the LLM repair pipeline
+                                     runs on drift.
+
+  selfheal setup <siteId> <url>       Generate a new scraper for <url>.
+                                     Saves HTML snapshot & calls Codex.
+`);
     process.exit(1);
   }
 }

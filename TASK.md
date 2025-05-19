@@ -41,6 +41,12 @@ Goal: Automatically patch broken scrapers when the **Validator** signals selecto
 | 2.3 | Extend CLI with `--heal` flag – on drift run orchestrator and propagate exit codes (0 success, 3 heal-fail). | core  | ✓ |
 | 2.4 | Add Jest tests: mock Codex process, validate retry/back-off & CLI integration.                                | core  | ✓ |
 | 2.5 | CI commit automation (`auto-heal:` prefix) will be tackled in Phase 3­ workflows – skipped for now.           | core  | ☐ |
+| 2.6 | Implement **`scraper-setup` CLI command** that:                                                            | core  | ☐ |
+|     | • Takes `<siteId>` and `<url>` (or infers siteId)                                                          |       | |
+|     | • Saves an HTML snapshot to `tests/fixtures/<siteId>.html`                                                 |       | |
+|     | • Invokes Codex to generate `src/scraper/<siteId>.ts` **and** Jest test skeleton                           |       | |
+|     | • Auto-commits with `auto-heal:init:` prefix on success                                                    |       | |
+|     | • Skips generation if scraper file already exists (idempotent)                                            |       | |
 
 ---
 

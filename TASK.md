@@ -7,7 +7,7 @@
 ## Phase 0 ▸ Project Scaffolding & Repo Hygiene
 
 - [x] 0.1 Initialise **Git** repo on GitHub; add Apache‑2.0 `LICENSE` & text placeholders for `README.md`, `CONTRIBUTING.md`, and `AGENTS.md`.
-- [x] 0.2 Set up **package manager** (PNPM) with `package.json` & `pnpm-workspace.yaml` (if monorepo).
+- [x] 0.2 Set up **package manager** (PNPM) with `package.json`
 - [x] 0.3 Configure **TypeScript** (`tsconfig.json`, strict mode) & add basic ESLint + Prettier configs.
 - [x] 0.4 Install baseline deps: `typescript`, `ts-node`, `jest`, `@types/jest`, `puppeteer`, `eslint`, `prettier`.
 - [x] 0.5 Create root directory structure `src/`, `tests/`, `.github/workflows/`.
@@ -17,12 +17,12 @@
 
 ## Phase 1 ▸ Core Scraper MVP
 
-- [x] 1.1 Implement `src/scraper/exampleSite.ts` using Puppeteer ― hard‑code a demo URL & selectors.
-- [x] 1.2 Define `ScrapeResult` interface & export `scrape(url): Promise<ScrapeResult>`.
-- [x] 1.3 Build CLI wrapper `src/cli/selfheal.ts scrape` that calls the scraper & logs JSON to stdout.
-- [x] 1.4 Write **Jest unit test** that loads an HTML fixture into `page.setContent()`; assert scraped fields.
-- [x] 1.5 Add golden HTML fixture in `tests/fixtures/exampleSite.html`.
-- [x] 1.6 Ensure `npm test` passes locally & in Husky pre‑push hook.
+- [ ] 1.1 Implement `src/scraper/exampleSite.ts` using Puppeteer ― hard‑code a demo URL & selectors.
+- [ ] 1.2 Define `ScrapeResult` interface & export `scrape(url): Promise<ScrapeResult>`.
+- [ ] 1.3 Build CLI wrapper `src/cli/selfheal.ts scrape` that calls the scraper & logs JSON to stdout.
+- [ ] 1.4 Write **Jest unit test** that loads an HTML fixture into `page.setContent()`; assert scraped fields.
+- [ ] 1.5 Add golden HTML fixture in `tests/fixtures/exampleSite.html`.
+- [ ] 1.6 Ensure `npm test` passes locally & in Husky pre‑push hook.
 
 Deliverable → "scrape & test locally" working demo.
 

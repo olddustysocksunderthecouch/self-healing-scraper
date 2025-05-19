@@ -6,12 +6,12 @@
 
 ## Phase 0 ▸ Project Scaffolding & Repo Hygiene
 
-- [ ] 0.1 Initialise **Git** repo on GitHub; add Apache‑2.0 `LICENSE` & text placeholders for `README.md`, `CONTRIBUTING.md`, and `AGENTS.md`.
-- [ ] 0.2 Set up **package manager** (PNPM) with `package.json` & `pnpm-workspace.yaml` (if monorepo).
-- [ ] 0.3 Configure **TypeScript** (`tsconfig.json`, strict mode) & add basic ESLint + Prettier configs.
+- [x] 0.1 Initialise **Git** repo on GitHub; add Apache‑2.0 `LICENSE` & text placeholders for `README.md`, `CONTRIBUTING.md`, and `AGENTS.md`.
+- [x] 0.2 Set up **package manager** (PNPM) with `package.json` & `pnpm-workspace.yaml` (if monorepo).
+- [x] 0.3 Configure **TypeScript** (`tsconfig.json`, strict mode) & add basic ESLint + Prettier configs.
 - [ ] 0.4 Install baseline deps: `typescript`, `ts-node`, `jest`, `@types/jest`, `puppeteer`, `eslint`, `prettier`.
-- [ ] 0.5 Create root directory structure `src/`, `tests/`, `.github/workflows/`.
-- [ ] 0.6 Add **Husky** with pre‑commit (lint) and pre‑push (jest) hooks.
+- [x] 0.5 Create root directory structure `src/`, `tests/`, `.github/workflows/`.
+- [x] 0.6 Add **Husky** with pre‑commit (lint) and pre‑push (jest) hooks.
 
 ---
 

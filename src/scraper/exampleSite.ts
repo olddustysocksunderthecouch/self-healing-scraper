@@ -21,7 +21,7 @@ const SELECTORS = {
  * @throws Error if scraping fails
  */
 export async function scrape(url: string = DEFAULT_URL): Promise<ScrapeResult> {
-  const startTime = Date.now();
+  const startTime = new Date().getTime();
   let browser: Browser | null = null;
 
   try {
@@ -52,12 +52,13 @@ export async function scrape(url: string = DEFAULT_URL): Promise<ScrapeResult> {
     const data = await extractData(page);
 
     // Return the scraped result
+    const now = new Date();
     return {
       url,
-      timestamp: new Date().toISOString(),
+      timestamp: now.toISOString(),
       data,
       meta: {
-        durationMs: Date.now() - startTime,
+        durationMs: new Date().getTime() - startTime,
       },
     };
   } catch (error) {
@@ -130,12 +131,13 @@ async function extractData(page: Page): Promise<Record<string, any>> {
       });
     }, SELECTORS);
 
+    const now = new Date();
     return {
       stories,
       count: stories.length,
       siteInfo: {
         name: 'Hacker News',
-        scrapedAt: new Date().toISOString(),
+        scrapedAt: now.toISOString(),
       },
     };
   } catch (error) {

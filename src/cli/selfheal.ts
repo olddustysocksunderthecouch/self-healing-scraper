@@ -89,7 +89,7 @@ Usage:
                                      runs on drift.
 
   selfheal setup <siteId> <url>       Generate a new scraper for <url>.
-                                     Saves HTML snapshot & calls Codex.
+                                     Saves HTML snapshot & calls Claude Code.
 `);
     process.exit(1);
   }

@@ -1,0 +1,34 @@
+[Unit]
+Description=Self-Healing Scraper Service
+After=network.target
+
+[Service]
+Type=oneshot
+User=scraper
+Group=scraper
+WorkingDirectory=/opt/self-healing-scraper
+Environment=NODE_ENV=production
+Environment=ANTHROPIC_API_KEY=
+Environment=SCRAPE_URL=https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163
+ExecStart=/usr/bin/pnpm scrape ${SCRAPE_URL} --heal
+
+# Security hardening
+PrivateTmp=true
+ProtectSystem=full
+NoNewPrivileges=true
+ProtectHome=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictNamespaces=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+RestrictRealtime=true
+PrivateDevices=true
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
+CapabilityBoundingSet=
+
+[Install]
+WantedBy=multi-user.target

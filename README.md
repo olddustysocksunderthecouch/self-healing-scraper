@@ -1,5 +1,7 @@
 # Self-Healing Scraper
 
+[![Test Coverage](https://img.shields.io/badge/coverage-%3E90%25-brightgreen)](./coverage/lcov-report/index.html)
+
 > **Self-Healing Scraper** is an opinionated TypeScript framework that **detects selector drift and automatically patches itself** using an LLM (Claude Code CLI). Ship your scrapers once – they will look after themselves from then on.
 
 ---

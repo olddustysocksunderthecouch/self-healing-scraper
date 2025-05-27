@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Self-Healing Scraper Hourly
+Requires=selfheal-scraper.service
+
+[Timer]
+Unit=selfheal-scraper.service
+OnBootSec=5min
+OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target

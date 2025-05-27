@@ -15,7 +15,7 @@ function runCli(args: string[], env: NodeJS.ProcessEnv = {}) {
         env: {
           ...process.env,
           NODE_OPTIONS: '--loader ts-node/esm',
-          CODEX_BIN: 'true', // instant success
+          CLAUDE_BIN: 'echo', // Mock Claude with echo command that will return success
           SKIP_GIT_COMMIT: '1',
           ...env,
         },
@@ -45,9 +45,30 @@ describe('selfheal setup CLI', () => {
   const fixtureSrc = path.resolve('tests/fixtures/exampleSite.html');
   const fixtureUrl = `file://${fixtureSrc}`;
 
+  // Clean up before and after tests
+  beforeAll(() => {
+    // Make sure to clean up any existing files from previous test runs
+    const htmlPath = path.resolve(`tests/fixtures/${siteId}.html`);
+    const scraperPath = path.resolve(`src/scraper/${siteId}.ts`);
+    const testPath = path.resolve(`tests/${siteId}.test.ts`);
+    
+    if (fs.existsSync(htmlPath)) fs.unlinkSync(htmlPath);
+    if (fs.existsSync(scraperPath)) fs.unlinkSync(scraperPath);
+    if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
+    
+    // Copy the example fixture to the expected location
+    fs.copyFileSync(fixtureSrc, htmlPath);
+  });
+  
   afterAll(() => {
-    const p = path.resolve(`tests/fixtures/${siteId}.html`);
-    if (fs.existsSync(p)) fs.unlinkSync(p);
+    // Clean up files created during the test
+    const htmlPath = path.resolve(`tests/fixtures/${siteId}.html`);
+    const scraperPath = path.resolve(`src/scraper/${siteId}.ts`);
+    const testPath = path.resolve(`tests/${siteId}.test.ts`);
+    
+    if (fs.existsSync(htmlPath)) fs.unlinkSync(htmlPath);
+    if (fs.existsSync(scraperPath)) fs.unlinkSync(scraperPath);
+    if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
   });
 
   it('returns exit code 0 on success', async () => {

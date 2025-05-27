@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  lint-typecheck-test:
+    runs-on: ubuntu-latest
+    
+    env:
+      NODE_ENV: test
+      SKIP_GIT_COMMIT: '1'  # Disable git operations in tests
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Lint
+        run: pnpm lint
+        
+      - name: Type check
+        run: pnpm build --noEmit
+      
+      - name: Test
+        run: |
+          pnpm test tests/healer/healOrchestrator.test.ts tests/healer/setupOrchestrator.test.ts \
+          tests/healer/claudeWrapper.test.ts tests/validator/validator.test.ts \
+          tests/storage/fileStore.test.ts tests/healer/codexWrapper.test.ts \
+          tests/exampleSite.test.ts tests/cli/selfhealSetup.test.ts \
+          tests/cli/selfheal.test.ts tests/property24.test.ts tests/cli/selfhealHeal.test.ts

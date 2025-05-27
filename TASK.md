@@ -43,7 +43,7 @@ Goal: Automatically patch broken scrapers when the **Validator** signals selecto
 | 2.4 | Add Jest tests: mock Claude process, validate retry/back-off & CLI integration.                               | core  | ✓ |
 | 2.5 | CI commit automation (`auto-heal:` prefix) will be tackled in Phase 3­ workflows – skipped for now.           | core  | ☐ |
 | 2.6 | Create **CLAUDE.md** file with detailed instructions for Claude Code to follow when repairing scrapers.     | core  | ✓ |
-| 2.7 | Implement **`scraper-setup` CLI command** that:                                                            | core  | ☐ |
+| 2.7 | Implement **`scraper-setup` CLI command** that:                                                            | core  | ✓ |
 |     | • Takes `<siteId>` and `<url>` (or infers siteId)                                                          |       | |
 |     | • Saves an HTML snapshot to `tests/fixtures/<siteId>.html`                                                 |       | |
 |     | • Invokes Claude Code to generate `src/scraper/<siteId>.ts` **and** Jest test skeleton                     |       | |
@@ -56,11 +56,11 @@ Goal: Automatically patch broken scrapers when the **Validator** signals selecto
 
 Goal: Run scraper + healer on an hourly cadence and enforce code quality.
 
-- [ ] 3.1 Add **GitHub Actions** workflow that executes `pnpm selfheal scrape` on cron schedule (`0 * * * *`).
-- [ ] 3.2 Provide optional **systemd-timer** unit files for non-GitHub environments.
-- [ ] 3.3 Build **CI workflow** (`.github/workflows/ci.yml`) running lint, unit tests, and TypeScript compilation on every PR.
+- [x] 3.1 Add **GitHub Actions** workflow that executes `pnpm selfheal scrape` on cron schedule (`0 * * * *`). (2025-05-27)
+- [x] 3.2 Provide optional **systemd-timer** unit files for non-GitHub environments. (2025-05-27)
+- [x] 3.3 Build **CI workflow** (`.github/workflows/ci.yml`) running lint, unit tests, and TypeScript compilation on every PR. (2025-05-27)
 - [ ] 3.4 Configure branch protection rules to block merge on red CI.
-- [ ] 3.5 Ensure Jest coverage ≥ 90 %; add badge in `README.md`.
+- [x] 3.5 Ensure Jest coverage ≥ 90 %; add badge in `README.md`. (2025-05-27)
 
 ---
 

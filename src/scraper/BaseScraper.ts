@@ -23,14 +23,18 @@ export abstract class BaseScraper<R extends ScrapeResult = ScrapeResult> {
    * Public scrape helper that callers should use. It handles the entire
    * lifecycle: create browser → navigate → delegate to subclass for data
    * extraction → close browser.
+   * 
+   * @param url URL to scrape
+   * @param params Optional URL parameters extracted from pattern matching
+   * @returns Scraped data with timestamp
    */
-  async scrape(url: string): Promise<R> {
+  async scrape(url: string, params: Record<string, string> = {}): Promise<R> {
     let browser: Browser | null = null;
 
     try {
       browser = await this.launchBrowser();
       const page = await this.openPage(browser, url);
-      const data = await this.extractData(page, url);
+      const data = await this.extractData(page, url, params);
       return {
         ...data,
         timestamp: new Date().toISOString(),
@@ -47,8 +51,17 @@ export abstract class BaseScraper<R extends ScrapeResult = ScrapeResult> {
    *
    * Implementation should throw on irrecoverable errors – caller will take
    * care of logging / retrying.
+   * 
+   * @param page Puppeteer page to extract data from
+   * @param url Original URL being scraped
+   * @param params URL parameters extracted from pattern matching
+   * @returns Partial scrape result (timestamp will be added automatically)
    */
-  protected abstract extractData(page: Page, url: string): Promise<Partial<R>>;
+  protected abstract extractData(
+    page: Page, 
+    url: string, 
+    params?: Record<string, string>
+  ): Promise<Partial<R>>;
 
   // ------------------------------------------------------------------
   // Convenience helpers

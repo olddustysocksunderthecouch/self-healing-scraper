@@ -10,6 +10,8 @@
 
 • **Self-repairing selectors** – when the HTML layout of the target site changes, the built-in validator flags consecutive extraction failures, kicks off the healing orchestrator and lets Claude Code submit a pull-request style patch.
 
+• **Pattern-based scraper selection** – automatic scraper selection based on URL patterns, no need to specify which scraper to use for a given URL.
+
 • **Plug-and-play storage** – start with simple JSON-on-disk; swap in Postgres, DynamoDB, S3 or anything that implements the `StorageAdapter` interface.
 
 • **Fully typed, battle-tested utilities** – a common `BaseScraper` class, robust retry helpers and Jest fixtures take the pain out of writing site-specific modules.
@@ -28,10 +30,13 @@ Requirements: **Node 20 LTS** (managed automatically if you use [Volta](https://
 # 1. Install dependencies
 pnpm install
 
-# 2. Run the example scraper (Property24 rental listing)
-pnpm scrape https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163
+# 2. Run a scraper (automatically selects the appropriate scraper based on URL)
+pnpm selfheal scrape https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163
 
-# → JSON result is printed and persisted under ~/.selfheal/data/exampleSite.json
+# 3. List all available scrapers
+pnpm selfheal list
+
+# → JSON result is printed and persisted under ~/.selfheal/data with the scraper ID
 ```
 
 If a selector mismatch is detected, the CLI exits with code `2` and logs:
@@ -48,6 +53,8 @@ Hook this exit code into your CI/CD (or the provided GitHub Action) to automatic
 docker compose up --build selfheal
 # or
 docker run -it self-healing-scraper:latest scrape https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163
+# or
+docker run -it self-healing-scraper:latest list  # List available scrapers
 ```
 
 ---
@@ -127,6 +134,8 @@ To use Claude Code for self-healing:
 • [AGENTS.md](AGENTS.md) – prompt guidelines & safety rails for the LLM workers.
 
 • [TASK.md](TASK.md) – project roadmap & phased feature checklist.
+
+• [Pattern-Based Scraping](docs/pattern-based-scraping.md) – guide to using URL patterns for automatic scraper selection.
 
 • [`src/` docs](./src) – inline comments and JSDoc on every public function.
 

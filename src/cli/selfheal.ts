@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { scrape } from '../scraper/exampleSite.js';
 import { getFileStore } from '../storage/fileStore.js';
 import { DriftValidator } from '../validator/index.js';
+import { scrapeUrl, canHandleUrl, getAvailableScrapers } from '../scraper/index.js';
 
 const store = getFileStore();
 const validator = new DriftValidator();
@@ -13,29 +13,47 @@ async function main(): Promise<void> {
 
   if (command === 'scrape') {
     try {
-      // Optional URL can be passed as second argument
       // Extract optional flags (currently only --heal)
       const healFlag = args.includes('--heal');
 
       // Filter out flags from positional args list to get URL
       const positional = args.filter((a) => !a.startsWith('--'));
       const url = positional[1];
-      console.log('Starting scraper...');
+      
+      if (!url) {
+        console.error('Error: URL is required for scrape command');
+        console.log('Usage: selfheal scrape <url> [--heal]');
+        process.exit(1);
+        return;
+      }
 
-      const result = await scrape(url);
+      // Check if URL can be handled by any registered scraper
+      console.log(`Checking if any scraper can handle URL: ${url}`);
+      const { canHandle, scraperId } = canHandleUrl(url);
+      
+      if (!canHandle) {
+        console.log(`Warning: No pattern explicitly matches URL: ${url}`);
+        console.log('Available scrapers:');
+        getAvailableScrapers().forEach(id => console.log(`- ${id}`));
+        console.log('Will attempt to use best-match scraper anyway');
+      }
+      
+      console.log(`Starting scraper for ${url} (using ${scraperId} scraper)...`);
+
+      // Use the registry to select and run the appropriate scraper
+      const { result, scraperId: usedScraperId } = await scrapeUrl(url);
 
       // Persist result
       await store.save(new Date(), result);
 
       // Drift validation
-      const siteId = process.env.SCRAPE_SITE_ID ?? 'exampleSite';
-      const drift = validator.update(siteId, result, ['title', 'price', 'description', 'imageUrl']);
+      const drift = validator.update(usedScraperId, result, ['title', 'price', 'description', 'imageUrl']);
 
       // Log the result as formatted JSON
-      console.log(JSON.stringify({ ...result, drift }, null, 2));
+      console.log(JSON.stringify({ ...result, drift, scraperId: usedScraperId }, null, 2));
 
       if (drift) {
-        console.warn(`⚠️  Drift detected for ${siteId}.`);
+        console.warn(`⚠️  Drift detected for ${usedScraperId}.`);
 
         if (healFlag) {
           console.log('🩹  --heal flag supplied – invoking healing orchestrator…');
@@ -59,13 +77,27 @@ async function main(): Promise<void> {
       process.exit(1);
     }
   } else if (command === 'setup' || command === 'scraper-setup') {
-    const siteId = args[1];
-    const url = args[2];
+    const url = args[1];
+    let siteId = args[2]; // Make siteId optional
 
-    if (!siteId || !url) {
-      console.error('Usage: selfheal setup <siteId> <url>');
+    if (!url) {
+      console.error('Usage: selfheal setup <url> [siteId]');
       process.exit(1);
       return;
+    }
+
+    // If siteId is not provided, try to derive it from the URL
+    if (!siteId) {
+      try {
+        const urlObj = new URL(url);
+        // Extract domain without www. prefix and remove .com, .org, etc.
+        siteId = urlObj.hostname.replace(/^www\./, '').split('.')[0] + 'Scraper';
+        console.log(`Auto-generated scraper ID: ${siteId}`);
+      } catch (error) {
+        console.error('Could not parse URL to auto-generate scraper ID. Please provide one.');
+        process.exit(1);
+        return;
+      }
     }
 
     try {
@@ -79,17 +111,33 @@ async function main(): Promise<void> {
       process.exit(1);
       return;
     }
+  } else if (command === 'list') {
+    // List all available scrapers
+    console.log('Available scrapers:');
+    const scrapers = getAvailableScrapers();
+    
+    if (scrapers.length === 0) {
+      console.log('No scrapers registered');
+    } else {
+      scrapers.forEach(id => console.log(`- ${id}`));
+    }
+    return;
   } else {
     console.log(`
 Self-Healing Scraper CLI
 ------------------------
 Usage:
   selfheal scrape <url> [--heal]      Scrape the target URL and output JSON.
+                                     Automatically selects the appropriate scraper.
                                      With --heal the LLM repair pipeline
                                      runs on drift.
 
-  selfheal setup <siteId> <url>       Generate a new scraper for <url>.
+  selfheal setup <url> [siteId]       Generate a new scraper for <url>.
                                      Saves HTML snapshot & calls Claude Code.
+                                     If siteId is not provided, it will be
+                                     auto-generated from the URL domain.
+
+  selfheal list                       List all available scrapers.
 `);
     process.exit(1);
   }

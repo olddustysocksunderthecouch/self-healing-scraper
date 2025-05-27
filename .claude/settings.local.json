@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.property24.com)",
+      "Bash(pnpm test:*)",
+      "Bash(git add:*)",
+      "Bash(NODE_ENV=test pnpm test)",
+      "Bash(npm test:*)"
+    ],
+    "deny": []
+  }
+}

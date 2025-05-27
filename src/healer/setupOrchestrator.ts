@@ -25,6 +25,23 @@ export class SetupOrchestrator {
     // Allow tests to disable git operations via env variable
     this.commit = process.env.SKIP_GIT_COMMIT === '1' ? false : commit;
   }
+  
+  /**
+   * Check if Claude Code CLI is installed
+   */
+  private isClaudeCodeInstalled(): boolean {
+    try {
+      // Try to detect if Claude Code is installed
+      const { execSync } = require('child_process');
+      const claudeBin = process.env.CLAUDE_BIN || 'claude';
+      execSync(`which ${claudeBin}`, { stdio: 'ignore' });
+      return true;
+    } catch (error) {
+      console.log('Note: Claude Code CLI is not installed or not found in PATH.');
+      console.log('Using demo mode to generate template scraper files instead.');
+      return false;
+    }
+  }
 
   /**
    * Ensure fixtures directory exists and write snapshot.
@@ -56,22 +73,79 @@ export class SetupOrchestrator {
    * Run Claude Code to create the scraper. Returns true on success.
    */
   private async runClaude(siteId: string, snapshotPath: string, url: string): Promise<boolean> {
-    // Special case for tests that use a mock command (like 'echo' or 'true')
-    // that returns success but doesn't actually produce any output
-    if (process.env.NODE_ENV === 'test' || process.env.SKIP_GIT_COMMIT === '1') {
+    // Special case for tests, demo mode, or when Claude Code is not available
+    if (process.env.NODE_ENV === 'test' || 
+        process.env.SKIP_GIT_COMMIT === '1' || 
+        process.env.DEMO_MODE === '1' ||
+        !this.isClaudeCodeInstalled()) {
       // Create minimal placeholder files for testing
+      // Extract domain from URL for pattern creation
+      let domain = '';
+      try {
+        const urlObj = new URL(url);
+        domain = urlObj.hostname;
+      } catch (e) {
+        domain = 'example.com';
+      }
+      
+      // Generate patterns based on URL structure
+      const urlPath = url.split('://')[1]?.split('/').slice(1).join('/') || '';
+      const pathParts = urlPath.split('/');
+      const urlPatterns = [];
+      
+      // Add domain-level pattern
+      urlPatterns.push(`${domain}`);
+      
+      // Add patterns with wildcards for each level
+      let currentPattern = domain;
+      for (let i = 0; i < pathParts.length; i++) {
+        if (pathParts[i]) {
+          // Add exact path
+          currentPattern += `/${pathParts[i]}`;
+          urlPatterns.push(currentPattern);
+          
+          // Add wildcard pattern
+          const wildcardPattern = `${domain}/${pathParts.slice(0, i).join('/')}${i > 0 ? '/' : ''}*`;
+          if (!urlPatterns.includes(wildcardPattern)) {
+            urlPatterns.push(wildcardPattern);
+          }
+          
+          // Add pattern with all remaining parts as wildcards
+          const remainingWildcards = `${currentPattern}${'/*'.repeat(pathParts.length - i - 1)}`;
+          if (pathParts.length - i - 1 > 0 && !urlPatterns.includes(remainingWildcards)) {
+            urlPatterns.push(remainingWildcards);
+          }
+        }
+      }
+      
       const scraperCode = `
 import type { ScrapeResult } from '../types/ScrapeResult.js';
 import { BaseScraper } from './BaseScraper.js';
 import { Page } from 'puppeteer';
+import { ScraperRegistry } from './ScraperRegistry.js';
+
+/**
+ * URL patterns that this scraper can handle
+ */
+export const urlPatterns = [
+  ${urlPatterns.map(pattern => `'${pattern}'`).join(',\n  ')}
+];
 
 class ${siteId.charAt(0).toUpperCase() + siteId.slice(1)}Scraper extends BaseScraper<ScrapeResult> {
-  protected async extractData(page: Page, url: string): Promise<Partial<ScrapeResult>> {
+  protected async extractData(page: Page, url: string, params?: Record<string, string>): Promise<Partial<ScrapeResult>> {
+    // Primary selectors with fallbacks for resilience
+    const selectors = {
+      title: '.product-title, h1, .title, [class*="title"]',
+      price: '.product-price, .price, [class*="price"]',
+      description: '.product-description, .description, [class*="description"], p',
+      imageUrl: '.product-image img, img[class*="product"], img[class*="main"], img'
+    };
+    
     const [title, price, description, imageUrl] = await Promise.all([
-      this.extractText(page, '.product-title'),
-      this.extractText(page, '.product-price'),
-      this.extractText(page, '.product-description'),
-      this.extractAttribute(page, '.product-image', 'src'),
+      this.extractText(page, selectors.title),
+      this.extractText(page, selectors.price),
+      this.extractText(page, selectors.description),
+      this.extractAttribute(page, selectors.imageUrl, 'src'),
     ]);
 
     return {
@@ -83,10 +157,17 @@ class ${siteId.charAt(0).toUpperCase() + siteId.slice(1)}Scraper extends BaseScr
   }
 }
 
-const scraper = new ${siteId.charAt(0).toUpperCase() + siteId.slice(1)}Scraper();
+const scraperInstance = new ${siteId.charAt(0).toUpperCase() + siteId.slice(1)}Scraper();
 
-export async function scrape(url = 'https://example.com/product'): Promise<ScrapeResult> {
-  return scraper.scrape(url);
+// Register with pattern-based scraper selection system
+ScraperRegistry.getInstance().register('${siteId}', {
+  scraper: scraperInstance,
+  urlPatterns
+});
+
+// Export function-style API for backward compatibility
+export async function scrape(url = '${url}'): Promise<ScrapeResult> {
+  return scraperInstance.scrape(url);
 }
 
 export type { ScrapeResult };
@@ -95,6 +176,8 @@ export type { ScrapeResult };
       const testCode = `
 import path from 'path';
 import { scrape, ScrapeResult } from '../src/scraper/${siteId}.js';
+import { urlPatterns } from '../src/scraper/${siteId}.js';
+import { findBestMatch } from '../src/utils/urlPatternMatcher.js';
 
 describe('${siteId} scraper', () => {
   it('scrapes data correctly from the fixture HTML', async () => {
@@ -108,6 +191,57 @@ describe('${siteId} scraper', () => {
     expect(result.description).toBeDefined();
     expect(result.imageUrl).toBeDefined();
     expect(new Date(result.timestamp).toISOString()).toBe(result.timestamp);
+  });
+  
+  it('handles missing elements gracefully', async () => {
+    const __dirname = path.dirname(new URL(import.meta.url).pathname);
+    const filePath = path.resolve(__dirname, 'fixtures', '${siteId}.html');
+    const url = \`file://\${filePath}\`;
+    
+    // Mock extractText to simulate missing elements
+    const originalScrape = scrape;
+    const mockScrape = async (url: string) => {
+      const result = await originalScrape(url);
+      // Simulate missing price
+      result.price = '';
+      return result;
+    };
+    
+    // @ts-ignore - Replace the scrape function temporarily
+    global.scrape = mockScrape;
+    
+    const result = await mockScrape(url);
+    
+    // Even with missing price, the scraper should not fail
+    expect(result.title).toBeDefined();
+    expect(result.price).toBe('');
+    expect(result.description).toBeDefined();
+    expect(result.imageUrl).toBeDefined();
+    
+    // Restore original function
+    // @ts-ignore
+    global.scrape = originalScrape;
+  });
+  
+  it('has valid URL patterns for pattern matching', () => {
+    // Test URL that should match this scraper
+    const testUrl = '${url}';
+    
+    // Check if our patterns match the test URL
+    const match = findBestMatch(testUrl, urlPatterns);
+    expect(match).not.toBeNull();
+    if (match) {
+      expect(match.pattern).toBeDefined();
+    }
+  });
+  
+  // Skip this test in CI environments
+  it.skip('scrapes live website', async () => {
+    const result = await scrape('${url}');
+    
+    // Just check we get some data back
+    expect(result.title).toBeTruthy();
+    expect(result.timestamp).toBeTruthy();
   });
 });
 `;

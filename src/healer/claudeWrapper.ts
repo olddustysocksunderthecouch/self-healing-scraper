@@ -1,6 +1,7 @@
 import { spawn } from 'child_process';
 import { readFileSync } from 'fs';
-import { join } from 'path';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Wrapper around the Claude Code CLI. It spawns a child process and returns
@@ -41,23 +42,32 @@ export class ClaudeWrapper {
     // Default flags for autonomous operation
     const defaultFlags = [
       '--dangerously-skip-permissions',
-      '--output-format', 'json'
+      '--output-format', 'json',
+      // Add flags to avoid stdin/raw mode issues
+      '--no-interactive',
+      '--disable-raw-mode'
     ];
 
     // Combine default flags with any additional args
     const allArgs = [...defaultFlags, ...args];
 
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       let output = '';
       
-      const proc = spawn(this.bin, allArgs, {
-        stdio: ['pipe', 'pipe', 'inherit'], // Capture stdout but inherit stderr
-        env: { ...process.env },
-      });
-
-      // Send the prompt to Claude's stdin
-      proc.stdin.write(prompt);
-      proc.stdin.end();
+      // Write prompt to a temporary file
+      const tmpDir = process.env.TMPDIR || '/tmp';
+      const promptFile = path.join(tmpDir, `claude_prompt_${Date.now()}.txt`);
+      
+      try {
+        await fs.promises.writeFile(promptFile, prompt, 'utf-8');
+        
+        // Add the prompt file to the arguments
+        allArgs.push('--prompt-file', promptFile);
+        
+        const proc = spawn(this.bin, allArgs, {
+          stdio: ['ignore', 'pipe', 'inherit'], // Ignore stdin, capture stdout, inherit stderr
+          env: { ...process.env },
+        });
 
       // Collect stdout
       proc.stdout.on('data', (data) => {
@@ -68,6 +78,11 @@ export class ClaudeWrapper {
       });
 
       proc.on('close', (code) => {
+        // Clean up the temporary file
+        fs.promises.unlink(promptFile).catch(() => {
+          // Ignore errors during cleanup
+        });
+        
         resolve({
           exitCode: code ?? 1,
           output
@@ -77,11 +92,24 @@ export class ClaudeWrapper {
       proc.on('error', (err) => {
         // Binary missing or failed to spawn
         console.error(`Error spawning Claude Code: ${err.message}`);
+        
+        // Clean up the temporary file
+        fs.promises.unlink(promptFile).catch(() => {
+          // Ignore errors during cleanup
+        });
+        
         resolve({
           exitCode: 1,
           output: `Error: ${err.message}`
         });
       });
+      } catch (err) {
+        console.error(`Error creating prompt file: ${err.message}`);
+        resolve({
+          exitCode: 1,
+          output: `Error: ${err.message}`
+        });
+      }
     });
   }
 

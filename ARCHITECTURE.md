@@ -41,6 +41,7 @@ Key goals:
 | Service                  | Responsibilities                                            | Default Implementation                    |
 | ------------------------ | ----------------------------------------------------------- | ----------------------------------------- |
 | **Scheduler**            | Fire scrape job every hour                                  | GitHub Actions cron or systemd‑timer      |
+| **Scraper Registry**     | Select appropriate scraper based on URL patterns            | `ScraperRegistry.ts`                      |
 | **Scraper**              | Puppeteer script → returns JSON                             | `src/scraper/<site>.ts`                   |
 | **Storage Adapter**      | Persist output + retrieve history                           | `fileStore` (JSON), `sqlStore` (Postgres) |
 | **Validator**            | Count consecutive missing fields                            | In‑memory Map (optionally Redis)          |
@@ -54,9 +55,13 @@ Key goals:
 
 Responsible for triggering scrape jobs at regular intervals (hourly). Can be implemented using either GitHub Actions cron jobs or systemd timers.
 
+### Scraper Registry
+
+Manages all available scrapers and automatically selects the appropriate one based on URL patterns. Implements pattern matching with support for wildcards and named parameters.
+
 ### Scraper
 
-Core component that executes Puppeteer scripts to scrape websites and returns structured JSON data. Implemented as site-specific modules in `src/scraper/`.
+Core component that executes Puppeteer scripts to scrape websites and returns structured JSON data. Implemented as site-specific modules in `src/scraper/`. Each scraper defines URL patterns it can handle.
 
 ### Storage Adapter
 
@@ -122,11 +127,12 @@ Ensures code quality through:
 
 ```
 src/
-  scraper/            ▶ site‑specific scrapers
+  scraper/            ▶ site‑specific scrapers + ScraperRegistry
   storage/            ▶ pluggable adapters (file, sql, …)
   validator/          ▶ drift detection logic
   healer/             ▶ orchestration + Claude Code wrapper
   cli/                ▶ `selfheal.ts` entry‑point
+  utils/              ▶ utility functions (e.g., URL pattern matching)
 .tests/
 .docker/
 .github/workflows/

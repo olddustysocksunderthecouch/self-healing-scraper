@@ -22,6 +22,6 @@
     "skipLibCheck": true,
     "noEmitOnError": false
   },
-  "include": ["src", "tests"],
-  "exclude": ["__tests__"]
+  "include": ["src"],
+  "exclude": ["tests", "__tests__"]
 }

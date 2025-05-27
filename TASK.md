@@ -26,6 +26,8 @@ Goal: Produce a working scraper for a single site with persistent output and bas
 - [x] 1.5 Build **Validator** service (`src/validator/index.ts`) that flags N consecutive missing fields (env-configurable).
 - [x] 1.6 Wire components together in CLI entry-point `src/cli/selfheal.ts` (mode: scrape-only) and add smoke test.
 - [x] 1.7 Update example site to use Property24 rental listing (https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163) as the source for fixtures and tests. (2025-05-27)
+- [x] 1.8 Implement dedicated p24Scraper with robust selectors and fallback mechanisms for Property24 site. (2025-05-27)
+- [x] 1.9 Add tests for p24Scraper including fixture tests and a skipped live test for manual verification. (2025-05-27)
 
 ---
 

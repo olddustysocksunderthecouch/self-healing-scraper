@@ -1,0 +1,2430 @@
+
+<!DOCTYPE html>
+<!--[if IE]><html class=" p24_live p24_outdatedBrowser"><![endif]-->
+<!--[if !IE]><!-->
+<html class=" p24_live" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!--<![endif]-->
+
+<head>
+    <script src="/Scripts/callbacks.v2.js?v=ktVuguz_HcBqRd8Db9icmujCsQDj6bYoEeFsaDy2_bE"></script>
+    <script type="text/javascript">
+        window.clientAjaxActive = 0;
+        window.inDevelopment = false;
+        addCallback(function() {
+            window.app = new Property24.Property24App();
+            window.app.setSettings({"isRecaptchaEnabled":true,"reCaptchaSiteKey":"6LcGHUEUAAAAAAfppsl05ypEC9L5KgUG3JYkpoF7"})
+        })
+    </script>
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preload" as="font" type="font/woff" crossorigin="anonymous" href="/Content/fonts/source-sans-pro-v14-latin-regular.woff?z=5cc3aae674ea3b199313" />
+    <link rel="preload" as="font" type="font/woff" crossorigin="anonymous" href="/Content/fonts/source-sans-pro-v14-latin-300.woff?z=ffbd23c82f990253ea03" />
+    <link rel="preload" as="font" type="font/woff" crossorigin="anonymous" href="/Content/fonts/source-sans-pro-v14-latin-600.woff?z=a75563d7b9e5b1db1639" />
+    <link rel="preload" as="font" type="font/woff" crossorigin="anonymous" href="/Content/fonts/source-sans-pro-v14-latin-700.woff?z=b03f2ec28f8e60e61974" />
+    <link rel="preload" as="font" type="font/woff" crossorigin="anonymous" href="/Content/font-awesome/fonts/fontawesome-webfont.woff2?z=4b5a84aaf1c9485e060c" />
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://dc.services.visualstudio.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com" />
+
+
+    <script type="text/javascript">
+        addCallback(() => {
+            if (Property24.Global.BrowserProbablySupportsOneTap())
+                Property24.ScriptService.getInstance().loadScript("https://accounts.google.com/gsi/client");
+        });
+    </script>
+
+
+
+    <script async type="text/javascript">
+        function aiInit(sdk) {
+            sdk.addTelemetryInitializer(function (envelope) {
+                envelope.tags["ai.application.ver"] = "50.35.756.0";
+                envelope.tags["ai.operation.id"] = "5b20a08b91fe3e05e54b2dde875a0a00";
+                envelope.tags["ai.operation.name"] = "GET Listing/ListingView";
+
+                if (envelope.data) {
+                    envelope.data["webInterface"] = "Desktop";
+                }
+          });
+        }
+
+        !(function (cfg){function e(){cfg.onInit&&cfg.onInit(n)}var x,w,D,t,E,n,C=window,O=document,b=C.location,q="script",I="ingestionendpoint",L="disableExceptionTracking",j="ai.device.";"instrumentationKey"[x="toLowerCase"](),w="crossOrigin",D="POST",t="appInsightsSDK",E=cfg.name||"appInsights",(cfg.name||C[t])&&(C[t]=E),n=C[E]||function(g){var f=!1,m=!1,h={initialize:!0,queue:[],sv:"8",version:2,config:g};function v(e,t){var n={},i="Browser";function a(e){e=""+e;return 1===e.length?"0"+e:e}return n[j+"id"]=i[x](),n[j+"type"]=i,n["ai.operation.name"]=b&&b.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(h.sv||h.version),{time:(i=new Date).getUTCFullYear()+"-"+a(1+i.getUTCMonth())+"-"+a(i.getUTCDate())+"T"+a(i.getUTCHours())+":"+a(i.getUTCMinutes())+":"+a(i.getUTCSeconds())+"."+(i.getUTCMilliseconds()/1e3).toFixed(3).slice(2,5)+"Z",iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}},ver:undefined,seq:"1",aiDataContract:undefined}}var n,i,t,a,y=-1,T=0,S=["js.monitor.azure.com","js.cdn.applicationinsights.io","js.cdn.monitor.azure.com","js0.cdn.applicationinsights.io","js0.cdn.monitor.azure.com","js2.cdn.applicationinsights.io","js2.cdn.monitor.azure.com","az416426.vo.msecnd.net"],o=g.url||cfg.src,r=function(){return s(o,null)};function s(d,t){if((n=navigator)&&(~(n=(n.userAgent||"").toLowerCase()).indexOf("msie")||~n.indexOf("trident/"))&&~d.indexOf("ai.3")&&(d=d.replace(/(\/)(ai\.3\.)([^\d]*)$/,function(e,t,n){return t+"ai.2"+n})),!1!==cfg.cr)for(var e=0;e<S.length;e++)if(0<d.indexOf(S[e])){y=e;break}var n,i=function(e){var a,t,n,i,o,r,s,c,u,l;h.queue=[],m||(0<=y&&T+1<S.length?(a=(y+T+1)%S.length,p(d.replace(/^(.*\/\/)([\w\.]*)(\/.*)$/,function(e,t,n,i){return t+S[a]+i})),T+=1):(f=m=!0,s=d,!0!==cfg.dle&&(c=(t=function(){var e,t={},n=g.connectionString;if(n)for(var i=n.split(";"),a=0;a<i.length;a++){var o=i[a].split("=");2===o.length&&(t[o[0][x]()]=o[1])}return t[I]||(e=(n=t.endpointsuffix)?t.location:null,t[I]="https://"+(e?e+".":"")+"dc."+(n||"services.visualstudio.com")),t}()).instrumentationkey||g.instrumentationKey||"",t=(t=(t=t[I])&&"/"===t.slice(-1)?t.slice(0,-1):t)?t+"/v2/track":g.endpointUrl,t=g.userOverrideEndpointUrl||t,(n=[]).push((i="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",o=s,u=t,(l=(r=v(c,"Exception")).data).baseType="ExceptionData",l.baseData.exceptions=[{typeName:"SDKLoadFailed",message:i.replace(/\./g,"-"),hasFullStack:!1,stack:i+"\nSnippet failed to load ["+o+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(b&&b.pathname||"_unknown_")+"\nEndpoint: "+u,parsedStack:[]}],r)),n.push((l=s,i=t,(u=(o=v(c,"Message")).data).baseType="MessageData",(r=u.baseData).message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+l+")").replace(/\"/g,"")+'"',r.properties={endpoint:i},o)),s=n,c=t,JSON&&((u=C.fetch)&&!cfg.useXhr?u(c,{method:D,body:JSON.stringify(s),mode:"cors"}):XMLHttpRequest&&((l=new XMLHttpRequest).open(D,c),l.setRequestHeader("Content-type","application/json"),l.send(JSON.stringify(s)))))))},a=function(e,t){m||setTimeout(function(){!t&&h.core||i()},500),f=!1},p=function(e){var n=O.createElement(q),e=(n.src=e,t&&(n.integrity=t),n.setAttribute("data-ai-name",E),cfg[w]);return!e&&""!==e||"undefined"==n[w]||(n[w]=e),n.onload=a,n.onerror=i,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||a(0,t)},cfg.ld&&cfg.ld<0?O.getElementsByTagName("head")[0].appendChild(n):setTimeout(function(){O.getElementsByTagName(q)[0].parentNode.appendChild(n)},cfg.ld||0),n};p(d)}cfg.sri&&(n=o.match(/^((http[s]?:\/\/.*\/)\w+(\.\d+){1,5})\.(([\w]+\.){0,2}js)$/))&&6===n.length?(d="".concat(n[1],".integrity.json"),i="@".concat(n[4]),l=window.fetch,t=function(e){if(!e.ext||!e.ext[i]||!e.ext[i].file)throw Error("Error Loading JSON response");var t=e.ext[i].integrity||null;s(o=n[2]+e.ext[i].file,t)},l&&!cfg.useXhr?l(d,{method:"GET",mode:"cors"}).then(function(e){return e.json()["catch"](function(){return{}})}).then(t)["catch"](r):XMLHttpRequest&&((a=new XMLHttpRequest).open("GET",d),a.onreadystatechange=function(){if(a.readyState===XMLHttpRequest.DONE)if(200===a.status)try{t(JSON.parse(a.responseText))}catch(e){r()}else r()},a.send())):o&&r();try{h.cookie=O.cookie}catch(k){}function e(e){for(;e.length;)!function(t){h[t]=function(){var e=arguments;f||h.queue.push(function(){h[t].apply(h,e)})}}(e.pop())}var c,u,l="track",d="TrackPage",p="TrackEvent",l=(e([l+"Event",l+"PageView",l+"Exception",l+"Trace",l+"DependencyData",l+"Metric",l+"PageViewPerformance","start"+d,"stop"+d,"start"+p,"stop"+p,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),h.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4},(g.extensionConfig||{}).ApplicationInsightsAnalytics||{});return!0!==g[L]&&!0!==l[L]&&(e(["_"+(c="onerror")]),u=C[c],C[c]=function(e,t,n,i,a){var o=u&&u(e,t,n,i,a);return!0!==o&&h["_"+c]({message:e,url:t,lineNumber:n,columnNumber:i,error:a,evt:C.event}),o},g.autoExceptionInstrumented=!0),h}(cfg.cfg),(C[E]=n).queue&&0===n.queue.length?(n.queue.push(e),n.trackPageView({})):e();})({
+          src: "https://js.monitor.azure.com/scripts/b/ai.3.gbl.min.js",
+          crossOrigin: "anonymous",
+          onInit: aiInit, 
+          cfg: {
+            connectionString: "InstrumentationKey=0b0da85d-02dc-4714-8a22-83a020d3d6b5;IngestionEndpoint=https://westeurope-3.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/;ApplicationId=896d2699-2fa1-4e29-ad9b-6b7978480161",
+            disableCookiesUsage: true,
+        }});
+    </script>
+    
+
+<script type="text/javascript">(function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, "clarity", "script", "lbu6kh4bm0");
+    addCallback(function () {
+        window.clarity("identify", "2f3tfqufzucjnjdqzhu5vnyl", undefined, "listing/listingview");
+    });
+</script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<link async rel="stylesheet" href="/Scripts/Generated/styles1.css?cc24ebc2be896700fe49" />
+<link async rel="stylesheet" href="/Scripts/Generated/styles2.css?2f92c7c546160041c3fa" />
+<link async rel="stylesheet" href="/Scripts/Generated/styles3.css?14b88a32b9361b71fed7" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LS4VP2QVQS"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LS4VP2QVQS', {"traffic_type":"Live","user_id":"2f3tfqufzucjnjdqzhu5vnyl","template":"Listing/ListingView","user_status":"NotLoggedIn","ui_context_name":"Property24 Desktop","listing_type":"Rental"});
+
+addCallback(function() {
+            Property24.Global.setupPageLoadTimeLogging();
+        })</script>
+
+
+
+    
+
+
+<meta property="al:ios:url" content="https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163/116020259" />
+<meta property="al:ios:app_store_id" content="486012121" />
+<meta property="al:ios:app_name" content="Property24.com" />
+
+
+<script type="text/javascript">
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+
+    (function () {
+        var gads = document.createElement('script');
+        gads.async = true;
+        gads.type = 'text/javascript';
+
+        gads.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(gads, node);
+    })();
+</script>
+
+<script type="text/javascript">
+    googletag.cmd.push(function () {
+googletag.defineSlot("/181213734/Property24/Web/Property24/Calculator/P24_Leaderboard550x70", [[550,70]], "div-gpt-ad-1641985752427-0").addService(googletag.pubads());
+googletag.defineSlot("/181213734/Property24/Web/Property24/Insurance_Desktop", [[657,100]], "div-gpt-ad-1634300091782-0").addService(googletag.pubads());
+googletag.pubads().setTargeting("userType", "NotLoggedIn");
+
+            googletag.pubads().enableSingleRequest();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.enableServices();
+    });
+</script>
+
+<script type="text/javascript">
+    addCallback(function () {
+        Property24.GoogleDFP.Load(googletag);
+    });
+</script>
+
+    <title>1 Bedroom Apartment / flat to rent in Walmer Estate - 91 Upper Duke, 91 Upper Duke - P24-116020259</title>
+
+<meta name="description" content="1 bedroom Property to rent in Walmer Estate, Cape Town for R 12 000 by Vermaak Properties. This well-maintained 1-bedroom apartment is located in the heart of Walmer Estate, a central and acc ... Property24.com" />
+    <link rel="canonical" href="https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163/116020259" />
+<meta property="fb:app_id" content="159786687457759" />
+<meta property="og:title" content="1 Bedroom Apartment / flat to rent in Walmer Estate - 91 Upper Duke, 91 Upper Duke - Cape Town - Property24" />
+<meta property="og:description" content="This well-maintained 1-bedroom apartment is located in the heart of Walmer Estate, a central and accessible suburb just minutes from Cape Town&#x2019;s CBD. Positioned on the ground floor at 91 Upper Duke Street, the unit features a spacious bedroom with built-in cupboards, an open-plan living area, a practical kitchen, and a tiled bathroom. It&#x27;s ideal for first-time buyers, students, or young professionals looking for a lock-up-and-go lifestyle close to the city.&#xA;&#xA;The apartment is conveniently situated near key amenities including UCT Medical Campus, CPUT, Pick n Pay Woodstock, Woodstock Exchange, and Garden Centre Mall. Commuters will benefit from easy access to the N2, M3, and MyCiTi bus routes, while nearby attractions such as the Old Biscuit Mill, De Waal Park, and Christiaan Barnard Hospital are all within a short drive. This is a prime opportunity to secure a centrally located property with great value and solid rental appeal" />
+
+<meta property="og:image" content="https://images.prop24.com/357956548" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1440" />
+<meta property="og:image:height" content="1080" />
+
+    <meta property="og:url" content="https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163/116020259" />
+
+<meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld&#x2B;json">
+        {"@context":"https://schema.org","@graph":[{"@type":"RealEstateListing","breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":"https://www.property24.com/to-rent","name":"Property to Rent"},{"@type":"ListItem","position":2,"item":"https://www.property24.com/to-rent/western-cape/9","name":"Western Cape"},{"@type":"ListItem","position":3,"item":"https://www.property24.com/to-rent/cape-town/western-cape/432","name":"Cape Town"},{"@type":"ListItem","position":4,"item":"https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163","name":"Walmer Estate"},{"@type":"ListItem","position":5,"item":"https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163/116020259","name":"Web Ref: 116020259"}]},"about":{"@type":"Apartment","numberOfBedrooms":1,"numberOfBathroomsTotal":1,"floorSize":{"@type":"QuantitativeValue","value":55,"unitCode":"MTK"},"petsAllowed":false,"address":{"@type":"PostalAddress","streetAddress":"91 Upper Duke, 91 Upper Duke","addressLocality":"Walmer Estate","addressRegion":"Western Cape","addressCountry":"South Africa"},"description":"Apartment / Flat"},"offers":{"@type":"Offer","priceSpecification":{"@type":"UnitPriceSpecification","price":"12000","priceCurrency":"ZAR","unitCode":"MON"},"offeredBy":{"@type":"Person","worksFor":{"@type":"RealEstateAgent","logo":"https://images.prop24.com/259006502/Fit450x225","name":"Vermaak Properties","url":"https://www.property24.com/estate-agents/vermaak-properties/32149"},"name":"Thaabiet Abrahams","url":"https://www.property24.com/estate-agents/vermaak-properties/thaabiet-abrahams/521213"},"url":"https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163/116020259"},"description":"Neat Ground Floor 1-Bedroom Apartment in Central Walmer Estate","image":"https://images.prop24.com/357956548/Ensure960x540","name":"1 Bedroom Apartment / flat to rent in Walmer Estate","url":"https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163/116020259"}]}
+    </script>
+
+    <link rel="icon" type="image/png" sizes="57x57" href="/Content/images/Optimized/TouchIcons/Icon_57x57.png?z=5d61e61c3b21f036f855" />
+    <link rel="icon" type="image/png" sizes="144x144" href="/Content/images/Optimized/TouchIcons/Icon_144x144.png?z=a11e5a0924be7d93b93b" />
+    <link rel="icon" type="image/png" sizes="152x152" href="/Content/images/Optimized/TouchIcons/Icon_152x152.png?z=6dac7c360aba7b7a8c12" />
+    <link rel="icon" type="image/png" sizes="180x180" href="/Content/images/Optimized/TouchIcons/Icon_180x180.png?z=b8f47719917531a11a86" />
+
+    <link rel="apple-touch-icon" href="/Content/images/Optimized/TouchIcons/Icon_57x57.png?z=5d61e61c3b21f036f855" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/Content/images/Optimized/TouchIcons/Icon_72x72.png?z=efb43065a6414e844b80" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/Content/images/Optimized/TouchIcons/Icon_76x76.png?z=efb43065a6414e844b80" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/Content/images/Optimized/TouchIcons/Icon_114x114.png?z=5156f0000ddbb6e4218d" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/Content/images/Optimized/TouchIcons/Icon_120x120.png?z=f774ccf66eb9131dd712" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/Content/images/Optimized/TouchIcons/Icon_144x144.png?z=a11e5a0924be7d93b93b" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/Content/images/Optimized/TouchIcons/Icon_152x152.png?z=6dac7c360aba7b7a8c12" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/Content/images/Optimized/TouchIcons/Icon_180x180.png?z=b8f47719917531a11a86" />
+</head>
+<body>
+    <div class="p24_theme">
+            <div class="js_ie8_message p24_outdatedMessage">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            Please note that you are using an outdated browser which is not compatible with some elements of the site.
+                            We strongly urge you to update to <a href="https://www.microsoft.com/en-us/edge" title="Download Edge" target="_blank" rel="noopener noreferrer">Edge</a> for an optimal browsing experience.
+                        </div>
+                    </div>
+                </div>
+                <i class="js_ie8_dismiss fa fa-times"></i>
+            </div>
+
+
+
+    <script type="text/javascript">
+        addCallback(function() {
+            Property24.ScriptService.loadReCaptcha();
+        });
+    </script>
+
+        
+
+<header class="navbar">
+    <nav class="p24_nav-container">
+        <!-- Header -->
+        <div class="navbar-header">
+            <a href="/" title="Property to rent: Houses to rent: Property24" class="navbar-brand">
+                <img src="/Content/images/Optimized/Logos/property24_logo.svg?z=2cd369fe7776a4beed13" alt="Property to rent: Houses to rent: Property24" />
+            </a>
+        </div>
+
+        <!-- Navbar Links -->
+<ul class="nav navbar-nav">
+        <li class="dropdown full-width">
+            <a href="/for-sale" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Buy</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="p24_heading">Looking to Buy?</p>
+                                                    <p>
+                                                        <a href="/for-sale/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Property for Sale in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/commercial-property-for-sale/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Commercial Property for Sale in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/for-sale/walmer-estate/cape-town/western-cape/10163?sp=r%3dTrue" 
+                                                                                                                >Repossessions in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/for-sale/walmer-estate/cape-town/western-cape/10163?sp=oa%3dTrue" 
+                                                                                                                >Auctions in Walmer Estate</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">&nbsp;</p>
+                                                    <p>
+                                                        <a href="/for-sale/walmer-estate/cape-town/western-cape/10163?sp=os%3dTrue" 
+                                                                                                                >On Show in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/for-sale/walmer-estate/cape-town/western-cape/10163?sp=rp%3dTrue" 
+                                                                                                                >Retirement Property for Sale in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/new-developments-for-sale/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Developments for Sale in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/retirement-developments-for-sale/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Retirement Developments for Sale in Walmer Estate</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">Helpful Links</p>
+                                                    <p>
+                                                        <a href="/property101/buyers-guide/become-a-first-time-home-owner" 
+                                                                                                                >Buyers Guide</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property-values/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Sold House Prices in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/purchase-property-report" 
+                                                                                                                >Buy Property Reports</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/articles/advice/buying" 
+                                                                                                                >Property Advice for Buyers</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/to-rent" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Rent</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="p24_heading">Looking to Rent?</p>
+                                                    <p>
+                                                        <a href="/houses-to-rent/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >House to Rent in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/apartments-to-rent/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Apartment / Flat to Rent in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/commercial-property-to-rent/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Commercial Property to Rent in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/to-rent/walmer-estate/cape-town/western-cape/10163?sp=rp%3dTrue" 
+                                                                                                                >Retirement Property to Rent in Walmer Estate</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">&nbsp;</p>
+                                                    <p>
+                                                        <a href="/new-developments-to-rent/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Developments to Rent in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/retirement-developments-to-rent/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Retirement Developments to Rent in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/estate-agencies/western-cape/9" 
+                                                                                                                >Find Letting Agents</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">List Privately</p>
+                                                    <p>
+                                                        <a href="/private-listing/rent-my-property" 
+                                                                                                                >Rent Your Property</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="https://rentalzone.property24.com/landlord?utm_source=homepage_header&amp;utm_medium=link&amp;utm_campaign=consumer_subscription" 
+                                                                                                                >Tenant Screenings</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/selling-your-property" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Sell</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="p24_heading">Looking to Sell?</p>
+                                                    <p>
+                                                        <a href="/estate-agencies/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Find Estate Agents in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/products/products-overview" 
+                                                                                                                >Agency Products</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">List Privately</p>
+                                                    <p>
+                                                        <a href="/private-listing/sell-my-property" 
+                                                                                                                >Sell Your Property</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">Helpful Links</p>
+                                                    <p>
+                                                        <a href="/selling-your-property" 
+                                                                                                                >Get a Free Property Valuation</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property-values/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Sold House Prices in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property101/sellers-guide/the-best-time-to-sell-a-home" 
+                                                                                                                >Seller Guide</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/commercial-property" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Commercial</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4 p24_commercial_col1 col-xs-push-4">
+                                    <p class="p24_heading">Find Commercial Property</p>
+                                                    <p>
+                                                        <a href="/commercial-property-for-sale/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Commercial Property for Sale in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/commercial-property-to-rent/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Commercial Property to Rent in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/industrial-property-for-sale/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Industrial Property for Sale in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/industrial-property-to-rent/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Industrial Property to Rent in Walmer Estate</a>
+                                                    </p>
+                                </div>
+                                <div class="col-3 col-xs-push-4">
+                                    <p class="p24_heading">Helpful Links</p>
+                                                    <p>
+                                                        <a href="/articles/news/commercial" 
+                                                                                                                >Commercial Property News</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/calculators/bond" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Calculators</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-3 p24_calculators_col1 col-xs-push-6">
+                                    <p class="p24_heading">Home Loan Calculators</p>
+                                                    <p>
+                                                        <a href="/calculators/bond" 
+                                                                                                                >Mortgage Bond Calculator</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/calculators/affordability" 
+                                                                                                                >Affordability Calculator</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/calculators/additionalpayment" 
+                                                                                                                >Additional Payment Calculator</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/calculators/bondcosts" 
+                                                                                                                >Bond and Transfer Calculator</a>
+                                                    </p>
+                                </div>
+                                <div class="col-3 p24_calculators_col2 col-xs-push-6">
+                                    <p class="p24_heading">&nbsp;</p>
+                                                    <p>
+                                                        <a href="https://homeloans.property24.com" 
+                                                                                                                >Property24 Home Loans</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/articles/advice" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Advice</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4 p24_advice_col1 ">
+                                    <p class="p24_heading">Articles</p>
+                                                    <p>
+                                                        <a href="/articles/news" 
+                                                                                                                >Property News</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/articles/advice" 
+                                                                                                                >Property Advice</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property101/sellers-guide/the-best-time-to-sell-a-home" 
+                                                                                                                >Selling Your House</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property101/buyers-guide/become-a-first-time-home-owner" 
+                                                                                                                >Buyers Guide</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4 p24_advice_col2 ">
+                                    <p class="p24_heading">Helpful Links</p>
+                                                    <p>
+                                                        <a href="/property-tools-and-services" 
+                                                                                                                >Property Tools &amp; Services</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property-values/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Sold House Prices in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/purchase-property-report" 
+                                                                                                                >Buy Property Reports</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/products/products-overview" 
+                                                                                                                >Agency Products</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4 p24_advice_col3 ">
+                                    <p class="p24_heading">&nbsp;</p>
+                                                    <p>
+                                                        <a href="/cape-town/walmer-estate/property-trends/10163" 
+                                                                                                                >Trends &amp; Statistics in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/estate-agencies/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Find Estate Agents in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/attorney-firms/walmer-estate/cape-town/western-cape/10163" 
+                                                                                                                >Find Attorneys in Walmer Estate</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="https://homeloans.property24.com" 
+                                                                                                                >Property24 Home Loans</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+</ul>
+<div class="p24_extra-links">
+    <div class="dropdown fill-width">
+        <div class="dropdown-toggle" data-hover="dropdown">
+            <a href="/private-listing/sell-my-property" class="p24_list-privately p24_extra-btn-navbar js_dropdownToggle">
+                List Privately
+            </a>
+        </div>
+        <div class="dropdown-menu" role="menu">
+            <div class="p24_nav-items-container">
+                    <p><a href="/private-listing/sell-my-property">Sell Your Property</a></p>
+                    <p><a href="/private-listing/rent-my-property">Rent Your Property</a></p>
+            </div>
+        </div>
+    </div>
+        <div id="sign-in-portal">
+            <a href="#" id="sign-in-placeholder" class="p24_sign-up-navbar p24_extra-btn-navbar js_dropdownToggle">Sign in</a>
+        </div>
+
+</div>
+
+    <div id="g_id_onload"
+        class="hide"
+        data-client_id="772958119492-r59gbbjmrqi41jt21kp9q07m3vr4sfg9.apps.googleusercontent.com"
+        data-auto_select="true"
+        data-login_uri="https://www.property24.com/user/GoogleOneTapVerification">
+    </div>
+
+<script type='text/javascript'>
+    addCallback(function() {
+        Property24.User.setIsLoggedIn(false);
+    });
+</script>
+    </nav>
+</header>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"Views_Shared__Header","type":"c"}));
+   </script>
+
+
+
+<div class="p24_listing p24_regularListing" data-listingnumber="116020259">
+    <div class="p24_top ">
+        <div class="container">
+            <div class="p24_breadCrumbContainer">
+
+
+<div id="breadCrumbContainer" class="hidden-print p24_breadCrumb">
+    <ul>
+            <li><i class="fa fa-lg fa-angle-left"></i></li>
+            <li>
+                <a id="backToSearchResults" href="javascript:" data-alternate-url="/to-rent/walmer-estate/cape-town/western-cape/10163/p1#116020259" title="Back to Results">
+                    Back to Results
+                </a>
+            </li>
+            <li>|</li>
+                    <li>
+                        <a href="/to-rent" title="Property to Rent: Houses to rent: Property24">Property to Rent</a>
+                    </li>
+                    <li>></li>
+                    <li>
+                        <a href="/to-rent/western-cape/9" title="Property to rent in Western Cape : Property and houses to rent in Western Cape : Property24.com">Western Cape</a>
+                    </li>
+                    <li>></li>
+                    <li>
+                        <a href="/to-rent/cape-town/western-cape/432" title="Property and houses to rent in Cape Town : Cape Town Property : Property24.com">Cape Town</a>
+                    </li>
+                    <li>></li>
+                    <li>
+                        <a href="/to-rent/walmer-estate/cape-town/western-cape/10163" title="Walmer Estate Property : Property and houses to rent in Walmer Estate : Property24.com">Walmer Estate</a>
+                    </li>
+                    <li>></li>
+                    <li>116020259</li>
+    </ul>
+</div>            </div>
+            <div class="hidden-print">
+
+    <div class="p24_pagerActions">
+
+
+            <a href="/to-rent/walmer-estate/cape-town/western-cape/10163/110099833" title="1 Bedroom Apartment / flat to rent in Walmer Estate - Cape Town">
+                Next <i class="fa fa-lg fa-angle-right"></i>
+            </a>
+    </div>
+            </div>
+        </div>
+    </div>
+    <div class="container p24_content ">
+        <div class="p24_listingPanel js_listingPanel">
+            <div class="p24_details">
+
+<div id="main-gallery" class="p24_gallery">
+    <div id="main-gallery-images-container" class="p24_image js_carouselContainer">
+            <a class="p24_fullscreen" id="main-gallery-fullscreen" href="javascript:;" title="Enter Fullscreen">
+                <img src="/Content/images/Optimized/Icons/icon_fullscreen.svg?z=8e742410d37523a0c937" alt="Fullscreen" />
+            </a>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="1" data-image-url="https://images.prop24.com/357956548/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956548" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956548/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 1, Image" style="background-image: url(https://images.prop24.com/357956548/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 1, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="2" data-image-url="https://images.prop24.com/357956549/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956549" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956549/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 2, Image" style="background-image: url(https://images.prop24.com/357956549/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 2, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="3" data-image-url="https://images.prop24.com/357956551/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956551" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956551/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 3, Image" style="background-image: url(https://images.prop24.com/357956551/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 3, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="4" data-image-url="https://images.prop24.com/357956553/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956553" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956553/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 4, Image" style="background-image: url(https://images.prop24.com/357956553/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 4, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="5" data-image-url="https://images.prop24.com/357956554/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956554" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956554/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 5, Image" style="background-image: url(https://images.prop24.com/357956554/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 5, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="6" data-image-url="https://images.prop24.com/357956556/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956556" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956556/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 6, Image" style="background-image: url(https://images.prop24.com/357956556/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 6, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="7" data-image-url="https://images.prop24.com/357956558/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956558" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956558/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 7, Image" style="background-image: url(https://images.prop24.com/357956558/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 7, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="8" data-image-url="https://images.prop24.com/357956560/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956560" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956560/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 8, Image" style="background-image: url(https://images.prop24.com/357956560/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 8, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="9" data-image-url="https://images.prop24.com/357956562/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956562" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956562/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 9, Image" style="background-image: url(https://images.prop24.com/357956562/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 9, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="10" data-image-url="https://images.prop24.com/357956564/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956564" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956564/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 10, Image" style="background-image: url(https://images.prop24.com/357956564/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 10, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="11" data-image-url="https://images.prop24.com/357956566/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956566" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956566/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 11, Image" style="background-image: url(https://images.prop24.com/357956566/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 11, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="12" data-image-url="https://images.prop24.com/357956568/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956568" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956568/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 12, Image" style="background-image: url(https://images.prop24.com/357956568/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 12, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="13" data-image-url="https://images.prop24.com/357956570/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956570" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956570/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 13, Image" style="background-image: url(https://images.prop24.com/357956570/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 13, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="14" data-image-url="https://images.prop24.com/357956571/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956571" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956571/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 14, Image" style="background-image: url(https://images.prop24.com/357956571/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 14, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="15" data-image-url="https://images.prop24.com/357956573/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956573" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956573/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 15, Image" style="background-image: url(https://images.prop24.com/357956573/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 15, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="16" data-image-url="https://images.prop24.com/357956575/Ensure1280x720" data-image-loaded="false">
+                    <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/357956575" >
+                            <img class="js_lazyImageLoading lazy-image hidden-print " lazy-print-src="https://images.prop24.com/357956575/Ensure1280x720" src="/blank.gif" alt="Listing number: P24-116020259, Image number: 16, Image" style="background-image: url(https://images.prop24.com/357956575/Ensure1280x720)" />
+                            <img class="p24_printGalleryImage js_lazyPrintImage " alt="Listing number: P24-116020259, Image number: 16, Image" />
+                    </a>
+
+                        <div class="p24_caption">
+                            <div class="js_carouselCaption">Image</div>
+                        </div>
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="1">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="2">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="3">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="4">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="5">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="6">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="7">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="8">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="9">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="10">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="11">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="12">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="13">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="14">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="15">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+                <!--Images are located with data-index selector, so need another attribute for index so that loaders are not selected by mistake-->
+                <div class="p24_loader p24_galleryLoader js_gallery-loader hide" data-img-index="16">
+                    <span class="p24_spinner p24_counterSpinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                </div>
+
+            <a href="javascript:;" class="p24_prev js_pp_prev">
+                <i class="fa fa-4x fa-angle-left"></i>
+            </a>
+            <a href="javascript:;" class="p24_next js_pp_next">
+                <i class="fa fa-4x fa-angle-right"></i>
+            </a>
+    </div>
+</div>
+<div class="hidden-print p24_mediaTabs p24_withCaption" id="carousel-media-tabs">
+        <div class="p24_thumbnails js_showThumbnailGallery">
+            <img src="/Content/images/Optimized/Icons/grid_icon_clean.svg?z=55f691d3f5ec1971df80" alt="Thumbnail Gallery" /> <span>Photo Grid</span>
+        </div>
+
+    <div class="p24_mediaTab js_mediaTab p24_activeTab" data-id="#gallery-photos"><i class="fa fa-image"></i><span>Photos</span></div>
+    <div class="p24_mediaTab js_mediaTab" data-id="#gallery-3d-tour"><i class="fa fa-cube"></i><span>3D Tour</span></div>
+    <div class="p24_mediaTab js_mediaTab" data-id="#gallery-map"><i class="fa fa-map"></i><span>Map</span></div>
+
+        <div class="pull-right p24_count test">
+            <span id="listing-carousel-position">1</span> of 16
+        </div>
+</div>                <div class="p24_listingContent">
+
+<div class="p24_listingCard p24_listingFeaturesWrapper">
+    <div class="p24_mBM">
+        <div class="p24_favourite"> 
+<div class="hidden-print">
+        <a href="#login-modal" class="js_favourite" data-mandate-id="38586272" data-toggle="modal" title="You must log in to save your favourite listings">
+            <svg width="26" height="23" class="js_fav_empty_star" title="Test tooltip">
+                <image xlink:href="/Content/images/Optimized/SPUI/spui_favourite_disabled.svg?z=232b4bf56db3ba880195" src="/Content/images/Optimized/SPUI/spui_favourite_disabled.svg?z=232b4bf56db3ba880195" width="26" height="23" />
+            </svg>
+        </a>
+</div>
+</div>
+        <div class="p24_price">R 12 000</div>
+        <div class="dropdown p24_bond">
+
+        </div>
+    </div>
+    <div class="p24_mBM">
+        <h1>1 Bedroom Apartment / Flat to Rent in Walmer Estate</h1>
+    </div>
+
+        <div class="p24_mB">
+            <a class="js_displayMap p24_address" href="javascript:;">91 Upper Duke, 91 Upper Duke, Walmer Estate, Cape Town</a>
+        </div>
+
+    <div class="p24_iconsWrapper">
+        <ul class="p24_icons">
+                    <li class="p24_featureDetails" title="Bedrooms">
+                        <img src="/Content/images/Optimized/Icons/icon_bed_listing.svg?z=ef5d0317514d405d13cb" alt="Bedrooms" class="p24_bedroomIcon" />
+                        <span>1</span>
+                    </li>
+                    <li class="p24_featureDetails" title="Bathrooms">
+                        <img src="/Content/images/Optimized/Icons/icon_bath_listing.svg?z=5383dcd42846c13e0634" alt="Bathrooms" class="p24_bathroomIcon" />
+                        <span>1</span>
+                    </li>
+                    <li class="p24_featureDetails" title="Parking Spaces">
+                        <img src="/Content/images/Optimized/Icons/icon_parking_listing.svg?z=ff69361343bd0ce01b24" alt="Garages" class="p24_garageIcon" />
+                        <span>1</span>
+                    </li>
+                <li class="p24_featureDetails p24_size" title="Floor Size">
+                        <img src="/Content/images/Optimized/Icons/icon_floor_new.svg?z=6469c3498bc6c7f3625f" alt="Floor Size" class="p24_sizeIcon" />
+                        <span>55 m&#xB2;</span>
+                </li>
+        </ul>
+    </div>
+
+
+    <ul class="p24_badges">
+                <li class="p24_availableBadge">AVAILABLE:<span class="p24_badgeSupplemental">01 JUN</span></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    addCallback(function () {
+        var bondCalcNavigation = new Property24.Bond.Navigation(
+            '/calculators/bond',
+            '/calculators/affordability',
+            '/calculators/additionalpayment',
+            '/calculators/bondcosts',
+                true);
+
+            var bondCalculator = new Property24.Bond.BondCalculatorsDesktop(
+            'https://www.property24.com/calculators/logmortgagecalc',
+                bondCalcNavigation, 5, $(".js_bondModal"), true);
+
+            var listingSummaryCard = new Property24.ListingSummaryCard();
+    });
+</script>
+
+
+<div class="modal fade p24_modal panel-body p24_small p24_agentContact" id="ContactAgentModal" data-target="#contactModal" data-toggle="modal" data-backdrop="true" data-keyboard="true">
+    <div class="p24_agentContactContent">
+        <img src="/Content/images/Optimized/Icons/icon_close_grey.png?z=1cc08bf7b63ad90d18b7" alt="Close" class="p24_close" data-dismiss="modal" aria-label="Close" />
+
+        <div id="ContactForAddressForm">
+            <div class="col-6">
+                <h4 class="p24_listingHeadings">Contact Agent</h4>
+<div class="hidden-print" id="RequestStreetAddress" itemscope itemtype="http://schema.org/ContactPage">
+    <div class="clearfix"></div>
+
+<form action="/to-rent/walmer-estate/cape-town/western-cape/10163/116020259" class="p24_messageForm js_leadContactForm" method="post"><input id="ListingNumberText_LeadFormBottom" name="ListingNumberText" type="hidden" value="116020259" />        <div id="P24_listingContactAgent" class="hide"></div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input class="form-control" data-val="true" data-val-maxlength="The field LeadContactName must be a string or array type with a maximum length of &#x27;301&#x27;." data-val-maxlength-max="301" data-val-required="Name is required" maxlength="301" name="LeadContactName" placeholder="Your Name" type="text" value="" />
+                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconUser">
+                    <path d="M7.00037 8C9.20974 8 11.0004 6.20937 11.0004 4C11.0004 1.79063 9.20974 0 7.00037 0C4.79099 0 3.00037 1.79063 3.00037 4C3.00037 6.20937 4.79099 8 7.00037 8ZM9.80037 9H9.27849C8.58474 9.31875 7.81287 9.5 7.00037 9.5C6.18787 9.5 5.41912 9.31875 4.72224 9H4.20037C1.88162 9 0.000366211 10.8813 0.000366211 13.2V14.5C0.000366211 15.3281 0.672241 16 1.50037 16H12.5004C13.3285 16 14.0004 15.3281 14.0004 14.5V13.2C14.0004 10.8813 12.1191 9 9.80037 9Z" fill="#3CC89E" />
+                </svg>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactName" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input autocomplete="off" class="form-control" data-val="true" data-val-email="Please enter a valid email address." data-val-maxlength="The field LeadContactEmail must be a string or array type with a maximum length of &#x27;100&#x27;." data-val-maxlength-max="100" data-val-required="Email is required." maxlength="100" name="LeadContactEmail" placeholder="Your Email" type="text" value="" />
+                <i class="fa fa-envelope"></i>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactEmail" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <div class="p24_mobileNumber p24_inputIconGroup">
+                <input class="form-control" name="ContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+                (* Please enter phone number so the agent can contact you.)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input class="form-control" data-val="true" data-val-regex="Mobile number is invalid." data-val-regex-pattern="^(?!.{21,})\s*?(\&#x2B;\s*?2\s*?7\s*?\(\s*?0\s*?\)|\&#x2B;\s*?2\s*?7|2\s*?7|0)\s*?(((6(?:0|1|2|3|4|5|6|7|8|9)\s*?|7(?:0|1|2|3|4|5|6|7|8|9)\s*?|8\s*?(?:1|2|3|4))\s*?((?:\d\s*?){7}))|((9600000|9602001|9602002|9602005|9602006|9602007|9602010|9602011|9603000|9603001|9603002|9603003|9609802|9609803)((?:\d\s*?){2})))$" data-val-required="Mobile number is required." name="LeadContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconNumber">
+                    <path d="M13.3273 13.4914L13.9835 10.6477C14.0546 10.3387 13.8933 10.0216 13.6035 9.89579L10.541 8.58331C10.2731 8.46847 9.95862 8.54503 9.77543 8.77198L8.4192 10.429C6.32198 9.44462 4.57749 7.72474 3.57399 5.58377L5.23099 4.22754C5.45794 4.04161 5.5345 3.7299 5.41966 3.46193L4.10718 0.399495C3.97867 0.106923 3.66149 -0.0544016 3.35251 0.0166907L0.508819 0.672927C0.213511 0.741285 0.000234604 1.00378 0.000234604 1.31276C0.000234604 8.31535 5.67395 14 12.6875 14C12.9937 14 13.2589 13.7895 13.3273 13.4914Z" fill="#3CC89E" />
+                </svg>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactMobileNumber" data-valmsg-replace="true"></span>
+        </div>
+        <div class="p24_messageBodyLead p24_leadMessageBody">
+            <div>
+                <textarea class="form-control js_leadMessageInput" data-val="true" data-val-maxlength="Message length cannot exceed 600 characters." data-val-maxlength-max="600" data-val-minlength="Message must be more than 5 characters." data-val-minlength-min="6" data-val-required="Message is required." maxlength="600" name="LeadMessageBody" placeholder="Message Body" rows="4">
+I&#x27;m interested in this property, please contact me.</textarea>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadMessageBody" data-valmsg-replace="true"></span>
+        </div>
+        <div class="clearfix"></div>
+        <button type="submit" class="btn btn-lg btn-block btn-success js_leadMessageSendButton">
+            <span class="js_textModal">Send Message</span>
+            <div class="hide p24_loader js_spinnerModal">
+                <span class="p24_spinner p24_counterSpinner">
+                    <span class="p24_dot-1"></span>
+                    <span class="p24_dot-2"></span>
+                    <span class="p24_dot-3"></span>
+                </span>
+                <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+            </div>
+        </button>
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8K0iOFnKEI1HqTNXFeen6WGC3UCyaIvqvgTEGRAdCwjIE6tI9kAfzzRWXFGTPXGUHZ6vrF5JMe1WRSh_6YMyZ-P9DR3G2Jf4NomW6jlYapsOOmt0FXBjWgo91sboAD0jkVQQwwpmkcfGAN0SoeXvCE0" /></form>    <div class="p24_popiBeforeContinuing js_popiBeforeContinuing">
+    By continuing I understand and agree with Property24&rsquo;s<br />
+    <a href="/terms-and-conditions" target="_blank" title="Terms and Conditions">Terms&nbsp;&amp;&nbsp;Conditions</a>
+    and
+    <a href="/privacy-policy" target="_blank" title="Privacy Policy">Privacy&nbsp;Policy</a>.
+</div>
+</div>
+            </div>
+
+            <div class="col-6">
+<div class="p24_agent" id="listingAgent">
+            <div class="p24_agentDetails">
+                <div class="p24_agentPhoto">
+                    <a href="/estate-agents/vermaak-properties/thaabiet-abrahams/521213" title="Agent profile for Thaabiet Abrahams" class="js_openAgentProfile">
+                        <img src="https://images.prop24.com/349636675/Crop204x306" alt="Agent profile for Thaabiet Abrahams" class="img-responsive" />
+                    </a>
+                </div>
+                <div class="p24_agentInfo" data-value="oz7c74lpynornuylu6a4ditti5kmnfnznxr4o4bdjdrwoas2habuac3e53yijo6xfiuneqkjjbtvwimydw6fyjkrhngndi2wfdsnvpa">
+                    <h5>
+                            <a href="/estate-agents/vermaak-properties/thaabiet-abrahams/521213" class="js_openAgentProfile">Thaabiet Abrahams</a>
+                    </h5>
+                        <div class="p24_showNumbers js_hideShowContactToggle">
+                            <a href='javascript:;' title="Show Contact Number" class="js_contactNumbersLink js_hideAgentName btn btn-block">
+                                <img src="/Content/images/Optimized/Icons/icon_message_number.svg?z=bdb2e93020612be118ea" alt="phone" class="js_icon" />
+                                <span class="js_text p24_placeholder">Show Contact Number</span>
+
+<div class="hide p24_loader js_spinner">
+    <span class="p24_spinner p24_counterSpinner">
+        <span class="p24_dot-1"></span>
+        <span class="p24_dot-2"></span>
+        <span class="p24_dot-3"></span>
+    </span>
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+</div>                            </a>
+                            <div class="hide js_contactNumbersDiv"></div>
+                        </div>
+
+                </div>
+            </div>
+</div>
+            </div>
+        </div>
+
+        <div class="col-12 hide p24_RequestAddress js_messageSentResult">
+            <div class="hidden-print text-center p24_messageResultContainer">
+                <div class="p24_contents">
+                    <div class="p24_icon">
+                        <img src="/Content/images/Optimized/Icons/icon_check.svg?z=fa586256542292a1590e" class="js_messageSuccessIcon hide" alt="Success">
+                        <img src="/Content/images/Optimized/Icons/icon_exclamationcircle.svg?z=e8c9774b6427f6c3a579" class="js_messageLoginRequiredIcon hide" alt="Warning">
+                        <img src="/Content/images/Optimized/Icons/icon_timescircle.svg?z=d17d2386a19c1d918cb5" class="js_messageFailedIcon hide" alt="Error">
+                    </div>
+                    <h2 class="p24_state js_messageSentHeading"></h2>
+                    <div class="p24_confirmationMessage js_messageSentDetail"></div>
+                </div>
+
+                <button type="button" class="btn btn-lg btn-block btn-success hide js_closeModalButton" alt="Close" data-dismiss="modal" aria-label="Close">Close</button>
+
+                <div class="js_loginRequired hide">
+                    <button class="btn btn-lg btn-block btn-primary js_signInButton" alt="Sign In" data-dismiss="modal" aria-label="Sign In">Sign In</button>
+                    <div class="p24_forgotPassword">
+                        <a href="" class="js_resetPasswordUrl">Forgot Password?</a>
+                    </div>
+                </div>
+
+                    <div class="p24_whatsappBlurb js_whatsAppBlurb hide">
+                        <h2>WhatsApp</h2>
+                        <div class="p24_leftContents">
+                            <p>Try out our new WhatsApp feature.</p>
+                            <p>Click on the "WhatsApp Agent" button and we'll initiate a chat with the listing agent using their mobile number.</p>
+                        </div>
+                        <div class="p24_rightContents">
+                            <p class="p24_fullName">Thaabiet Abrahams</p>
+                            <button class="p24_button js_ContactViaWhatsappLink">
+                                <img src="/Content/images/Optimized/Icons/icon_whatsapp_white.svg?z=a88f0a171d25f71cab5b" /><span>WhatsApp Agent</span>
+                            </button>
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.contactAgentModal = null; 
+    addCallback(function () {
+        contactAgentModal = new Property24.ContactForAddressForm({
+            listingSendAgentAMessageActionUrl: "/Listing/SendAgentAMessage",
+            resetPasswordUrl: "/reset-password",
+            contactAgentIsAdminUser: false,
+            isAdminLeadFieldId: "IsAdminLead",
+            requestStreetAddressMessage: "Please send me the street address for this property.",
+            messageSentSuccessfullyHtml: "Thank you for your enquiry. A message has been sent to <span class='p24_bold'>Vermaak Properties</span> and an agent will be in contact with you shortly."
+        });
+    });
+</script>
+
+                    <div class="p24_listingCard p24_listingAbout js_readMoreContainer p24_readMoreVisible p24_minimized">
+                            <h5>Neat Ground Floor 1-Bedroom Apartment in Central Walmer Estate</h5>
+
+<div id="633552924" class="js_readMore">
+    <div class="js_readMoreText p24_readMoreText">
+        <div class="js_visibleText p24_abbreviatedText">            <p>This well-maintained 1-bedroom apartment is located in the heart of Walmer Estate, a central and accessible suburb just minutes from Cape Town&#x2019;s CBD. Positioned on the ground floor at 91 Upper Duke Street, the unit features a spacious bedroom with built-in cupboards, an open-plan living area, a practical kitchen, and a tiled bathroom. It&#x27;s ideal for first-time buyers, students, or young professionals looking for a lock-up-and-go lifestyle close to the city.</p>
+            <p>The apartment is conveniently situated near key amenities including UCT Medical Campus, CPUT, Pick n Pay Woodstock, Woodstock Exchange, and Garden Centre Mall. Commuters will benefit from easy access to the N2, M3, and MyCiTi bus routes, while nearby attractions such as the Old Biscuit Mill, De Waal Park, and Christiaan Barnard Hospital are all within a short drive. This is a prime opportunity to secure a...</p>
+</div>
+        <div class="js_expandedText p24_expandedText hide">            <p>This well-maintained 1-bedroom apartment is located in the heart of Walmer Estate, a central and accessible suburb just minutes from Cape Town&#x2019;s CBD. Positioned on the ground floor at 91 Upper Duke Street, the unit features a spacious bedroom with built-in cupboards, an open-plan living area, a practical kitchen, and a tiled bathroom. It&#x27;s ideal for first-time buyers, students, or young professionals looking for a lock-up-and-go lifestyle close to the city.</p>
+            <p>The apartment is conveniently situated near key amenities including UCT Medical Campus, CPUT, Pick n Pay Woodstock, Woodstock Exchange, and Garden Centre Mall. Commuters will benefit from easy access to the N2, M3, and MyCiTi bus routes, while nearby attractions such as the Old Biscuit Mill, De Waal Park, and Christiaan Barnard Hospital are all within a short drive. This is a prime opportunity to secure a centrally located property with great value and solid rental appeal</p>
+</div>
+    </div>
+        <div class="p24_bgWhite">
+            <a href="javascript:;" title="Read More" class="p24_readMoreLink js_readMoreLink hidden-print">
+                <span class="p24_readMore js_readMoreLinkText">
+                    <img src="/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe" class="p24_plusIcon" alt="" /> Read More
+                </span>
+                <span class="p24_line"></span>
+            </a>
+            <div class="p24_readMoreFade hidden-print"></div>
+        </div>
+</div>
+
+
+    <script type="text/javascript">
+        addCallback(function () {
+            const readMore = new Property24.ReadMore('#633552924');
+        });
+    </script>
+                    </div>
+
+                        <div class="p24_listingCard">
+                            <div class="row">
+                                <div class="col-12">
+
+<div class="p24_keyFeaturesContainer">
+        <div class="p24_listingFeatures">
+            <span class="p24_keyFeaturesIconWrapper">
+                <img src="/Content/images/Optimized/Icons/icon_bed_blue.svg?z=bc86a916d9dc68094a1e" alt="Bedrooms" class="p24_keyFeaturesIcon p24_Bedrooms" />
+            </span>
+
+                <span class="p24_feature">Bedrooms:</span>
+                <span class="p24_featureAmount">1</span>
+        </div>
+        <div class="p24_listingFeatures">
+            <span class="p24_keyFeaturesIconWrapper">
+                <img src="/Content/images/Optimized/Icons/icon_bathroom_blue.svg?z=669738d9158a5f1bb50b" alt="Bathrooms" class="p24_keyFeaturesIcon p24_Bathrooms" />
+            </span>
+
+                <span class="p24_feature">Bathrooms:</span>
+                <span class="p24_featureAmount">1</span>
+        </div>
+        <div class="p24_listingFeatures">
+            <span class="p24_keyFeaturesIconWrapper">
+                <img src="/Content/images/Optimized/Icons/icon_secure_parking_blue.svg?z=0ba2cb82627bd58e0f99" alt="Parking" class="p24_keyFeaturesIcon p24_Parking" />
+            </span>
+
+                <span class="p24_feature">Parking:</span>
+                <span class="p24_featureAmount">1</span>
+        </div>
+</div>
+<div class="p24_keyFeaturesContainer p24_pL20">
+        <div class="p24_listingFeatures">
+            <span class="p24_keyFeaturesIconWrapper">
+                <img src="/Content/images/Optimized/Icons/icon_pet_blue.svg?z=17b437c75ac713df28cb" alt="No Pets Allowed" class="p24_keyFeaturesIcon p24_No Pets Allowed" />
+            </span>
+
+                <span class="p24_feature">No Pets Allowed</span>
+        </div>
+        <div class="p24_listingFeatures">
+            <span class="p24_keyFeaturesIconWrapper">
+                <img src="/Content/images/Optimized/Icons/icon_unfurnished_blue.svg?z=1743f61133f8c9488290" alt="Unfurnished" class="p24_keyFeaturesIcon p24_Unfurnished" />
+            </span>
+
+                <span class="p24_feature">Unfurnished</span>
+        </div>
+</div>
+
+                                </div>
+                            </div>
+                        </div>
+                   
+
+<div class="p24_listingCard p24_galleryThumbnails p24_thumbnail3Row p24_withViewMore" id="listing-thumbnails">
+    <div class="p24_galleryWrapper">
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/357956548/Crop320x213" alt="Listing number: P24-116020259, Image number: 1, Image" data-index="1" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/357956549/Crop320x213" alt="Listing number: P24-116020259, Image number: 2, Image" data-index="2" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/357956551/Crop320x213" alt="Listing number: P24-116020259, Image number: 3, Image" data-index="3" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/357956553/Crop320x213" alt="Listing number: P24-116020259, Image number: 4, Image" data-index="4" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/357956554/Crop320x213" alt="Listing number: P24-116020259, Image number: 5, Image" data-index="5" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/357956556/Crop320x213" alt="Listing number: P24-116020259, Image number: 6, Image" data-index="6" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/357956558/Crop320x213" alt="Listing number: P24-116020259, Image number: 7, Image" data-index="7" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/357956560/Crop320x213" alt="Listing number: P24-116020259, Image number: 8, Image" data-index="8" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/357956562/Crop320x213" alt="Listing number: P24-116020259, Image number: 9, Image" data-index="9" />
+            </div>
+    </div>
+        <button class="btn btn-default p24_showThumbnailGallery" id="view-more-thumbnails">View More</button>
+</div>
+
+
+<div class="p24_listingCard p24_propertyOverview">
+    <div id="accordion" class="p24_accordion p24_mainAccordion" role="tablist" aria-multiselectable="true">
+            <div class="panel">
+                <div class="panel-heading " role="button" data-toggle="collapse" data-target="#js_accordion_propertyoverview" aria-expanded="true">
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon ' />
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' />
+                    Property Overview
+                </div>
+                <div id="js_accordion_propertyoverview" class="panel-collapse collapse in" role="tabpanel">
+                    <div class="panel-body">
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Listing Number</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">116020259</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Type of Property</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">Apartment / Flat</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Street Address</div>
+                                <div class="col-6 noPadding">
+                                            <a class="js_displayMap p24_addressPropOverview" href="javascript:;">91 Upper Duke, 91 upper duke, Walmer Estate</a>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Occupation Date</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">01 June 2025</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Deposit Requirements</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">Deposit Required: 24000</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Erf Size</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">55 m&#xB2;</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Floor Size</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">55 m&#xB2;</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Levies</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">R 1</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Special Levy</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">R 1</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Rates and Taxes</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">R 1</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Pets Allowed</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">No</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Furnished</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">No</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading collapsed" role="button" data-toggle="collapse" data-target="#js_accordion_rooms" aria-expanded="true">
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon ' />
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' />
+                    Rooms
+                </div>
+                <div id="js_accordion_rooms" class="panel-collapse collapse " role="tabpanel">
+                    <div class="panel-body">
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Bedroom</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">1</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Bathrooms</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">1</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Kitchens</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">1</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Reception Rooms</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">2</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading collapsed" role="button" data-toggle="collapse" data-target="#js_accordion_externalfeatures" aria-expanded="true">
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon ' />
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' />
+                    External Features
+                </div>
+                <div id="js_accordion_externalfeatures" class="panel-collapse collapse " role="tabpanel">
+                    <div class="panel-body">
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Parking</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">On Street Parking</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading collapsed" role="button" data-toggle="collapse" data-target="#js_accordion_building" aria-expanded="true">
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon ' />
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' />
+                    Building
+                </div>
+                <div id="js_accordion_building" class="panel-collapse collapse " role="tabpanel">
+                    <div class="panel-body">
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Floor</div>
+                                <div class="col-6 noPadding">
+                                            <div class="p24_info">Tiled Floors</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading collapsed" role="button" data-toggle="collapse" data-target="#accordian-points-of-interest">
+                    <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' /> <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon hide' />Points of Interest
+                </div>
+                <div id="accordian-points-of-interest" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                        <div id="P24_poi" class="hidden-print p24_poi">
+                            <div id="P24_pointsOfInterest">
+<div class="hidden-print p24_loader">
+    <i class="fa fa-2x fa-spin fa-spinner"></i> 
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" /> Loading
+</div>                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                addCallback(function () {
+                    Property24.Global.LoadOnAppear("#P24_pointsOfInterest", '/ListingReadOnly/PointsOfInterestForListing?ListingNumber=116020259');
+                });
+            </script>
+    </div>
+</div>
+
+
+    <div class="p24_hide hidden-print p24_listingCard p24_videoTour p24_3dTour" id="3d_tour">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="p24_listingHeadings">3D Tour</h4>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-12">
+                    <iframe type="text/html"
+                            src="https://my.matterport.com/show/?m=35g3w1JXw3j&amp;brand=0&amp;nt=1"
+                            width="100%" height="370"
+                            frameborder="0"
+                            scrolling="no"
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+    </div>
+
+
+                    <div class="hidden-print p24_listingCard p24_recentSales">
+                        <div id="P24_recentSales">
+                            <div class="hidden-print p24_loader">
+    <i class="fa fa-2x fa-spin fa-spinner"></i> 
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" /> Loading
+</div>
+                        </div>
+
+                        <script type="text/javascript">
+                            addCallback(function () {
+                                Property24.Global.LoadOnAppear("#P24_recentSales", '/Listing/RecentSalesView/10163/False');
+                            });
+                        </script>
+                    </div>
+
+                    <div class="p24_mT0 p24_agentContact">
+<div class="p24_listingCard js_analyticsV4BottomCard hidden-print">
+    <div class="row">
+        <div class="col-6">
+            <h4 class="p24_listingHeadings">Contact Agent</h4>
+<div class="hidden-print" id="ContactAgentBottom" itemscope itemtype="http://schema.org/ContactPage">
+    <div class="clearfix"></div>
+
+<form action="/to-rent/walmer-estate/cape-town/western-cape/10163/116020259" class="p24_messageForm js_leadContactForm" method="post"><input id="ListingNumberText_LeadFormBottom" name="ListingNumberText" type="hidden" value="116020259" />        <div id="P24_listingContactAgent" class="hide"></div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input class="form-control p24_textInput" data-val="true" data-val-maxlength="The field LeadContactName must be a string or array type with a maximum length of &#x27;301&#x27;." data-val-maxlength-max="301" data-val-required="Name is required" maxlength="301" name="LeadContactName" placeholder="Your Name" type="text" value="" />
+                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconUser">
+                    <path d="M7.00037 8C9.20974 8 11.0004 6.20937 11.0004 4C11.0004 1.79063 9.20974 0 7.00037 0C4.79099 0 3.00037 1.79063 3.00037 4C3.00037 6.20937 4.79099 8 7.00037 8ZM9.80037 9H9.27849C8.58474 9.31875 7.81287 9.5 7.00037 9.5C6.18787 9.5 5.41912 9.31875 4.72224 9H4.20037C1.88162 9 0.000366211 10.8813 0.000366211 13.2V14.5C0.000366211 15.3281 0.672241 16 1.50037 16H12.5004C13.3285 16 14.0004 15.3281 14.0004 14.5V13.2C14.0004 10.8813 12.1191 9 9.80037 9Z" fill="#3CC89E" />
+                </svg>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactName" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                 
+<input autocomplete="off" class="form-control" data-mailcheck="e85b794d-ccb8-4056-a328-031af8a01482" data-val="true" data-val-email="Please enter a valid email address." data-val-maxlength="The field LeadContactEmail must be a string or array type with a maximum length of &#x27;100&#x27;." data-val-maxlength-max="100" data-val-required="Email is required." maxlength="100" name="LeadContactEmail" placeholder="Your Email" type="text" value="" />
+
+<script type="text/javascript">
+    addCallback(function () {
+        const $element = $('input[data-mailcheck="e85b794d-ccb8-4056-a328-031af8a01482"]');
+
+            Property24.MailCheck.Setup($element);
+    });
+</script>
+                <i class="fa fa-envelope"></i>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactEmail" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <div class="p24_mobileNumber p24_inputIconGroup">
+                <input class="form-control" name="ContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+                (* Please enter phone number so the agent can contact you.)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input class="form-control" data-val="true" data-val-regex="Mobile number is invalid." data-val-regex-pattern="^(?!.{21,})\s*?(\&#x2B;\s*?2\s*?7\s*?\(\s*?0\s*?\)|\&#x2B;\s*?2\s*?7|2\s*?7|0)\s*?(((6(?:0|1|2|3|4|5|6|7|8|9)\s*?|7(?:0|1|2|3|4|5|6|7|8|9)\s*?|8\s*?(?:1|2|3|4))\s*?((?:\d\s*?){7}))|((9600000|9602001|9602002|9602005|9602006|9602007|9602010|9602011|9603000|9603001|9603002|9603003|9609802|9609803)((?:\d\s*?){2})))$" data-val-required="Mobile number is required." name="LeadContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconNumber">
+                    <path d="M13.3273 13.4914L13.9835 10.6477C14.0546 10.3387 13.8933 10.0216 13.6035 9.89579L10.541 8.58331C10.2731 8.46847 9.95862 8.54503 9.77543 8.77198L8.4192 10.429C6.32198 9.44462 4.57749 7.72474 3.57399 5.58377L5.23099 4.22754C5.45794 4.04161 5.5345 3.7299 5.41966 3.46193L4.10718 0.399495C3.97867 0.106923 3.66149 -0.0544016 3.35251 0.0166907L0.508819 0.672927C0.213511 0.741285 0.000234604 1.00378 0.000234604 1.31276C0.000234604 8.31535 5.67395 14 12.6875 14C12.9937 14 13.2589 13.7895 13.3273 13.4914Z" fill="#3CC89E" />
+                </svg>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactMobileNumber" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group p24_leadMessageBody">
+            <div>
+                <textarea class="form-control" data-val="true" data-val-maxlength="Message length cannot exceed 600 characters." data-val-maxlength-max="600" data-val-minlength="Message must be more than 5 characters." data-val-minlength-min="6" data-val-required="Message is required." maxlength="600" name="LeadMessageBody" placeholder="Message Body" rows="4">
+I&#x27;m interested in this property, please contact me.</textarea>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadMessageBody" data-valmsg-replace="true"></span>
+        </div>
+        <div class="clearfix"></div>
+        <button type="submit" class="btn btn-lg btn-block btn-success">
+            <span class="js_text">Send Message</span>
+
+<div class="hide p24_loader js_spinner">
+    <span class="p24_spinner p24_counterSpinner">
+        <span class="p24_dot-1"></span>
+        <span class="p24_dot-2"></span>
+        <span class="p24_dot-3"></span>
+    </span>
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+</div>        </button>
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8K0iOFnKEI1HqTNXFeen6WGC3UCyaIvqvgTEGRAdCwjIE6tI9kAfzzRWXFGTPXGUHZ6vrF5JMe1WRSh_6YMyZ-P9DR3G2Jf4NomW6jlYapsOOmt0FXBjWgo91sboAD0jkVQQwwpmkcfGAN0SoeXvCE0" /></form></div>
+            <div class="p24_popiBeforeContinuing js_popiBeforeContinuing">
+    By continuing I understand and agree with Property24&rsquo;s<br />
+    <a href="/terms-and-conditions" target="_blank" title="Terms and Conditions">Terms&nbsp;&amp;&nbsp;Conditions</a>
+    and
+    <a href="/privacy-policy" target="_blank" title="Privacy Policy">Privacy&nbsp;Policy</a>.
+</div>
+        </div>
+        <div class="col-6 noPadding-left">
+<div class="p24_agent" id="listingAgent">
+            <div class="p24_agentDetails">
+                <div class="p24_agentPhoto">
+                    <a href="/estate-agents/vermaak-properties/thaabiet-abrahams/521213" title="Agent profile for Thaabiet Abrahams">
+                        <img src="https://images.prop24.com/349636675/Crop204x306" alt="Agent profile for Thaabiet Abrahams" class="img-responsive" />
+                    </a>
+                </div>
+                <div class="p24_agentInfo" data-value="oz7c74lpynornuylu6a4ditti7we3eeielea23quxgjbnzj42eo7v6tgnrd7rur26d7rddigqrx36aarnfsqyhgvet2dwukhzbsr3ya">
+                    <h5>
+                            <a href="/estate-agents/vermaak-properties/thaabiet-abrahams/521213">Thaabiet Abrahams</a>
+                    </h5>
+                        <div class="p24_showNumbers js_hideShowContactToggle">
+                            <a href='javascript:;' title="Show Contact Number" class="js_contactNumbersLink js_hideAgentName btn btn-block">
+                                <img src="/Content/images/Optimized/Icons/icon_message_number.svg?z=bdb2e93020612be118ea" class="p24_iconNumber js_icon" />
+                                <span class="p24_placeholder js_text">Show Contact Numbers</span>
+
+<div class="hide p24_loader js_spinner">
+    <span class="p24_spinner p24_counterSpinner">
+        <span class="p24_dot-1"></span>
+        <span class="p24_dot-2"></span>
+        <span class="p24_dot-3"></span>
+    </span>
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+</div>                            </a>
+                            <div class="hide js_contactNumbersDiv"></div>
+                        </div>
+
+                </div>
+            </div>
+</div>
+        </div>
+    </div>
+</div>
+                    </div>
+                </div>
+                <div class="p24_listingSidebar">
+                    <div class="p24_sidebar">
+
+
+
+
+
+<div class="p24_listingCard js-p24-leadform p24_contactBlock js_analyticsV4SideCard" id="ContactAgent" itemscope itemtype="http://schema.org/ContactPage">
+    <div class="p24_contact">
+        <h4 class="p24_listingHeadings text-center">Contact Agent</h4>
+            <div id="ContactDetails" class="p24_contactOptionWrapper" data-value="xzfuknhc3jgbubmmyitcudyvz7lbkn2ijnojyvqsqrsopvglvnkve2kcnnk6bgm3u2fdiipcwzhfg">
+                    <div class="p24_showNumbers js_hideShowContactToggle">
+                        <a href='javascript:;' title="Show Contact Number" class="js_contactNumbersLink btn btn-block">
+                            <img src="/Content/images/Optimized/Icons/icon_message_number.svg?z=bdb2e93020612be118ea" alt="Contact Number" class="p24_iconNumber js_icon" />
+                            <span class="p24_placeholder js_text">Show Contact Number</span>
+
+<div class="hide p24_loader js_spinner">
+    <span class="p24_spinner p24_counterSpinner">
+        <span class="p24_dot-1"></span>
+        <span class="p24_dot-2"></span>
+        <span class="p24_dot-3"></span>
+    </span>
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+</div>                        </a>
+                        <div class="hide js_contactNumbersDiv p24_contactNumbersDiv"></div>
+                    </div>
+                <div class="clearfix"></div>
+            </div>
+    </div>
+<form action="/to-rent/walmer-estate/cape-town/western-cape/10163/116020259" class="hidden-print p24_contactForm js_leadContactForm" method="post"><input id="ListingNumberText_LeadAgentSidebar" name="ListingNumberText" type="hidden" value="116020259" />            <div id="P24_listingContactAgent" class="hide"></div>
+            <div class="form-group">
+                <div class="p24_inputIconGroup">
+                    <input class="form-control" data-val="true" data-val-maxlength="The field LeadContactName must be a string or array type with a maximum length of &#x27;301&#x27;." data-val-maxlength-max="301" data-val-required="Name is required" maxlength="301" name="LeadContactName" placeholder="Your Name" type="text" value="" />
+                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconUser">
+                        <path d="M7.00037 8C9.20974 8 11.0004 6.20937 11.0004 4C11.0004 1.79063 9.20974 0 7.00037 0C4.79099 0 3.00037 1.79063 3.00037 4C3.00037 6.20937 4.79099 8 7.00037 8ZM9.80037 9H9.27849C8.58474 9.31875 7.81287 9.5 7.00037 9.5C6.18787 9.5 5.41912 9.31875 4.72224 9H4.20037C1.88162 9 0.000366211 10.8813 0.000366211 13.2V14.5C0.000366211 15.3281 0.672241 16 1.50037 16H12.5004C13.3285 16 14.0004 15.3281 14.0004 14.5V13.2C14.0004 10.8813 12.1191 9 9.80037 9Z" fill="#3CC89E" />
+                    </svg>
+                </div>
+                <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactName" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <div class="p24_inputIconGroup">
+                     
+<input autocomplete="off" class="form-control" data-mailcheck="b314fa51-20bf-43b6-a9ae-a2b1e6955834" data-val="true" data-val-email="Please enter a valid email address." data-val-maxlength="The field LeadContactEmail must be a string or array type with a maximum length of &#x27;100&#x27;." data-val-maxlength-max="100" data-val-required="Email is required." maxlength="100" name="LeadContactEmail" placeholder="Your Email" type="text" value="" />
+
+<script type="text/javascript">
+    addCallback(function () {
+        const $element = $('input[data-mailcheck="b314fa51-20bf-43b6-a9ae-a2b1e6955834"]');
+
+            Property24.MailCheck.Setup($element);
+    });
+</script>
+                    <i id="faEnvelope" class="fa fa-envelope"></i>
+                </div>
+                <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactEmail" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group p24_mobileNumber">
+                <div class="p24_inputIconGroup">
+                    <input class="form-control" name="ContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+                </div>
+                (* Please enter phone number so the agent can contact you.)
+            </div>
+            <div class="form-group">
+                <div class="p24_inputIconGroup">
+                    <input class="form-control" data-val="true" data-val-regex="Mobile number is invalid." data-val-regex-pattern="^(?!.{21,})\s*?(\&#x2B;\s*?2\s*?7\s*?\(\s*?0\s*?\)|\&#x2B;\s*?2\s*?7|2\s*?7|0)\s*?(((6(?:0|1|2|3|4|5|6|7|8|9)\s*?|7(?:0|1|2|3|4|5|6|7|8|9)\s*?|8\s*?(?:1|2|3|4))\s*?((?:\d\s*?){7}))|((9600000|9602001|9602002|9602005|9602006|9602007|9602010|9602011|9603000|9603001|9603002|9603003|9609802|9609803)((?:\d\s*?){2})))$" data-val-required="Mobile number is required." name="LeadContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconNumber">
+                        <path d="M13.3273 13.4914L13.9835 10.6477C14.0546 10.3387 13.8933 10.0216 13.6035 9.89579L10.541 8.58331C10.2731 8.46847 9.95862 8.54503 9.77543 8.77198L8.4192 10.429C6.32198 9.44462 4.57749 7.72474 3.57399 5.58377L5.23099 4.22754C5.45794 4.04161 5.5345 3.7299 5.41966 3.46193L4.10718 0.399495C3.97867 0.106923 3.66149 -0.0544016 3.35251 0.0166907L0.508819 0.672927C0.213511 0.741285 0.000234604 1.00378 0.000234604 1.31276C0.000234604 8.31535 5.67395 14 12.6875 14C12.9937 14 13.2589 13.7895 13.3273 13.4914Z" fill="#3CC89E" />
+                    </svg>
+                </div>
+                <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactMobileNumber" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group p24_leadMessageBody">
+                <textarea class="form-control" data-val="true" data-val-maxlength="Message length cannot exceed 600 characters." data-val-maxlength-max="600" data-val-minlength="Message must be more than 5 characters." data-val-minlength-min="6" data-val-required="Message is required." id="LeadMessageBody" maxlength="600" name="LeadMessageBody" placeholder="Message Body" rows="4">
+I&#x27;m interested in this property, please contact me.</textarea>
+                <span class="errorLabel p24_textAreaSuggestion field-validation-valid" data-valmsg-for="LeadMessageBody" data-valmsg-replace="true"></span>
+            </div>
+            <div class="clearfix"></div>
+            <button type="submit" class="btn btn-block btn-success">
+                <span class="js_text">Send Message</span>
+
+<div class="hide p24_loader js_spinner">
+    <span class="p24_spinner p24_counterSpinner">
+        <span class="p24_dot-1"></span>
+        <span class="p24_dot-2"></span>
+        <span class="p24_dot-3"></span>
+    </span>
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+</div>            </button>
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8K0iOFnKEI1HqTNXFeen6WGC3UCyaIvqvgTEGRAdCwjIE6tI9kAfzzRWXFGTPXGUHZ6vrF5JMe1WRSh_6YMyZ-P9DR3G2Jf4NomW6jlYapsOOmt0FXBjWgo91sboAD0jkVQQwwpmkcfGAN0SoeXvCE0" /></form>    <div class="p24_popiBeforeContinuing">
+        By continuing I understand and agree with
+        <br />
+        Property24's
+        <a href="/terms-and-conditions" target="_blank" title="Terms and Conditions">Terms&nbsp;&amp;&nbsp;Conditions</a>
+        and
+        <a href="/privacy-policy" target="_blank" title="Privacy Policy">Privacy&nbsp;Policy</a>.
+    </div>
+</div>
+
+
+
+    <div class="js_analyticsV4RightSideAgentCard p24_agency" id="p24_listingAgency">
+            <div class="p24_listingCard">
+                    <a href="/to-rent/agency/vermaak-properties/32149" class="p24_agencyLogo">
+                        <img src="https://images.prop24.com/259006502/Fit450x225" alt="Property to rent by Vermaak Properties" class="img-responsive" />
+                    </a>
+                    <div class="clearfix"></div>
+                    <a href="/to-rent/agency/vermaak-properties/32149" title="View all properties to rent" class="hidden-print p24_agencyLogoName">
+                        <span>Vermaak Properties</span>
+                    </a>
+            </div>
+
+                <div class="p24_listingCard p24_agent hidden-print">
+                        <div class="p24_agentPhoto">
+                            <a href="/estate-agents/vermaak-properties/thaabiet-abrahams/521213" title="Agent profile for Thaabiet Abrahams">
+                                <img src="https://images.prop24.com/349636675/Crop204x306" alt="Agent profile for Thaabiet Abrahams" class="img-responsive" />
+                            </a>
+                        </div>
+                        <div class="p24_agentInfo" data-value="oz7c74lpynornuylu6a4ditti6nstfn36ioz5cxtcyscyw2hb3kt2hp7zzv4aexfdlqo3625mzlamnejespp5zohhah7arfawgy45oy">
+                            <h5>
+                                    <a href="/estate-agents/vermaak-properties/thaabiet-abrahams/521213">Thaabiet Abrahams</a>
+                            </h5>
+                                <div class="p24_showNumbers js_hideShowContactToggle">
+                                    <a href='javascript:;' title="Show Contact Number" class="js_contactNumbersLink js_hideAgentName btn btn-block">
+                                        <img src="/Content/images/Optimized/Icons/icon_message_number.svg?z=bdb2e93020612be118ea" alt="phone" class="js_icon" />
+                                        <span class="js_text p24_placeholder">Show Contact Number</span>
+
+<div class="hide p24_loader js_spinner">
+    <span class="p24_spinner p24_counterSpinner">
+        <span class="p24_dot-1"></span>
+        <span class="p24_dot-2"></span>
+        <span class="p24_dot-3"></span>
+    </span>
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+</div>                                    </a>
+                                    <div class="hide js_contactNumbersDiv"></div>
+                                </div>
+
+                        </div>
+                </div>
+    </div>
+
+                        <div class="clearfix"></div>
+
+
+<div class="p24_listingCard js_sidebarSocial p24_share hidden-print">
+
+
+<div class="p24_social">
+        <h4 class="p24_listingHeadings text-center">Share</h4>
+        <a href="https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163/116020259?utm_source=facebook&amp;utm_medium=referral&amp;utm_campaign=socialmedia" title="Share on Facebook" class="share-social-button-facebook js_facebookShare">
+            <img src="/Content/images/Optimized/Icons/icon_facebook_social.svg?z=a4ca447a6b4b31b557b1" alt="Facebook" />
+        </a>
+        <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fwww.property24.com%2fto-rent%2fwalmer-estate%2fcape-town%2fwestern-cape%2f10163%2f116020259%3futm_source%3dx%26utm_medium%3dreferral%26utm_campaign%3dsocialmedia&text=1 Bedroom Apartment / flat to rent in Walmer Estate, Cape Town R 12 000 : Property24" title="Share on Twitter" class="share-social-button-twitter">
+            <img src="/Content/images/Optimized/Icons/icon_twitter_social_dark.svg?z=1b75a5a3d602c7a11854" alt="Twitter" />
+        </a>
+        <a href="#EmailModal" title="Email" data-toggle="modal" data-target="#EmailModal" class="share-email">
+            <img src="/Content/images/Optimized/Icons/icon_message_social.svg?z=5dd1e928fbe3963c1295" alt="Email" />
+        </a>
+
+
+<div class="modal fade p24_modal p24_small p24_emailDialogue" id="EmailModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="/Content/images/Optimized/Icons/icon_close_grey.png?z=1cc08bf7b63ad90d18b7" alt="Close" class="p24_close" data-dismiss="modal" aria-label="Close" />
+                        <div class="clearfix"></div>
+                        <h5>
+                            <span class="title">Send Listing to:</span>
+                        </h5>
+<form action="/GeneralSession/SendEmail" class="p24_emailForm" id="EmailForm" method="post" novalidate="">                            <div class="form-group js_40958372">
+                                <label class="control-label" for="ToEmail">To email*</label>
+                                 
+<input class="form-control p24_input" data-mailcheck="4c51686b-d54c-49e2-b7df-a871fb719431" data-val="true" data-val-email="This is not a valid email address" data-val-required="This field is required" id="ToEmail" name="ToEmail" placeholder="To Email" type="text" value="" />
+
+<script type="text/javascript">
+    addCallback(function () {
+        const $element = $('input[data-mailcheck="4c51686b-d54c-49e2-b7df-a871fb719431"]');
+
+            Property24.MailCheck.Setup($element, $element.closest('.js_40958372'));
+    });
+</script>
+                            </div>
+                            <div class="form-group js_40958372">
+                                <label class="control-label" for="FromEmail">From email*</label>
+                                 
+<input class="form-control p24_input" data-mailcheck="465c579d-8f87-4207-9546-0de16471f793" data-val="true" data-val-email="This is not a valid email address" data-val-required="This field is required" id="FromEmail" name="FromEmail" placeholder="From Email" type="text" value="" />
+
+<script type="text/javascript">
+    addCallback(function () {
+        const $element = $('input[data-mailcheck="465c579d-8f87-4207-9546-0de16471f793"]');
+
+            Property24.MailCheck.Setup($element, $element.closest('.js_40958372'));
+    });
+</script>
+                            </div>
+<span class="text-danger field-validation-valid" data-valmsg-for="FromEmail" data-valmsg-replace="true"></span>                            <div class="form-group">
+                                <label class="control-label" for="Message">Optional Message</label>
+                                <textarea class="form-control" id="Message" name="Message" placeholder="Optional Message" rows="5">
+</textarea>
+                            </div>
+<input id="PostData" name="PostData" type="hidden" value="P24-116020259," /><input data-val="true" data-val-required="The PostDataType field is required." id="PostDataType" name="PostDataType" type="hidden" value="Listing" /><input id="DevelopmentContext" name="DevelopmentContext" type="hidden" value="Rental" />                            <div class="form-group">
+                                <span id="EmailResultText" class="hide">
+                                </span>
+                                <button type="button" class="pull-right btn btn-success" id="SendEmail">
+                                    <span>Send</span>
+                                    <i class="fa fa-spinner fa-spin hide"></i>
+                                </button>
+                                <button type="button" class="pull-right btn btn-default" id="CancelEmail" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            </div>
+</form>                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    addCallback(function () {
+        var model = new Property24.EmailDialog();
+    });
+</script>
+        <a href="https://web.whatsapp.com/send?text=Check out this property I found on Property24! https%3a%2f%2fwww.property24.com%2fto-rent%2fwalmer-estate%2fcape-town%2fwestern-cape%2f10163%2f116020259%3futm_source%3dwhatsapp%26utm_medium%3dreferral%26utm_campaign%3dsocialmedia" target="_blank" data-action="share/whatsapp/share" title="Share on WhatsApp" class="share-social-button-whatsapp">            
+            <img src="/Content/images/Optimized/Icons/icon_whatsapp_social.svg?z=baa384371fb9f6e1c994" alt="WhatsApp" />
+        </a>
+</div>
+
+<script type="text/javascript">
+    addCallback(function () {
+        var share = new Property24.Share({
+            googleIdSelector: 'google-share',
+            facebookClassSelector: 'js_facebookShare',
+        });
+    })
+</script>
+    <div class="clearfix"></div>
+</div>
+
+<div class="p24_listingCard js_sidebarSocial p24_share hidden-print">
+    <div class="p24_altOptions">
+        <a href="javascript:;" title="Print" onclick="window.print();">
+            <img src="/Content/images/Optimized/Icons/icon_print.svg?z=f8b3bef481725ed9ad36" alt="Print" />Print
+        </a>
+<form action="/Listing/DownloadBrochure" class="p24_downloadBrochure" method="get">            <img src="/Content/images/Optimized/Icons/icon_pdf.svg?z=54de768865e2853c78bb" alt="Brochure" />
+            <input id="brochure-download" class="p24_submitInput" type="submit" value="Download Brochure" />
+            <input type="hidden" name="ListingNumber" id="ListingNumber" value="P24-116020259" />
+</form>    <script type="text/javascript">
+                addCallback(function () {
+                    $("#brochure-download").on('click', function () {
+                        Property24.GoogleAnalyticsV4.Downloads.ListingBrochure();
+                    });
+                });
+    </script>
+
+<link async rel="stylesheet" href="/Scripts/Generated/report_listing_survey.css?eb7cc9892a026a62fac1" />
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"Client_ReportListing_ReportListing","props":{"messageCharLimit":500,"soleMandateMaxFileSize":10,"soleMandateFileContentType":"application/pdf","mandateId":38586272,"listingReported":false,"userIsLoggedIn":false,"isGroupedListing":false,"loggedInUserName":"","loggedInUserEmail":"","isSmartphone":false,"whoAreYouSelectList":[{"text":"Consumer","value":1},{"text":"Estate Agent","value":2}],"consumerIssueSelectList":[{"text":"Property is no longer available","value":1},{"text":"Agent did not contact me","value":2},{"text":"Incorrect information/photos","value":3}],"agentIssueSelectList":[{"text":"Property is no longer available","value":1},{"text":"Duplicate listing","value":2},{"text":"Grouped listing","value":3},{"text":"Incorrect information/photos","value":4},{"text":"Mandate (sole, dual, joint, etc.)","value":5}],"incorrectInformationSelectList":[{"text":"Location (suburb, street address, map, etc.)","value":1},{"text":"Photographs","value":2},{"text":"Media (video, 3D tour)","value":3},{"text":"Price","value":4},{"text":"Property details (erf/floor area, description, features, etc.)","value":5}]},"type":"r","elementId":"4fc2e894a0574fdfb01559fe20385993"}));
+   </script>
+
+<div id="4fc2e894a0574fdfb01559fe20385993">
+        <a href="#" class="p24_reportListingLink">
+            <img src="/Content/images/Optimized/Icons/icon_bullhorn.svg?z=d65dd553c46642c2d05d" alt="Report" />Report Listing
+        </a>
+</div>
+<script>
+    addCallback(function() {
+        if ("#ReportListingSurveyModal" === window.location.hash) {
+            $("#ReportListingSurveyModal").modal("show");
+        }
+    });
+</script>    </div>
+    <div class="clearfix"></div>
+</div>                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="google_conversion" class="hide"></div>
+
+
+    <div id="media-gallery-modal" class="modal fade p24_modal p24_galleryModal" tabindex="-1" role="dialog" data-backdrop="static">
+        <img src="/Content/images/Optimized/Icons/icon_close_white.svg?z=021afab086e6969eed35" alt="Close" class="p24_dummy" />
+        <div id="gallery-top" class="p24_top">
+
+            <div class="pull-left p24_mediaDescription">
+                <span class="p24_price">R 12 000</span>
+                <span class="p24_pipe">|</span>
+                <span class="p24_title">1 Bedroom Apartment / flat to rent in Walmer Estate</span>
+            </div>
+            <div class="p24_rightControls">
+                <div id="gallery-media-tabs" class="p24_mediaTabs">
+
+    <div class="p24_mediaTab js_mediaTab p24_activeTab" data-id="#gallery-photos"><i class="fa fa-image"></i><span>Photos</span></div>
+    <div class="p24_mediaTab js_mediaTab" data-id="#gallery-3d-tour"><i class="fa fa-cube"></i><span>3D Tour</span></div>
+    <div class="p24_mediaTab js_mediaTab" data-id="#gallery-map"><i class="fa fa-map"></i><span>Map</span></div>
+                </div>
+                <div class="p24_zoomControls ">
+                    <a id="gallery-zoom" href="javascript:;" class="hide">
+                        <img src="/Content/images/Optimized/Icons/search-plus.svg?z=891b682b8bf9b9b0df74" alt="Zoom In" />
+                        <img src="/Content/images/Optimized/Icons/search-minus.svg?z=870686279263ef7efd42" class="hide" alt="Zoom Out" />
+                    </a>
+                </div>
+                <a id="gallery-fullscreen" class="p24_fullScreenTab" href="javascript:;" title="Enter Fullscreen">
+                    <i class="fa fa-lg fa-expand"></i>
+                </a>
+                <a id="gallery-compress" href="javascript:;" title="Exit Fullscreen" class="hide">
+                    <i class="fa fa-lg fa-compress"></i>
+                </a>
+                <a id="gallery-close" href="javascript:;" title="Close" data-dismiss="modal" aria-label="Close">
+                    <img src="/Content/images/Optimized/Icons/icon_close_white.svg?z=021afab086e6969eed35" class="p24_closeIcon" alt="Close" />
+                </a>
+            </div>
+        </div>
+
+            <div class="p24_loader js_lightboxSpinner hide">
+                <i class="fa fa-2x fa-spin fa-spinner"></i>
+                <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+            </div>
+            <div id="gallery-photos" class="p24_mediaHolder js_mediaHolder">
+                <div class="p24_photos js_lightboxImageWrapper">
+                    <img class="img-responsive js_lightboxImage" />
+                </div>
+                <a title="Previous" class="js_lightboxPrevious p24_previous">
+                    <i class="fa fa-4x fa-angle-left"></i>
+                </a>
+                <a title="Next" class="js_lightboxNext p24_next">
+                    <i class="fa fa-4x fa-angle-right"></i>
+                </a>
+                <div class="js_lightboxImageCaption p24_caption"></div>
+                <div class="p24_count">
+                    <span class="js_lightboxImagePosition"></span> / <span>16</span>
+                </div>
+
+                    <div class="p24_thumbnailsIcon js_showThumbnailGallery" data-gallery="true">
+                        <img src="/Content/images/Optimized/Icons/grid_icon_clean.svg?z=55f691d3f5ec1971df80" alt="Thumbnail Gallery" /><span> Photo Grid</span>
+                    </div>
+            </div>
+                <div id="gallery-thumbnails" class="p24_mediaHolder hide">
+                    <div id="gallery-scrollable-container" class="p24_scrollable">
+                        <div class="p24_thumbnailContainer">
+                                <div class="row js_thumbnailRow">
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956548/Crop320x213" alt="Listing number: P24-116020259, Image number: 1, Image" data-index="1" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956549/Crop320x213" alt="Listing number: P24-116020259, Image number: 2, Image" data-index="2" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956551/Crop320x213" alt="Listing number: P24-116020259, Image number: 3, Image" data-index="3" />
+                                        </div>
+                                </div>
+                                <div class="row js_thumbnailRow">
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956553/Crop320x213" alt="Listing number: P24-116020259, Image number: 4, Image" data-index="4" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956554/Crop320x213" alt="Listing number: P24-116020259, Image number: 5, Image" data-index="5" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956556/Crop320x213" alt="Listing number: P24-116020259, Image number: 6, Image" data-index="6" />
+                                        </div>
+                                </div>
+                                <div class="row js_thumbnailRow">
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956558/Crop320x213" alt="Listing number: P24-116020259, Image number: 7, Image" data-index="7" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956560/Crop320x213" alt="Listing number: P24-116020259, Image number: 8, Image" data-index="8" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956562/Crop320x213" alt="Listing number: P24-116020259, Image number: 9, Image" data-index="9" />
+                                        </div>
+                                </div>
+                                <div class="row js_thumbnailRow">
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956564/Crop320x213" alt="Listing number: P24-116020259, Image number: 10, Image" data-index="10" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956566/Crop320x213" alt="Listing number: P24-116020259, Image number: 11, Image" data-index="11" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956568/Crop320x213" alt="Listing number: P24-116020259, Image number: 12, Image" data-index="12" />
+                                        </div>
+                                </div>
+                                <div class="row js_thumbnailRow">
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956570/Crop320x213" alt="Listing number: P24-116020259, Image number: 13, Image" data-index="13" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956571/Crop320x213" alt="Listing number: P24-116020259, Image number: 14, Image" data-index="14" />
+                                        </div>
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956573/Crop320x213" alt="Listing number: P24-116020259, Image number: 15, Image" data-index="15" />
+                                        </div>
+                                </div>
+                                <div class="row js_thumbnailRow">
+                                        <div class="col-4 p24_galleryThumbnail">
+                                            <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/357956575/Crop320x213" alt="Listing number: P24-116020259, Image number: 16, Image" data-index="16" />
+                                        </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="gallery-3d-tour" class="p24_mediaHolder js_mediaHolder hide">
+
+                    <iframe class="js_mediaGalleryFrame" type="text/html" src="https://my.matterport.com/show/?m=35g3w1JXw3j&amp;brand=0&amp;nt=1" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div id="gallery-map" class="p24_mediaHolder js_mediaHolder p24_mapContainer hide">
+
+        <div id="mapContainer" class="p24_address hidden-print">
+                <div id="travel-time-calculator-media-gallery" class="p24_hide p24_travelTime">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="p24_listingHeadings js_desktop-travel-time-ui-toggle">Travel Time Calculator <i class="js_toggleTravelTimeIcon pull-right fa fa-angle-down"></i> </h4>
+                            <div class="p24_left" id="travel-time-calculator-media-gallery-travel-time-ui">
+                                <div class="text-primary p24_streetAddress">91 Upper Duke, 91 Upper Duke, Walmer Estate, Cape Town, Western Cape</div>
+                                <div id="start-point" class="p24_start">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <div class="p24_destinations js_destinations">
+                                    <span class="p24_dashedLine"></span>
+                                </div>
+                                <div>
+                                    <button class="btn btn-default hide js_add-destination">
+                                        <i class="fa fa-plus"></i>
+                                        Add destination
+                                    </button>
+                                    <div data-active="false" class="p24_departure js_departure">
+                                        <div class="p24_departureToggle js_departure-toggle">
+                                            <span class="js_departureText">Leave now</span>
+                                            <i class="fa fa-caret-down js_departureCaret"></i>
+                                        </div>
+                                        <div class="hide p24_departureFields js_departure-fields">
+                                            <input class="js_departure form-control js_departure-date" type="text" />
+                                            <select class="js_departure js_departure-time"></select>
+                                        </div>
+                                    </div>
+                                    <div class="p24_loader p24_travelTimeLoader hide js_travel-time-loader">
+                                        <i class="fa fa-4x fa-spin fa-spinner"></i>
+                                        <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="p24_right">
+                                <span>
+                                    Calculate travel times  to your regular destinations e.g. work, schools
+                                </span>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="js_route-information">
+                                <div class="js_routeInformation p24_routes"></div>
+                            </div>
+                            <div class="text-danger p24_error hide js_error-message"></div>
+                        </div>
+                    </div>
+                </div>
+
+<div id="route-information-template" class="hide">
+    <div class="js_route">
+        <div class="p24_carClockLarge">
+            <img src="/Content/images/Optimized/Icons/icon_travelTime.svg?z=4c9154eddfd14128da85" />
+        </div>
+        <div class="p24_routeData">
+            <span class="js_routeDuration p24_duration"></span>
+            <span class="js_routeDistance p24_distance"></span>
+            <div class="js_routeSummary p24_summary"></div>
+            <div class="js_routeSteps hide">
+                <div class="js_routeStepsInstructions"></div>
+                <span class="js_routeSeeMore hide">See more...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="destination-field-template" class="hide">
+    <div class="js_destinationHolder p24_destination">
+        <i class="fa fa-map-marker p24_startLocationMarker"></i>
+        <input class="js_destination form-control" placeholder="Choose your destination" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+        <span class="p24_remove js_removeDestination js_close-button-travel-time">
+            <i class="fa fa-times js_removeDestinationIcon p24_removeDestination"></i>
+        </span>
+    </div>
+</div>
+
+<div id="travel-time-info-window-template" class="hide">
+    <div class="p24_mapWindow">
+        <div class="p24_carClockSmall">
+            <img src="/Content/images/Optimized/Icons/icon_travelTime.svg?z=4c9154eddfd14128da85" />
+        </div>
+        <div class="p24_windowText">
+            <div class="p24_duration js_duration"></div>
+            <div class="p24_distance js_distance"></div>
+        </div>
+    </div>
+</div>
+
+            <div id="google-map-media-gallery" class="p24_map">
+                <div id="map-loading-icon-media-gallery" class="p24_loader hide">
+                    <i class="fa fa-2x fa-spin fa-spinner"></i>
+                    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" /> Loading
+                </div>
+            </div>
+        </div>
+    <script type="text/javascript">
+        addCallback(function () {
+            var options = {
+                type: 0,
+                apiKey: 'AIzaSyC2RktftcJdFvtKiGUWgQdEtRk2Jq1mNYg',
+                latitude: 0,
+                longitude: 0,
+                mapsBaseUrl: 'https://maps.property24.com/tiles/{levelOfDetail:int}/{x:int}/{y:int}?v=638839309079210550',
+                applyScalingToFitTravelTimeRouteIntoUI: true,
+                streetAddress: '91 Upper Duke, 91 Upper Duke',
+                showBounds: true,
+                propertyMarkerImageUrl: 'https://www.property24.com/Content/images/Optimized/Maps/map_pin.png?z=b63f43b52fc167db67ca',
+                showLocation: true,
+                pins: null,
+                haveExactLocation: false,
+                showTravelTimeCalculator: true,
+                streetAddressWithFullLocation: '91 Upper Duke, 91 Upper Duke, Walmer Estate, Cape Town, Western Cape',
+                suburbCityProvince: 'Walmer Estate, Cape Town, Western Cape',
+                mapSelector: "#google-map-media-gallery",
+                loaderSelector: "#map-loading-icon-media-gallery",
+                toggleStreetViewSelector: "#toggle-street-view-media-gallery",
+                travelTimeCalculatorSelector: "#travel-time-calculator-media-gallery",
+                travelTimeCalculatorMediaGalleryUISelector: '#travel-time-calculator-media-gallery-travel-time-ui'
+            };
+
+                model = new Property24.GoogleMapMediaGallery(options);
+
+            model.setup();
+        });
+    </script>
+            </div>
+    </div>
+<div class="hidden-print p24_footer">
+    <div class="p24_areas">
+        <div class="container">
+            <div class="row">
+                    <div class="col-2-4 p24_areaHeading">
+                                <a href="/to-rent/cape-town/western-cape/432" title="Property and houses to rent in Cape Town : Cape Town Property : Property24.com" class="p24_bold">Property to rent in Cape Town</a>
+                    </div>
+                    <div class="col-2-4 p24_areaHeading">
+                                <a href="/to-rent/western-cape/9" title="Property to rent in Western Cape : Property and houses to rent in Western Cape : Property24.com" class="p24_bold">Property to rent in Western Cape</a>
+                    </div>
+                    <div class="col-2-4 p24_areaHeading">
+                    </div>
+                    <div class="col-2-4 p24_areaHeading">
+                    </div>
+                    <div class="col-2-4 p24_areaHeading">
+                    </div>
+            </div>
+            <div class="row">
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/camps-bay/cape-town/western-cape/11014" title="Camps Bay Property : Property and houses to rent in Camps Bay : Property24.com">Camps Bay</a>
+                                </li>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/cape-town-city-centre/cape-town/western-cape/9138" title="Cape Town City Centre Property : Property and houses to rent in Cape Town City Centre : Property24.com">Cape Town City Centre</a>
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/constantia/cape-town/western-cape/11742" title="Constantia, Cape Town Property : Property and houses to rent in Constantia, Cape Town : Property24.com">Constantia</a>
+                                </li>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/gardens/cape-town/western-cape/9145" title="Gardens Property : Property and houses to rent in Gardens : Property24.com">Gardens</a>
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/green-point/cape-town/western-cape/11017" title="Green Point, Cape Town Property : Property and houses to rent in Green Point, Cape Town : Property24.com">Green Point</a>
+                                </li>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/muizenberg/cape-town/western-cape/9025" title="Muizenberg Property : Property and houses to rent in Muizenberg : Property24.com">Muizenberg</a>
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/observatory/cape-town/western-cape/10157" title="Observatory, Cape Town Property : Property and houses to rent in Observatory, Cape Town : Property24.com">Observatory</a>
+                                </li>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/sea-point/cape-town/western-cape/11021" title="Sea Point Property : Property and houses to rent in Sea Point : Property24.com">Sea Point</a>
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/woodstock/cape-town/western-cape/10164" title="Woodstock Property : Property and houses to rent in Woodstock : Property24.com">Woodstock</a>
+                                </li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="container p24_moreFooter">
+        <div class="row">
+            <div class="col-8">
+                <a href="/to-rent" title="Property to rent: Houses to rent: Property24">
+                    <img src="/Content/images/Optimized/Logos/footer_logo_white_large.svg?z=8108a8253dc9f8d0d0d1" alt = "Property to rent: Houses to rent: Property24" class="p24_footerLogo" />
+                </a>
+            </div>
+            <div class="col-4">
+                <div class="p24_socials">
+                    <a href="https://www.instagram.com/property24_sa/" target="_blank" title="Find Property24 on Instagram" class=""><img src="/Content/images/Optimized/Icons/icon_instagram_rounded.svg?z=befcb56eeefeca2b7157" alt="instagram" /></a>
+                    <a href="https://www.facebook.com/property24" target="_blank" title="Find Property24 on Facebook" class=""><img src="/Content/images/Optimized/Icons/icon_facebook_rounded.svg?z=38bfdb8180de4b2ec66a" alt="facebook" /></a>
+                    <a href="https://twitter.com/Property24" target="_blank" title="Find Property24 on Twitter" class=""><img src="/Content/images/Optimized/Icons/icon_twitter_rounded.svg?z=a4e31f27df144d88a0ea" alt="twitter" /></a>
+                    <a href="https://www.youtube.com/user/Property24" target="_blank" title="Find Property24 on Youtube" class=""><img src="/Content/images/Optimized/Icons/icon_youtube_rounded.svg?z=4e7743d439878c62a49f" alt="youtube" /></a>
+                    <a href="https://www.pinterest.com/property24/" target="_blank" title="Find Property24 on Pinterest" class=""><img src="/Content/images/Optimized/Icons/icon_pinterest_rounded.svg?z=d70f8a6856fc28aea94c" alt="pinterest" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 p24_postFooter">
+                <div class="row">
+                    <div class="col-4">
+                        <ul>
+                            <li>
+                                <a href="/General/AboutUs">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/contact-us">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="/feedback">Feedback</a>
+                            </li>
+                            <li>
+                                <a href="/sitemap">Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <ul>
+                            <li>
+                                <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+                            </li>
+                            <li>
+                                <a href="/privacy-policy">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="/cookie-policy">Cookie Policy</a>
+                            </li>
+                            <li>
+                                <a href="/paia-manual">PAIA Manual</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <ul>
+                            <li>
+                                <a href="/careers">Join Our Team</a>
+                            </li>
+                            <li>
+                                <a href="https://manage.property24.com/">Agent Zone</a>
+                            </li>
+                            <li>
+                                <a href="/products/products-overview">Agency Products</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="p24_copyright">Copyright &#xA9; 2025 Property24</div>
+            </div>
+            <div class="col-4">
+                <div class="pull-right">
+                    <p class="p24_bold p24_downloadTitle p24_mB0">Download the App</p>
+                    <div class="p24_appLogos">
+                        <a href="https://itunes.apple.com/za/app/property24.com-property-for/id486012121?mt=8" alt="Available on the App Store" class="p24_storeIcon"><img src="/Content/images/Optimized/Icons/footer_apple_store.svg?z=5de7839dd2c149b09824" alt="Availabe on the App Store" /></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.korbitec.property24" alt="Android app on Google play" class="p24_storeIcon"><img src="/Content/images/Optimized/Icons/footer_google_store.svg?z=c8260857661db3a84c9d" alt="Availabe on the App Store" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="cookieConsentWrapper" class="p24_cookieWrapper">
+        <div class="p24_cookieBanner" role="alert">
+            <div class="p24_text">
+                <h4>Cookie Notice</h4>
+                <div>We use cookies that are essential for this website to function and to improve your user experience. Please refer to our
+                    <a id="cookiePolicyLink" href="/cookie-policy" target="_blank">cookie policy</a>.</div>
+            </div>
+            <div class="p24_button">
+                <button id="cookieBannerClose" type="button" class="btn btn-default">Close</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function hideCookieBanner() {
+            let expiryDate = new Date((new Date().getTime()) + 31536000000);
+            document.cookie = "P24CPA=2021-06-29T00:27:41.2870000;path=/;domain=.property24.com;SameSite=Lax;Secure;expires=" + expiryDate.toUTCString();
+            document.querySelector("#cookieConsentWrapper").classList.add("hidden");
+        }
+
+        (function () {
+            document.getElementById("cookiePolicyLink").addEventListener("click", hideCookieBanner, false);
+            document.getElementById("cookieBannerClose").addEventListener("click", hideCookieBanner, false);
+        })();
+    </script>
+</div>
+
+
+<div id="7269b3fc81ce4449958f440bc8f3ed20" class=""></div>   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"Client_WhatsappAgent_WhatsappAgentModal","props":{"listingNumber":116020259,"isSPUI":false},"type":"r","elementId":"7269b3fc81ce4449958f440bc8f3ed20"}));
+   </script>
+
+<script type="text/javascript">
+    addCallback(function () {
+        var listingView = new Property24.ListingViewDesktop({
+            imageCount: 16,
+            imageFocus: 1,
+            allowImageEnlarge: true,
+            displayDesktopThumbnailsCard: true,
+            canShowAgentContactNumber: true,
+            canShowAgentContactEmail: false,
+            contactAgentIsAdminUser: false,
+            listingShowContactNumbersActionUrl: "/Listing/ShowContactNumbers",
+            listingShowContactEmailsActionUrl: "/Listing/ShowContactEmails",
+            isAdminLeadFieldId: "IsAdminLead",
+            displayPreviewListingFloatingBar: false
+        });
+
+        var bondCalcNavigation = new Property24.Bond.Navigation(
+            '/calculators/bond',
+            '/calculators/affordability',
+            '/calculators/additionalpayment',
+            '/calculators/bondcosts',
+                true);
+
+            var bondCalculator = new Property24.Bond.BondCalculatorsDesktop(
+            'https://www.property24.com/calculators/logmortgagecalc',
+                bondCalcNavigation, 5, $(".js_bondCard"), false);
+
+            $("input[data-type=money]").autoNumeric('init', { aPad: false, aSep: ' ', vMax: '999999000000' });
+
+        window.app.setLeadContextId("none")
+    });
+</script>
+
+        
+        <script src="/Scripts/Generated/libs.js?bcd93e8f8153624f5e5c"></script>
+        <script src="/Scripts/Generated/core-js.js?55e23ee2e5ecf4b65cd4"></script>
+        <script src="/Scripts/Generated/vendor.js?d52ac8e8c002deb09f88"></script>
+        <script src="/Scripts/Generated/runtime.js?b34340ea8043c9566e2a"></script>
+
+        <script src="/Scripts/Generated/desktop.js?6c8a0df81112fa3f34ad"></script>
+        <script src="/Scripts/Generated/client.js?d575c4625581f5881ecd"></script>
+        <script src="/Scripts/Generated/common.js?c7048ec975a5f616886a"></script>
+
+        
+    <link async rel="stylesheet" href="/Scripts/jquery-ui-slider/jquery-ui.css?efb34c6ba68d08bb0dbd" />
+
+
+            <script type="text/javascript">
+                $(".js_ie8_dismiss").on("click", function () {
+                    Property24.Cookies.Set(Property24.Constants.CookieKeys.OldIEUpgradeWarningSeen, 1, { expires: 365 });
+                    $(".js_ie8_message").fadeOut(500);
+                });
+            </script>
+    </div>
+    <div class="p24_loading js_Loading">
+        <i class="fa fa-3x fa-spin fa-spinner"></i>
+        <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+    </div>
+    <div class="modal fade p24_modal" id="globalModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="/Content/images/Optimized/Icons/icon_close_grey.png?z=1cc08bf7b63ad90d18b7" alt="Close" class="p24_close" data-dismiss="modal" aria-label="Close" />
+                            <div class="clearfix"></div>
+                            <div><span class="p24_title">set at runtime</span> - Property24</div>
+                            <div class="p24_devMessage">
+                                set at runtime
+                            </div>
+                            <div class="p24_liveMessage">
+                                set at runtime
+                            </div>
+                            <hr class="p24_margin" />
+                            <a href="javascript:;" class="pull-right btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div id="55ed97dd06e748849482401247980d07" class=""></div>   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"Client_Login_LoginModal","props":{"spui":false,"isOAuth2":false,"showPopi":true,"activeTab":0,"enableRecaptcha":true,"state":8,"returnUrl":"/to-rent/walmer-estate/cape-town/western-cape/10163/116020259","registerUrl":"/signup?returnUrl=%2fto-rent%2fwalmer-estate%2fcape-town%2fwestern-cape%2f10163%2f116020259","oAuthLoginUrl":"/oauth2login","forgotPasswordUrl":"/reset-password?returnUrl=%2fto-rent%2fwalmer-estate%2fcape-town%2fwestern-cape%2f10163%2f116020259","termsAndConditionsUrl":"/terms-and-conditions","resendVerificationCodeUrl":"https://www.property24.com/User/ResendVerificationCode","validateVerificationCodeUrl":"https://www.property24.com/User/ValidateVerificationCode"},"type":"r","elementId":"55ed97dd06e748849482401247980d07"}));
+   </script>
+
+    <script type="text/javascript">
+        var IsDesktopRendered = true;
+        $.validator.methods.email = function(value, element) {
+            var re = /^(\s*)(?![.-])(?:[-a-zA-Z0-9!#$%&*+/=?^_`{|}~.])*(?:[a-zA-Z0-9!#$%&*+/=?^_`{|}~])+@(?:(?!-)[a-zA-Z0-9-]*[a-zA-Z0-9]\.)+[a-zA-Z]{2,}(\s*)$/;
+            return this.optional(element) || re.test(value);
+        };
+    </script>
+</body>
+</html>

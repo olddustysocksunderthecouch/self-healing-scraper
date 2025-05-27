@@ -42,7 +42,8 @@
     "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
     "prettier": "prettier \"{src,tests}/**/*.{ts,mts}\" --config .prettierrc --write",
     "prettier:check": "prettier \"{src,tests}/**/*.{ts,mts}\" --config .prettierrc --check",
-    "scrape": "node --loader ts-node/esm src/cli/selfheal.ts scrape"
+    "build:quick": "tsc --skipLibCheck --noEmit false --project tsconfig.cli.json",
+    "selfheal": "npm run build:quick && node --enable-source-maps build/src/cli/selfheal.js"
   },
   "author": "",
   "license": "Apache-2.0",

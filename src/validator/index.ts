@@ -1,17 +1,17 @@
 import type { ScrapeResult } from '../types/ScrapeResult.js';
+import { getMissCounter } from '../memory/MissCounter.js';
 
 const DEFAULT_THRESHOLD = Number.parseInt(process.env.MISS_THRESHOLD ?? '3', 10);
 
 /**
- * In-memory drift validator that tracks consecutive occurrences of missing
- * fields. Once a site crosses the configured threshold, `isDriftExceeded`
- * returns `true` so the caller may trigger the healing pipeline.
+ * Drift validator that tracks consecutive occurrences of missing fields.
+ * Uses a persistent miss counter to maintain state across process executions.
+ * Once a site crosses the configured threshold, `isDrift` returns `true`
+ * so the caller may trigger the healing pipeline.
  */
 export class DriftValidator {
   private readonly threshold: number;
-
-  /** Map<siteId, consecutiveMissingCount> */
-  private readonly misses = new Map<string, number>();
+  private readonly missCounter = getMissCounter();
 
   constructor(threshold: number = DEFAULT_THRESHOLD) {
     this.threshold = threshold;
@@ -26,17 +26,17 @@ export class DriftValidator {
    *   top-level keys of ScrapeResult are considered.
    * @returns An object with drift status and missing fields information
    */
-  update(
+  async update(
     siteId: string,
     result: ScrapeResult,
     watchedKeys: (keyof ScrapeResult)[] = [],
-  ): { 
+  ): Promise<{ 
     isDrift: boolean;
     missingFields: string[];
     missingCount: number;
     consecutiveMisses: number;
     threshold: number;
-  } {
+  }> {
     const keys = watchedKeys.length ? watchedKeys : (Object.keys(result) as (keyof ScrapeResult)[]);
 
     // Collect all missing fields
@@ -50,10 +50,12 @@ export class DriftValidator {
     
     const hasMissing = missingFields.length > 0;
 
-    // Update consecutive misses counter
-    const prev = this.misses.get(siteId) ?? 0;
+    // Get previous miss count from persistent storage
+    const prev = await this.missCounter.get(siteId);
     const next = hasMissing ? prev + 1 : 0;
-    this.misses.set(siteId, next);
+    
+    // Update persistent miss counter
+    await this.missCounter.set(siteId, next);
     
     // Log details for debugging
     if (hasMissing) {
@@ -68,6 +70,9 @@ export class DriftValidator {
       
       console.log(`Drift detected for ${siteId} (consecutive: ${next}/${this.threshold})`);
       console.log(`Problem fields: ${details}`);
+    } else {
+      // If no missing fields, log a message and reset counter
+      console.log(`✅ All fields present for ${siteId}, resetting miss counter`);
     }
     
     // Determine if drift threshold is exceeded
@@ -82,7 +87,7 @@ export class DriftValidator {
     };
   }
 
-  reset(siteId: string): void {
-    this.misses.delete(siteId);
+  async reset(siteId: string): Promise<void> {
+    await this.missCounter.reset(siteId);
   }
 }

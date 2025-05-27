@@ -75,7 +75,7 @@ async function main(): Promise<void> {
       await memoryManager.saveScrapeResult(usedScraperId, result, timestamp);
 
       // Drift validation
-      const driftInfo = validator.update(usedScraperId, result, ['title', 'price', 'description', 'imageUrl']);
+      const driftInfo = await validator.update(usedScraperId, result, ['title', 'price', 'description', 'imageUrl']);
 
       // Create detailed drift information
       const driftDetails = {};

@@ -101,9 +101,9 @@ export class ClaudeWrapper {
         console.error(`Error spawning Claude Code: ${err.message}`);
         
         // Check if this is ENOENT (command not found)
-        if (err.code === 'ENOENT') {
-          console.error(`\n❌ Claude CLI not found. Please install Claude CLI using 'pip install claude-cli'.\n`);
-        }
+        // if (err.code === 'ENOENT') {
+        //   console.error(`\n❌ Claude CLI not found. Please install Claude CLI using 'pip install claude-cli'.\n`);
+        // }
         
         // Clean up the temporary file
         fs.promises.unlink(promptFile).catch(() => {

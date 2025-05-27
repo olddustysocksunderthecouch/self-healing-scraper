@@ -46,6 +46,7 @@ export class ScraperRegistry {
     scraper: BaseScraper; 
     params: Record<string, string>;
   } | null {
+    // First try direct pattern matching
     for (const [id, definition] of this.scrapers.entries()) {
       const match = findBestMatch(url, definition.urlPatterns);
       
@@ -56,6 +57,31 @@ export class ScraperRegistry {
           params: match.params
         };
       }
+    }
+    
+    // If no direct match, try to find a scraper by domain
+    try {
+      const urlObj = new URL(url);
+      const domain = urlObj.hostname;
+      
+      // Check each scraper for domain match
+      for (const [id, definition] of this.scrapers.entries()) {
+        // Check if any pattern starts with this domain
+        for (const pattern of definition.urlPatterns) {
+          const patternDomain = pattern.split('/')[0];
+          if (patternDomain === domain || 
+              domain === 'www.' + patternDomain || 
+              patternDomain === 'www.' + domain) {
+            return {
+              scraperId: id,
+              scraper: definition.scraper,
+              params: {}
+            };
+          }
+        }
+      }
+    } catch (e) {
+      // Ignore URL parsing errors
     }
     
     return null;

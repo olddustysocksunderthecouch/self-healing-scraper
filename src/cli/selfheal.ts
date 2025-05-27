@@ -61,13 +61,58 @@ async function main(): Promise<void> {
       await store.save(new Date(), result);
 
       // Drift validation
-      const drift = validator.update(usedScraperId, result, ['title', 'price', 'description', 'imageUrl']);
+      const driftInfo = validator.update(usedScraperId, result, ['title', 'price', 'description', 'imageUrl']);
 
+      // Create detailed drift information
+      const driftDetails = {};
+      
+      if (driftInfo.missingCount > 0) {
+        // Record the actual values for missing fields
+        const fieldValues = driftInfo.missingFields.reduce((acc, field) => {
+          acc[field] = result[field];
+          return acc;
+        }, {} as Record<string, unknown>);
+        
+        Object.assign(driftDetails, { fieldValues });
+      }
+      
       // Log the result as formatted JSON
-      console.log(JSON.stringify({ ...result, drift, scraperId: usedScraperId }, null, 2));
+      console.log(JSON.stringify({ 
+        ...result, 
+        drift: {
+          detected: driftInfo.isDrift,
+          missingFields: driftInfo.missingFields,
+          missingCount: driftInfo.missingCount,
+          consecutiveMisses: driftInfo.consecutiveMisses,
+          threshold: driftInfo.threshold,
+          ...driftDetails
+        }, 
+        scraperId: usedScraperId 
+      }, null, 2));
 
-      if (drift) {
-        console.warn(`⚠️  Drift detected for ${usedScraperId}.`);
+      if (driftInfo.missingCount > 0) {
+        console.warn(`⚠️  Missing fields detected: ${driftInfo.missingFields.join(', ')}`);
+        
+        // Look for empty strings and report them specifically
+        const emptyFields = Object.entries(result)
+          .filter(([key, value]) => value === '' || (typeof value === 'string' && value.trim() === ''))
+          .map(([key]) => key);
+          
+        const nullFields = Object.entries(result)
+          .filter(([key, value]) => value === null)
+          .map(([key]) => key);
+          
+        if (emptyFields.length > 0) {
+          console.warn(`⚠️  Fields with empty strings: ${emptyFields.join(', ')}`);
+        }
+        
+        if (nullFields.length > 0) {
+          console.warn(`⚠️  Fields with null values: ${nullFields.join(', ')}`);
+        }
+      }
+
+      if (driftInfo.isDrift) {
+        console.warn(`⚠️  Drift threshold exceeded for ${usedScraperId}. ${driftInfo.consecutiveMisses}/${driftInfo.threshold} consecutive scrapes with missing fields.`);
 
         if (healFlag) {
           console.log('🩹  --heal flag supplied – invoking healing orchestrator…');
@@ -82,8 +127,13 @@ async function main(): Promise<void> {
           process.exitCode = 2; // dedicated exit code meaning "drift"
         }
       } else {
-        console.log('✅  Scrape successful, no drift detected.');
-        process.exitCode = 0;
+        if (driftInfo.missingCount > 0) {
+          console.log(`ℹ️  Some fields are missing but threshold not exceeded: ${driftInfo.consecutiveMisses}/${driftInfo.threshold} consecutive scrapes.`);
+          process.exitCode = 0;
+        } else {
+          console.log('✅  Scrape successful, all fields present.');
+          process.exitCode = 0;
+        }
       }
       return;
     } catch (error) {

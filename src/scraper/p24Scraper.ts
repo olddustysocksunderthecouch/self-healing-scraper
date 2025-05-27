@@ -22,6 +22,10 @@ interface Property24Data extends P24ScrapeResult {
  * URL patterns that this scraper can handle
  */
 export const urlPatterns = [
+  // Domain patterns
+  'property24.com',
+  'www.property24.com',
+  // Simple path patterns
   'property24.com/to-rent/*',
   'property24.com/for-sale/*',
   'property24.com/*/to-rent/*',
@@ -30,8 +34,12 @@ export const urlPatterns = [
   'www.property24.com/for-sale/*',
   'www.property24.com/*/to-rent/*',
   'www.property24.com/*/for-sale/*',
+  // Complex patterns
   'property24.com/*/*/*/*',
-  'www.property24.com/*/*/*/*'
+  'www.property24.com/*/*/*/*',
+  // Catch-all patterns
+  'property24.com/*',
+  'www.property24.com/*'
 ];
 
 class Property24Scraper extends BaseScraper<Property24Data> {

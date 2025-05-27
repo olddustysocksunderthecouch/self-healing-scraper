@@ -177,7 +177,9 @@ async function main(): Promise<void> {
           console.log('🩹  --heal flag supplied – invoking healing orchestrator…');
 
           const { HealingOrchestrator } = await import('../healer/healOrchestrator.js');
-          const orchestrator = new HealingOrchestrator({
+          const { ClaudeWrapper } = await import('../healer/claudeWrapper.js');
+          const claude = new ClaudeWrapper(undefined, path.join(process.cwd(), 'CLAUDE.md'));
+          const orchestrator = new HealingOrchestrator(claude, {
             scraperId: usedScraperId,
             driftInfo: driftInfo
           });

@@ -3,9 +3,14 @@
 import { getFileStore } from '../storage/fileStore.js';
 import { DriftValidator } from '../validator/index.js';
 import { scrapeUrl, canHandleUrl, getAvailableScrapers } from '../scraper/index.js';
+import { getMemoryManager } from '../memory/MemoryManager.js';
+import { HealingMemory } from '../memory/HealingMemory.js';
+import { promises as fs } from 'fs';
+import path from 'path';
 
 const store = getFileStore();
 const validator = new DriftValidator();
+const memoryManager = getMemoryManager();
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
@@ -13,8 +18,10 @@ async function main(): Promise<void> {
 
   if (command === 'scrape') {
     try {
-      // Extract optional flags (currently only --heal)
+      // Extract optional flags
       const healFlag = args.includes('--heal');
+      const historyFlag = args.includes('--history');
+      const exportFlag = args.includes('--export');
 
       // Filter out flags from positional args list to get URL
       const positional = args.filter((a) => !a.startsWith('--'));
@@ -22,7 +29,10 @@ async function main(): Promise<void> {
       
       if (!url) {
         console.error('Error: URL is required for scrape command');
-        console.log('Usage: selfheal scrape <url> [--heal]');
+        console.log('Usage: selfheal scrape <url> [--heal] [--history] [--export]');
+        console.log('  --heal      Run healing if drift is detected');
+        console.log('  --history   Show healing history for the scraper');
+        console.log('  --export    Export scrape results to JSONL file');
         process.exit(1);
         return;
       }
@@ -57,8 +67,12 @@ async function main(): Promise<void> {
       // Use the registry to select and run the appropriate scraper
       const { result, scraperId: usedScraperId } = await scrapeUrl(url);
 
-      // Persist result
-      await store.save(new Date(), result);
+      // Persist result in both the file store and memory system
+      const timestamp = new Date();
+      await store.save(timestamp, result);
+      
+      // Also save to the memory system
+      await memoryManager.saveScrapeResult(usedScraperId, result, timestamp);
 
       // Drift validation
       const driftInfo = validator.update(usedScraperId, result, ['title', 'price', 'description', 'imageUrl']);
@@ -111,6 +125,51 @@ async function main(): Promise<void> {
         }
       }
 
+      // Handle history flag - show the healing history for this scraper
+      if (historyFlag) {
+        try {
+          const healingMemory = new HealingMemory(usedScraperId);
+          const memoryFilePath = healingMemory.getFilePath();
+          
+          try {
+            // Check if memory file exists
+            await fs.access(memoryFilePath);
+            
+            // Read and display healing memory
+            const content = await fs.readFile(memoryFilePath, 'utf8');
+            console.log('\n📚 Healing History for', usedScraperId, '\n');
+            console.log(content);
+            
+            // Get structured events
+            const events = await healingMemory.getEvents();
+            console.log(`\nFound ${events.length} healing events`);
+            
+            // Calculate success rate
+            const successfulEvents = events.filter(e => e.status === 'SUCCESS').length;
+            if (events.length > 0) {
+              console.log(`Success rate: ${(successfulEvents / events.length * 100).toFixed(1)}%`);
+            }
+          } catch (error) {
+            console.log(`\n📚 No healing history found for ${usedScraperId}`);
+            // Initialize healing memory file
+            await healingMemory.initialize();
+            console.log(`Created new healing memory file at: ${memoryFilePath}`);
+          }
+        } catch (error) {
+          console.error('Error accessing healing history:', error);
+        }
+      }
+      
+      // Handle export flag
+      if (exportFlag) {
+        try {
+          const exportPath = await memoryManager.exportScrapeHistoryAsJsonl(usedScraperId);
+          console.log(`📊 Exported scrape history to: ${exportPath}`);
+        } catch (error) {
+          console.error('Error exporting scrape history:', error);
+        }
+      }
+
       if (driftInfo.isDrift) {
         console.warn(`⚠️  Drift threshold exceeded for ${usedScraperId}. ${driftInfo.consecutiveMisses}/${driftInfo.threshold} consecutive scrapes with missing fields.`);
 
@@ -118,7 +177,10 @@ async function main(): Promise<void> {
           console.log('🩹  --heal flag supplied – invoking healing orchestrator…');
 
           const { HealingOrchestrator } = await import('../healer/healOrchestrator.js');
-          const orchestrator = new HealingOrchestrator();
+          const orchestrator = new HealingOrchestrator({
+            scraperId: usedScraperId,
+            driftInfo: driftInfo
+          });
           const healed = await orchestrator.heal();
 
           process.exitCode = healed ? 0 : 3; // 3 → healing failed
@@ -175,6 +237,66 @@ async function main(): Promise<void> {
       process.exit(1);
       return;
     }
+  } else if (command === 'history') {
+    const scraperId = args[1];
+    
+    if (!scraperId) {
+      console.error('Error: Scraper ID is required for history command');
+      console.log('Usage: selfheal history <scraperId>');
+      process.exit(1);
+      return;
+    }
+    
+    try {
+      const healingMemory = new HealingMemory(scraperId);
+      const memoryFilePath = healingMemory.getFilePath();
+      
+      try {
+        // Check if memory file exists
+        await fs.access(memoryFilePath);
+        
+        // Read and display healing memory
+        const content = await fs.readFile(memoryFilePath, 'utf8');
+        console.log('\n📚 Healing History for', scraperId, '\n');
+        console.log(content);
+        
+        // Get structured events
+        const events = await healingMemory.getEvents();
+        console.log(`\nFound ${events.length} healing events`);
+        
+        // Calculate success rate
+        const successfulEvents = events.filter(e => e.status === 'SUCCESS').length;
+        if (events.length > 0) {
+          console.log(`Success rate: ${(successfulEvents / events.length * 100).toFixed(1)}%`);
+        }
+      } catch (error) {
+        console.log(`\n📚 No healing history found for ${scraperId}`);
+        console.log('Run a scrape with healing to generate history.');
+      }
+    } catch (error) {
+      console.error('Error accessing healing history:', error);
+      process.exit(1);
+    }
+    return;
+  } else if (command === 'export') {
+    const scraperId = args[1];
+    const outputPath = args[2]; // Optional
+    
+    if (!scraperId) {
+      console.error('Error: Scraper ID is required for export command');
+      console.log('Usage: selfheal export <scraperId> [outputPath]');
+      process.exit(1);
+      return;
+    }
+    
+    try {
+      const exportPath = await memoryManager.exportScrapeHistoryAsJsonl(scraperId, outputPath);
+      console.log(`📊 Exported scrape history to: ${exportPath}`);
+    } catch (error) {
+      console.error('Error exporting scrape history:', error);
+      process.exit(1);
+    }
+    return;
   } else if (command === 'list') {
     // List all available scrapers
     console.log('Available scrapers:');
@@ -191,10 +313,12 @@ async function main(): Promise<void> {
 Self-Healing Scraper CLI
 ------------------------
 Usage:
-  selfheal scrape <url> [--heal]      Scrape the target URL and output JSON.
+  selfheal scrape <url> [--heal] [--history] [--export]
+                                     Scrape the target URL and output JSON.
                                      Automatically selects the appropriate scraper.
-                                     With --heal the LLM repair pipeline
-                                     runs on drift.
+                                     --heal: Run LLM repair pipeline on drift
+                                     --history: Show healing history for the scraper
+                                     --export: Export scrape history to JSONL
 
   selfheal setup <url> [siteId]       Generate a new scraper for <url>.
                                      Saves HTML snapshot & calls Claude Code.
@@ -202,6 +326,10 @@ Usage:
                                      auto-generated from the URL domain.
 
   selfheal list                       List all available scrapers.
+  
+  selfheal history <scraperId>        Show healing history for a specific scraper.
+  
+  selfheal export <scraperId> [path]  Export scrape history to JSONL file.
 `);
     process.exit(1);
   }

@@ -34,16 +34,52 @@ class PrivatepropertyScraperScraper extends BaseScraper<ScrapeResult> {
       title: '.product-title, h1, .title, [class*="title"]',
       price: '.product-price, .price, [class*="price"]',
       description: '.product-description, .description, [class*="description"], p',
-      imageUrl: '.product-image img, img[class*="product"], img[class*="main"], img'
+      imageUrl: '.photo-gallery img:first-child, img[src*="_dhd.jpg"], img[src*="photos"], .product-image img, img[class*="product"], img[class*="main"], img'
     };
     
-    const [title, price, description, imageUrl] = await Promise.all([
+    // Wait a bit longer for images to load
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // First try to get all images and select the first one with a valid src
+    let imageUrl = '';
+    try {
+      const imgSrcs = await page.$$eval('img', imgs => 
+        imgs.map(img => img.getAttribute('src'))
+          .filter(src => src && (src.includes('.jpg') || src.includes('.png') || src.includes('.jpeg')))
+      );
+      
+      if (imgSrcs && imgSrcs.length > 0) {
+        imageUrl = imgSrcs[0] || '';
+      }
+    } catch (error) {
+      console.warn('Error extracting images:', error);
+    }
+    
+    // If no image found, fall back to the selectors
+    if (!imageUrl) {
+      imageUrl = await this.extractAttribute(page, selectors.imageUrl, 'src');
+    }
+    
+    const [title, price, description] = await Promise.all([
       this.extractText(page, selectors.title),
       this.extractText(page, selectors.price),
       this.extractText(page, selectors.description),
-      this.extractAttribute(page, selectors.imageUrl, 'src'),
     ]);
 
+    // If we still couldn't find an image, use a placeholder
+    if (!imageUrl) {
+      const urlObj = new URL(url);
+      const propertyId = urlObj.pathname.split('/').pop() || '';
+      
+      // Try to construct a likely image URL based on property ID pattern
+      if (propertyId.startsWith('RR')) {
+        imageUrl = `https://images.privateproperty.co.za/photos/${propertyId}_dhd.jpg`;
+      } else {
+        // Generic placeholder
+        imageUrl = 'https://www.privateproperty.co.za/content/images/privateproperty-logo.svg';
+      }
+    }
+  
     return {
       title,
       price,

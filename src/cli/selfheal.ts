@@ -35,10 +35,24 @@ async function main(): Promise<void> {
         console.log(`Warning: No pattern explicitly matches URL: ${url}`);
         console.log('Available scrapers:');
         getAvailableScrapers().forEach(id => console.log(`- ${id}`));
-        console.log('Will attempt to use best-match scraper anyway');
+        
+        // Extract domain from URL
+        let domain = '';
+        try {
+          domain = new URL(url).hostname;
+        } catch (e) {
+          domain = url.split('/')[0];
+        }
+        
+        console.log(`Attempting to find a scraper by domain: ${domain}`);
+        console.log('Will use best-match scraper for this domain if available');
       }
       
-      console.log(`Starting scraper for ${url} (using ${scraperId} scraper)...`);
+      if (scraperId) {
+        console.log(`Starting scraper for ${url} (using ${scraperId} scraper)...`);
+      } else {
+        console.log(`Starting scraper for ${url} (using best-match scraper)...`);
+      }
 
       // Use the registry to select and run the appropriate scraper
       const { result, scraperId: usedScraperId } = await scrapeUrl(url);

@@ -4,9 +4,11 @@
 import type { ScrapeResult } from '../types/ScrapeResult.js';
 import { ScraperRegistry } from './ScraperRegistry.js';
 
-// Import all scrapers to ensure they register themselves
+// Import scrapers manually for immediate loading
 import './exampleSite.js';
 import './p24Scraper.js';
+import './privatepropertyScraper.js';
+// Add any new scrapers here
 
 /**
  * Get the registry instance

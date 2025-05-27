@@ -135,7 +135,7 @@ After making your changes, please run the tests to verify they pass.
               console.warn('⚠️  Claude CLI not found in path. Make sure it is installed and in your PATH.');
             }
           });
-        } catch (error) {
+        } catch {
           // Ignore any errors in the check
         }
         
@@ -161,8 +161,8 @@ After making your changes, please run the tests to verify they pass.
               reasoning
             );
             console.log('📝 Healing event recorded in memory');
-          } catch (error) {
-            console.warn('⚠️  Failed to record healing event:', error);
+          } catch {
+            console.warn('⚠️  Failed to record healing event');
           }
 
           try {
@@ -179,8 +179,8 @@ After making your changes, please run the tests to verify they pass.
               beforeChanges || 'No changes detected',
               output?.substring(0, 500) + (output && output.length > 500 ? '...' : '')
             );
-          } catch (error) {
-            console.warn('⚠️  Failed to record failed healing event:', error);
+          } catch {
+            console.warn('⚠️  Failed to record failed healing event');
           }
         }
       } catch (error) {

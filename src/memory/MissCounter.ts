@@ -41,7 +41,7 @@ export class MissCounter {
         records.forEach(record => {
           this.cache.set(record.scraperId, record.consecutiveMisses);
         });
-      } catch (error) {
+      } catch {
         // File probably doesn't exist yet - start with empty cache
         this.cache = new Map();
       }

@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+// Removed unused import
 import { MemoryManager } from '../../src/memory/MemoryManager';
 import fs from 'fs';
 import path from 'path';

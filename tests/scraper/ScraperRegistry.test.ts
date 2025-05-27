@@ -21,7 +21,7 @@ class MockScraper extends BaseScraper {
   }
 
   // Override launchBrowser to prevent actual browser launches in tests
-  protected async launchBrowser(): Promise<any> {
+  protected async launchBrowser(): Promise<{ newPage: () => Promise<{ goto: () => Promise<unknown>; waitForSelector: () => Promise<unknown>; $eval: () => Promise<string>; close: () => Promise<unknown> }>; close: () => Promise<unknown> }> {
     return {
       newPage: async () => ({
         goto: async () => ({}),
@@ -42,7 +42,7 @@ describe('ScraperRegistry', () => {
     registry = new ScraperRegistry();
     
     // Clear singleton instance to avoid test interference
-    (ScraperRegistry as any).instance = null;
+    (ScraperRegistry as unknown as { instance: null }).instance = null;
   });
 
   it('registers and retrieves scrapers', () => {

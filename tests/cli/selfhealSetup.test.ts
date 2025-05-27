@@ -6,7 +6,7 @@ import path from 'path';
 import { spawn } from 'child_process';
 import fs from 'fs';
 
-function runCli(args: string[], env: NodeJS.ProcessEnv = {}) {
+function runCli(args: string[], env: NodeJS.ProcessEnv = {}): Promise<{ code: number | null; stdout: string; stderr: string }> {
   return new Promise<{ code: number | null; stdout: string; stderr: string }>((resolve) => {
     const proc = spawn(
       'node',

@@ -80,7 +80,7 @@ export class ScraperRegistry {
           }
         }
       }
-    } catch (e) {
+    } catch {
       // Ignore URL parsing errors
     }
     

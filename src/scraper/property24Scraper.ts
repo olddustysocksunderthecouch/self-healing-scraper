@@ -28,7 +28,7 @@ export const urlPatterns = [
 ];
 
 class Property24ScraperScraper extends BaseScraper<ScrapeResult> {
-  protected async extractData(page: Page, url: string, params?: Record<string, string>): Promise<Partial<ScrapeResult>> {
+  protected async extractData(page: Page, _url: string, _params?: Record<string, string>): Promise<Partial<ScrapeResult>> {
     // Primary selectors with fallbacks for resilience
     const selectors = {
       title: '.product-title, h1, .title, [class*="title"]',

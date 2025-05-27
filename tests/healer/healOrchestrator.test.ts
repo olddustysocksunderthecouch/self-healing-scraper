@@ -6,7 +6,7 @@ import { jest } from '@jest/globals';
 import { HealingOrchestrator } from '../../src/healer/healOrchestrator.js';
 
 // Helper that always fails N-1 times and succeeds on last attempt
-function createMockClaudeWrapper(failuresBeforeSuccess: number) {
+function createMockClaudeWrapper(failuresBeforeSuccess: number): { run: jest.Mock } {
   return {
     run: jest.fn().mockImplementation(() => {
       if (failuresBeforeSuccess > 0) {

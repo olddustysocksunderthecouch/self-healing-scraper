@@ -32,11 +32,11 @@ export class SetupOrchestrator {
   private isClaudeCodeInstalled(): boolean {
     try {
       // Try to detect if Claude Code is installed
-      const { execSync } = require('child_process');
+      const { execSync } = (await import('child_process')).default || await import('child_process');
       const claudeBin = process.env.CLAUDE_BIN || 'claude';
       execSync(`which ${claudeBin}`, { stdio: 'ignore' });
       return true;
-    } catch (error) {
+    } catch {
       console.log('Note: Claude Code CLI is not installed or not found in PATH.');
       console.log('Using demo mode to generate template scraper files instead.');
       return false;
@@ -84,7 +84,7 @@ export class SetupOrchestrator {
       try {
         const urlObj = new URL(url);
         domain = urlObj.hostname;
-      } catch (e) {
+      } catch {
         domain = 'example.com';
       }
       

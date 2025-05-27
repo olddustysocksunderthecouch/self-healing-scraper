@@ -6,7 +6,10 @@
       "Bash(git add:*)",
       "Bash(NODE_ENV=test pnpm test)",
       "Bash(npm test:*)",
-      "Bash(DEMO_MODE=true pnpm selfheal scrape https://www.privateproperty.co.za/to-rent/western-cape/cape-town/cape-town-city-bowl/oranjezicht/RR4401076 --heal)"
+      "Bash(DEMO_MODE=true pnpm selfheal scrape https://www.privateproperty.co.za/to-rent/western-cape/cape-town/cape-town-city-bowl/oranjezicht/RR4401076 --heal)",
+      "Bash(DEMO_MODE=true pnpm selfheal scrape https://www.quay1.co.za/results/residential/for-sale/kraaifontein/zoo-park/house/6297/ --heal)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(node:*)"
     ],
     "deny": []
   }

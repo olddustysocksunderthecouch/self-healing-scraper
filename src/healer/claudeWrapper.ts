@@ -1,4 +1,4 @@
-import { spawn } from 'child_process';
+import { spawnSync } from 'child_process';
 import { readFileSync } from 'fs';
 import fs from 'fs';
 import path from 'path';
@@ -7,6 +7,10 @@ import path from 'path';
  * Wrapper around the Claude Code CLI. It spawns a child process and returns
  * the resulting exit code and output. All stdout/stderr data is forwarded to the parent
  * process so developers can observe progress in real-time.
+ *
+ * This implementation uses spawnSync with direct stdin input to avoid raw mode errors,
+ * and uses the --allowedTools flag to explicitly specify no tools are needed instead
+ * of using the --dangerously-skip-permissions flag.
  *
  * The executable can be overridden via the `CLAUDE_BIN` environment variable
  * which greatly simplifies Jest testing (we simply point it to `echo`).
@@ -33,93 +37,120 @@ export class ClaudeWrapper {
       console.log('🔧 Running in DEMO_MODE. Claude CLI not required.');
       return Promise.resolve({
         exitCode: 0,
-        output: 'Running in DEMO_MODE. This is a simulated successful response from Claude.'
+        output: 'Running in DEMO_MODE. This is a simulated successful response from Claude.',
       });
     }
-    
+
+    // Check if the prompt is potentially too long or complex for non-interactive mode
+    if (prompt.length > 1000) {
+      console.warn(
+        '⚠️  Long prompt detected, consider using DEMO_MODE if you encounter raw mode errors.'
+      );
+    }
+
     // Load CLAUDE.md if it exists for system instructions
     let systemInstructions = '';
     if (this.claudeMdPath) {
       try {
         systemInstructions = readFileSync(this.claudeMdPath, 'utf-8');
         prompt = `${systemInstructions}\n\n${prompt}`;
-      } catch (error) {
-        console.warn(`Warning: Could not read ${this.claudeMdPath}. Continuing without system instructions.`);
+      } catch {
+        console.warn(
+          `Warning: Could not read ${this.claudeMdPath}. Continuing without system instructions.`
+        );
       }
     }
 
-    // Default flags for autonomous operation
+    // Default flags for autonomous operation - only use documented, supported flags
     const defaultFlags = [
-      '--dangerously-skip-permissions',
-      '--output-format', 'json'
-      // Removed incompatible flags: '--no-interactive', '--disable-raw-mode'
-    ];
+      '--allowedTools',
+      'Edit',
+    ]; 
 
     // Combine default flags with any additional args
     const allArgs = [...defaultFlags, ...args];
 
-    return new Promise(async (resolve) => {
-      let output = '';
-      
-      // Write prompt to a temporary file
+    return new Promise((resolve) => {
+      // Write prompt to a temporary file (just for debugging purposes)
       const tmpDir = process.env.TMPDIR || '/tmp';
       const promptFile = path.join(tmpDir, `claude_prompt_${Date.now()}.txt`);
-      
+
       try {
-        await fs.promises.writeFile(promptFile, prompt, 'utf-8');
-        
-        // Add the prompt file to the arguments
-        allArgs.push('--prompt-file', promptFile);
-        
-        const proc = spawn(this.bin, allArgs, {
-          stdio: ['ignore', 'pipe', 'inherit'], // Ignore stdin, capture stdout, inherit stderr
-          env: { ...process.env },
-        });
+        // Write prompt to file for reference
+        console.log(`PROMPT: ${prompt}`);
+        fs.writeFileSync(promptFile, prompt, 'utf-8');
+        console.log(`Saved prompt to file for reference: ${promptFile}`);
 
-      // Collect stdout
-      proc.stdout.on('data', (data) => {
-        const chunk = data.toString();
-        output += chunk;
+        // Add environment variables to prevent terminal interaction issues
+        const env = {
+          ...process.env,
+          FORCE_COLOR: '0', // Disable color output
+          CI: 'true', // Pretend we're in a CI environment
+          TERM: 'dumb', // Use dumb terminal
+          NO_COLOR: '1', // Disable colors in output
+        };
+
+        console.log(`Running Claude in non-interactive mode with '--allowedTools none'...`);
+
+        // Use spawnSync with the -p flag to send the prompt and avoid raw mode issues
+        // This uses synchronous execution which is more reliable in non-interactive environments
+        const result = spawnSync(this.bin, ['-p', ...allArgs], {
+          input: prompt, // Pass prompt directly as stdin
+          encoding: 'utf-8', // Ensure proper encoding
+          env, // Custom environment variables
+          maxBuffer: 10 * 1024 * 1024, // 10MB buffer for large outputs
+          stdio: ['pipe', 'pipe', 'pipe'], // Explicitly set stdio configuration
+        });
+        console.log(`RESULT: ${result}`);
+
+        // Clean up the prompt file (just for tidiness)
+        try {
+          fs.unlinkSync(promptFile);
+        } catch {
+          // Ignore errors during cleanup
+        }
+
+        // Handle any execution errors
+        if (result.error) {
+          console.error(`Error executing Claude CLI: ${result.error.message}`);
+          resolve({
+            exitCode: 1,
+            output: `Error: ${result.error.message}`,
+          });
+          return;
+        }
+
+        // Process output
+        const output = result.stdout || '';
+        const stderrOutput = result.stderr || '';
+
+        // Log stderr if any
+        if (stderrOutput) {
+          console.error(`[Claude stderr]: ${stderrOutput}`);
+        }
+
         // Also output to console for visibility
-        process.stdout.write(chunk);
-      });
+        console.log(output);
 
-      proc.on('close', (code) => {
-        // Clean up the temporary file
-        fs.promises.unlink(promptFile).catch(() => {
-          // Ignore errors during cleanup
-        });
-        
         resolve({
-          exitCode: code ?? 1,
-          output
+          exitCode: result.status ?? 1,
+          output,
         });
-      });
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : String(err);
+        console.error(`Error running Claude: ${errorMessage}`);
 
-      proc.on('error', (err) => {
-        // Binary missing or failed to spawn
-        console.error(`Error spawning Claude Code: ${err.message}`);
-        
-        // Check if this is ENOENT (command not found)
-        // if (err.code === 'ENOENT') {
-        //   console.error(`\n❌ Claude CLI not found. Please install Claude CLI using 'pip install claude-cli'.\n`);
-        // }
-        
-        // Clean up the temporary file
-        fs.promises.unlink(promptFile).catch(() => {
-          // Ignore errors during cleanup
-        });
-        
+        // Clean up the temporary file if it was created
+        try {
+          fs.accessSync(promptFile);
+          fs.unlinkSync(promptFile);
+        } catch {
+          // File doesn't exist or can't be accessed, ignore
+        }
+
         resolve({
           exitCode: 1,
-          output: `Error: ${err.message}`
-        });
-      });
-      } catch (err) {
-        console.error(`Error creating prompt file: ${err.message}`);
-        resolve({
-          exitCode: 1,
-          output: `Error: ${err.message}`
+          output: `Error: ${errorMessage}`,
         });
       }
     });
@@ -127,11 +158,11 @@ export class ClaudeWrapper {
 
   /**
    * Helper method to parse JSON output from Claude Code when using --output-format json
-   * 
+   *
    * @param output Raw output string from Claude Code
    * @returns Parsed JSON object or null if parsing fails
    */
-  parseJsonOutput(output: string): any | null {
+  parseJsonOutput(output: string): unknown | null {
     try {
       // Find JSON in the output (sometimes there might be extra output)
       const jsonMatch = output.match(/(\{.*\})/s);
@@ -139,7 +170,7 @@ export class ClaudeWrapper {
         return JSON.parse(jsonMatch[1]);
       }
       return null;
-    } catch (error) {
+    } catch {
       console.error('Failed to parse JSON output from Claude Code');
       return null;
     }

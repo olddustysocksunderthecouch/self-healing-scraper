@@ -1,0 +1,27 @@
+[
+  {
+    "scraperId": "privatepropertyScraper",
+    "consecutiveMisses": 0,
+    "lastUpdated": "2025-05-27T17:06:43.286Z"
+  },
+  {
+    "scraperId": "property24",
+    "consecutiveMisses": 1,
+    "lastUpdated": "2025-05-27T17:06:43.286Z"
+  },
+  {
+    "scraperId": "seeffScraper",
+    "consecutiveMisses": 0,
+    "lastUpdated": "2025-05-27T17:06:43.286Z"
+  },
+  {
+    "scraperId": "quay1Scraper",
+    "consecutiveMisses": 24,
+    "lastUpdated": "2025-05-27T17:06:43.286Z"
+  },
+  {
+    "scraperId": "test",
+    "consecutiveMisses": 4,
+    "lastUpdated": "2025-05-27T17:06:43.286Z"
+  }
+]

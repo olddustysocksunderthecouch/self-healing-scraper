@@ -50,8 +50,7 @@ async function main(): Promise<void> {
         let domain = '';
         try {
           domain = new URL(url).hostname;
-        } catch (e) {
-          domain = url.split('/')[0];
+        } catch {  domain = url.split('/')[0];
         }
         
         // Extract base domain for suggestion
@@ -62,8 +61,8 @@ async function main(): Promise<void> {
         console.log('Will use best-match scraper for this domain if available');
         
         // Check if a file exists that might be a scraper for this domain
-        const { existsSync } = require('fs');
-        const { join } = require('path');
+        const { existsSync } = await import('fs');
+        const { join } = await import('path');
         const possibleScraperPath = join(process.cwd(), 'src', 'scraper', `${suggestedScraperId}.ts`);
         
         if (existsSync(possibleScraperPath)) {
@@ -123,11 +122,11 @@ async function main(): Promise<void> {
         
         // Look for empty strings and report them specifically
         const emptyFields = Object.entries(result)
-          .filter(([key, value]) => value === '' || (typeof value === 'string' && value.trim() === ''))
+          .filter(([, value]) => value === '' || (typeof value === 'string' && value.trim() === ''))
           .map(([key]) => key);
           
         const nullFields = Object.entries(result)
-          .filter(([key, value]) => value === null)
+          .filter(([, value]) => value === null)
           .map(([key]) => key);
           
         if (emptyFields.length > 0) {
@@ -163,7 +162,7 @@ async function main(): Promise<void> {
             if (events.length > 0) {
               console.log(`Success rate: ${(successfulEvents / events.length * 100).toFixed(1)}%`);
             }
-          } catch (error) {
+          } catch {
             console.log(`\n📚 No healing history found for ${usedScraperId}`);
             // Initialize healing memory file
             await healingMemory.initialize();
@@ -193,10 +192,10 @@ async function main(): Promise<void> {
           // Check if Claude CLI is available and suggest demo mode if not
           let claudeInstalled = false;
           try {
-            const { execSync } = require('child_process');
+            const { execSync } = await import('child_process');
             const result = execSync('which claude 2>/dev/null || echo "not found"').toString().trim();
             claudeInstalled = result !== 'not found';
-          } catch (error) {
+          } catch {
             // Ignore errors, assume Claude is not installed
           }
           
@@ -252,7 +251,7 @@ async function main(): Promise<void> {
         // Extract domain without www. prefix and remove .com, .org, etc.
         siteId = urlObj.hostname.replace(/^www\./, '').split('.')[0] + 'Scraper';
         console.log(`Auto-generated scraper ID: ${siteId}`);
-      } catch (error) {
+      } catch {
         console.error('Could not parse URL to auto-generate scraper ID. Please provide one.');
         process.exit(1);
         return;
@@ -302,7 +301,7 @@ async function main(): Promise<void> {
         if (events.length > 0) {
           console.log(`Success rate: ${(successfulEvents / events.length * 100).toFixed(1)}%`);
         }
-      } catch (error) {
+      } catch {
         console.log(`\n📚 No healing history found for ${scraperId}`);
         console.log('Run a scrape with healing to generate history.');
       }

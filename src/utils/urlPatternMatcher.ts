@@ -78,7 +78,7 @@ export function findBestMatch(url: string, patterns: string[]): {
   try {
     const urlObj = new URL(url);
     urlDomain = urlObj.hostname;
-  } catch (e) {
+  } catch {
     // If parsing fails, use the original URL
     urlDomain = url.split('/')[0];
   }

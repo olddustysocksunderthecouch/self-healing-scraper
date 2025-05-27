@@ -25,14 +25,14 @@ describe('quay1Scraper scraper', () => {
     
     // Mock extractText to simulate missing elements
     const originalScrape = scrape;
-    const mockScrape = async (url: string) => {
+    const mockScrape = async (url: string): Promise<ScrapeResult> => {
       const result = await originalScrape(url);
       // Simulate missing price
       result.price = '';
       return result;
     };
     
-    // @ts-ignore - Replace the scrape function temporarily
+    // @ts-expect-error - Replace the scrape function temporarily
     global.scrape = mockScrape;
     
     const result = await mockScrape(url);
@@ -44,7 +44,7 @@ describe('quay1Scraper scraper', () => {
     expect(result.imageUrl).toBeDefined();
     
     // Restore original function
-    // @ts-ignore
+    // @ts-expect-error - global.scrape is not defined in TypeScript
     global.scrape = originalScrape;
   });
   
@@ -61,7 +61,7 @@ describe('quay1Scraper scraper', () => {
   });
   
   // Skip this test in CI environments
-  it.skip('scrapes live website', async () => {
+  it('scrapes live website', async () => {
     const result = await scrape('https://www.quay1.co.za/results/residential/for-sale/kraaifontein/zoo-park/house/6297/');
     
     // Just check we get some data back

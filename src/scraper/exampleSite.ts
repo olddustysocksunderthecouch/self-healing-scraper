@@ -19,15 +19,14 @@ export const urlPatterns = [
   'example.com/products/*',
   'www.example.com/product',
   'www.example.com/product/*',
-  'www.example.com/products/*'
+  'www.example.com/products/*',
 ];
 
 class ExampleSiteScraper extends BaseScraper<ExampleScrapeResult> {
   protected async extractData(
     page: Page,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _url: string,
-    params?: Record<string, string>
+    _params?: Record<string, string>
   ): Promise<Partial<ExampleScrapeResult>> {
     const [title, price, description, imageUrl] = await Promise.all([
       this.extractText(page, '.product-title'),
@@ -54,7 +53,7 @@ const scraperInstance = new ExampleSiteScraper();
 // Register this scraper with the registry
 ScraperRegistry.getInstance().register('exampleSite', {
   scraper: scraperInstance,
-  urlPatterns
+  urlPatterns,
 });
 
 // Keep the original function-style API so existing imports in tests & CLI do

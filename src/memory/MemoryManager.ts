@@ -55,7 +55,7 @@ export class MemoryManager {
     try {
       const data = await fs.readFile(filePath, 'utf8');
       history = JSON.parse(data);
-    } catch (error) {
+    } catch {
       // File probably doesn't exist yet, start with empty array
     }
 
@@ -80,7 +80,7 @@ export class MemoryManager {
     try {
       // Read history
       const data = await fs.readFile(filePath, 'utf8');
-      const history = JSON.parse(data) as any[];
+      const history = JSON.parse(data) as Array<ScrapeResult & { timestamp: string }>;
 
       // Convert to JSONL
       const jsonl = history.map(item => JSON.stringify(item)).join('\n');
@@ -107,7 +107,7 @@ export class MemoryManager {
       const data = await fs.readFile(filePath, 'utf8');
       const history = JSON.parse(data) as ScrapeResult[];
       return history.slice(0, count);
-    } catch (error) {
+    } catch {
       // File probably doesn't exist yet
       return [];
     }

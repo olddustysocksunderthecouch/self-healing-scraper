@@ -46,7 +46,7 @@ class Property24Scraper extends BaseScraper<Property24Data> {
   protected async extractData(
     page: Page,
     _url: string,
-    params?: Record<string, string>
+    _params?: Record<string, string>
   ): Promise<Partial<Property24Data>> {
     // Primary selectors for main listing page
     const primarySelectors = {

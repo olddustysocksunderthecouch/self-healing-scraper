@@ -6,17 +6,17 @@ import { ScraperRegistry } from './ScraperRegistry.js';
 import { loadAllScrapers } from './loader.js';
 
 // Dynamic loading of all scrapers
-(async () => {
+(async (): Promise<void> => {
   try {
     await loadAllScrapers();
   } catch (error) {
     console.error('Error loading scrapers:', error);
     
     // Fallback to manual imports if dynamic loading fails
-    import('./exampleSite.js').catch(e => console.error('Failed to load exampleSite:', e));
-    import('./p24Scraper.js').catch(e => console.error('Failed to load p24Scraper:', e));
-    import('./privatepropertyScraper.js').catch(e => console.error('Failed to load privatepropertyScraper:', e));
-    import('./seeffScraper.js').catch(e => console.error('Failed to load seeffScraper:', e));
+    import('./exampleSite.js').catch(() => console.error('Failed to load exampleSite'));
+    import('./p24Scraper.js').catch(() => console.error('Failed to load p24Scraper'));
+    import('./privatepropertyScraper.js').catch(() => console.error('Failed to load privatepropertyScraper'));
+    import('./seeffScraper.js').catch(() => console.error('Failed to load seeffScraper'));
   }
 })();
 
@@ -43,7 +43,7 @@ export async function scrapeUrl(url: string): Promise<{
     let domain = '';
     try {
       domain = new URL(url).hostname.replace(/^www\./, '');
-    } catch (e) {
+    } catch {
       // Not a valid URL, just try to use it as is
       domain = url.split('/')[0].replace(/^www\./, '');
     }
@@ -66,13 +66,11 @@ export async function scrapeUrl(url: string): Promise<{
         if (newAvailableScrapers.includes(possibleScraperId)) {
           console.log(`✅ Successfully loaded scraper: ${possibleScraperId}`);
         }
-      } catch (error) {
-        console.error('Error loading scraper:', error);
+      } catch {
         // Ignore errors, we'll fall back to other scrapers
       }
     }
-  } catch (error) {
-    console.error('Error in scrapeUrl:', error);
+  } catch {
     // Ignore errors in the scraper auto-detection
   }
   
@@ -104,7 +102,7 @@ export async function canHandleUrl(url: string): Promise<{
     let domain = '';
     try {
       domain = new URL(url).hostname.replace(/^www\./, '');
-    } catch (e) {
+    } catch {
       // Not a valid URL, just try to use it as is
       domain = url.split('/')[0].replace(/^www\./, '');
     }
@@ -121,11 +119,11 @@ export async function canHandleUrl(url: string): Promise<{
         await import(`./${possibleScraperId}.js`).catch(() => {
           // Silent failure, just means the file doesn't exist
         });
-      } catch (error) {
+      } catch {
         // Ignore errors, we'll fall back to other scrapers
       }
     }
-  } catch (error) {
+  } catch {
     // Ignore errors in the scraper auto-detection
   }
   

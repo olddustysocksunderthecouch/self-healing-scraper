@@ -28,7 +28,7 @@ describe('HealingMemory', () => {
     memoryManager = new MemoryManager(testDir);
     
     // Mock the getMemoryManager function to return our test instance
-    (MemoryManager as any).getMemoryManager.mockReturnValue(memoryManager);
+    (MemoryManager as unknown as { getMemoryManager: jest.Mock }).getMemoryManager.mockReturnValue(memoryManager);
     
     // Initialize memory manager
     memoryManager.initialize();

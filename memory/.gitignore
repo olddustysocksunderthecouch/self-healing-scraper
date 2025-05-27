@@ -1,0 +1,7 @@
+# Ignore all files in subdirectories
+data/*
+healing/*
+
+# But keep the directories themselves
+!data/.gitkeep
+!healing/.gitkeep

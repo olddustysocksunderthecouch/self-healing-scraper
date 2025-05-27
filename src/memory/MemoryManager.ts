@@ -1,18 +1,19 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import os from 'os';
 import type { ScrapeResult } from '../types/ScrapeResult.js';
 
 /**
  * Centralized manager for all memory-related functionality.
  * Handles both scraper history and healing memory.
+ * 
+ * Memory files are stored in the 'memory' directory within the project.
  */
 export class MemoryManager {
   private readonly baseDir: string;
   private readonly scrapeHistoryDir: string;
   private readonly healingMemoryDir: string;
 
-  constructor(baseDir: string = path.join(os.homedir(), '.selfheal')) {
+  constructor(baseDir: string = path.join(process.cwd(), 'memory')) {
     this.baseDir = baseDir;
     this.scrapeHistoryDir = path.join(baseDir, 'data');
     this.healingMemoryDir = path.join(baseDir, 'healing');
@@ -230,7 +231,7 @@ let singleton: MemoryManager | null = null;
 
 export function getMemoryManager(): MemoryManager {
   if (!singleton) {
-    const baseDir = process.env.MEMORY_DIR ?? path.join(os.homedir(), '.selfheal');
+    const baseDir = process.env.MEMORY_DIR ?? path.join(process.cwd(), 'memory');
     singleton = new MemoryManager(baseDir);
   }
   return singleton;

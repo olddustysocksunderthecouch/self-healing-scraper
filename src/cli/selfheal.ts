@@ -176,6 +176,23 @@ async function main(): Promise<void> {
         if (healFlag) {
           console.log('🩹  --heal flag supplied – invoking healing orchestrator…');
 
+          // Check if Claude CLI is available and suggest demo mode if not
+          let claudeInstalled = false;
+          try {
+            const { execSync } = require('child_process');
+            const result = execSync('which claude 2>/dev/null || echo "not found"').toString().trim();
+            claudeInstalled = result !== 'not found';
+          } catch (error) {
+            // Ignore errors, assume Claude is not installed
+          }
+          
+          if (!claudeInstalled && !process.env.DEMO_MODE) {
+            console.log('⚠️  Claude CLI not found. You have two options:');
+            console.log('   1. Install Claude CLI using: pip install claude-cli');
+            console.log('   2. Run in DEMO_MODE: DEMO_MODE=true pnpm selfheal scrape <url> --heal');
+            console.log('\nProceeding anyway, but healing might fail...');
+          }
+          
           const { HealingOrchestrator } = await import('../healer/healOrchestrator.js');
           const { ClaudeWrapper } = await import('../healer/claudeWrapper.js');
           const claude = new ClaudeWrapper(undefined, path.join(process.cwd(), 'CLAUDE.md'));
@@ -321,6 +338,10 @@ Usage:
                                      --heal: Run LLM repair pipeline on drift
                                      --history: Show healing history for the scraper
                                      --export: Export scrape history to JSONL
+                                     
+                                     Environment variables:
+                                     DEMO_MODE=true - Run in demo mode without Claude CLI
+                                     CLAUDE_BIN=/path/to/claude - Specify Claude binary path
 
   selfheal setup <url> [siteId]       Generate a new scraper for <url>.
                                      Saves HTML snapshot & calls Claude Code.

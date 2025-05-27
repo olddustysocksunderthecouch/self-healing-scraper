@@ -119,12 +119,20 @@ export class MemoryManager {
     const filePath = this.getHealingMemoryPath(scraperId);
     
     try {
-      await fs.access(filePath);
-      // File exists, no need to create it
-    } catch {
-      // File doesn't exist, create it with template
-      const template = this.createHealingMemoryTemplate(scraperId);
-      await fs.writeFile(filePath, template, 'utf8');
+      // Ensure directory exists first
+      await fs.mkdir(path.dirname(filePath), { recursive: true });
+      
+      try {
+        await fs.access(filePath);
+        // File exists, no need to create it
+      } catch {
+        // File doesn't exist, create it with template
+        const template = this.createHealingMemoryTemplate(scraperId);
+        await fs.writeFile(filePath, template, 'utf8');
+      }
+    } catch (error) {
+      console.error(`Error initializing healing memory: ${error}`);
+      throw error;
     }
   }
 

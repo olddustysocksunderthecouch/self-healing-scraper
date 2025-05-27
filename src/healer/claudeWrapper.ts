@@ -28,6 +28,15 @@ export class ClaudeWrapper {
    * @returns Promise resolving to an object with exit code and parsed output.
    */
   run(prompt: string, args: string[] = []): Promise<{ exitCode: number; output: string }> {
+    // Check for demo mode
+    if (process.env.DEMO_MODE === 'true') {
+      console.log('🔧 Running in DEMO_MODE. Claude CLI not required.');
+      return Promise.resolve({
+        exitCode: 0,
+        output: 'Running in DEMO_MODE. This is a simulated successful response from Claude.'
+      });
+    }
+    
     // Load CLAUDE.md if it exists for system instructions
     let systemInstructions = '';
     if (this.claudeMdPath) {
@@ -42,10 +51,8 @@ export class ClaudeWrapper {
     // Default flags for autonomous operation
     const defaultFlags = [
       '--dangerously-skip-permissions',
-      '--output-format', 'json',
-      // Add flags to avoid stdin/raw mode issues
-      '--no-interactive',
-      '--disable-raw-mode'
+      '--output-format', 'json'
+      // Removed incompatible flags: '--no-interactive', '--disable-raw-mode'
     ];
 
     // Combine default flags with any additional args
@@ -92,6 +99,11 @@ export class ClaudeWrapper {
       proc.on('error', (err) => {
         // Binary missing or failed to spawn
         console.error(`Error spawning Claude Code: ${err.message}`);
+        
+        // Check if this is ENOENT (command not found)
+        if (err.code === 'ENOENT') {
+          console.error(`\n❌ Claude CLI not found. Please install Claude CLI using 'pip install claude-cli'.\n`);
+        }
         
         // Clean up the temporary file
         fs.promises.unlink(promptFile).catch(() => {

@@ -126,48 +126,66 @@ After making your changes, please run the tests to verify they pass.
 
       console.log(`🤖 Running Claude Code with enhanced prompt including healing history...`);
       
-      // Run Claude; capture output and exit code
-      const { exitCode, output } = await this.claude.run(prompt);
-
-      if (exitCode === 0) {
-        console.log('✅  Claude Code patch succeeded.');
-
-        // Get the changes that were made
-        const afterChanges = this.getCodeDiff();
-        
-        // Extract reasoning from Claude's output (first 500 chars for brevity)
-        const reasoning = output?.substring(0, 500) + (output && output.length > 500 ? '...' : '');
-        
-        // Record the successful healing event
+      try {
+        // Check if Claude CLI is available
         try {
-          await this.healingMemory.addEvent(
-            this.driftInfo,
-            true,
-            afterChanges || 'No changes detected in diff',
-            reasoning
-          );
-          console.log('📝 Healing event recorded in memory');
+          const { exec } = await import('child_process');
+          exec('which claude', (err, stdout) => {
+            if (err || !stdout) {
+              console.warn('⚠️  Claude CLI not found in path. Make sure it is installed and in your PATH.');
+            }
+          });
         } catch (error) {
-          console.warn('⚠️  Failed to record healing event:', error);
+          // Ignore any errors in the check
         }
+        
+        // Run Claude; capture output and exit code
+        const { exitCode, output } = await this.claude.run(prompt);
+      
+        // Process the result
+        if (exitCode === 0) {
+          console.log('✅  Claude Code patch succeeded.');
 
-        try {
-          await this.postSuccess?.();
-        } catch {/* ignored – healing counts as success regardless */}
+          // Get the changes that were made
+          const afterChanges = this.getCodeDiff();
+          
+          // Extract reasoning from Claude's output (first 500 chars for brevity)
+          const reasoning = output?.substring(0, 500) + (output && output.length > 500 ? '...' : '');
+          
+          // Record the successful healing event
+          try {
+            await this.healingMemory.addEvent(
+              this.driftInfo,
+              true,
+              afterChanges || 'No changes detected in diff',
+              reasoning
+            );
+            console.log('📝 Healing event recorded in memory');
+          } catch (error) {
+            console.warn('⚠️  Failed to record healing event:', error);
+          }
 
-        return true;
-      } else {
-        // Record the failed healing attempt
-        try {
-          await this.healingMemory.addEvent(
-            this.driftInfo,
-            false,
-            beforeChanges || 'No changes detected',
-            output?.substring(0, 500) + (output && output.length > 500 ? '...' : '')
-          );
-        } catch (error) {
-          console.warn('⚠️  Failed to record failed healing event:', error);
+          try {
+            await this.postSuccess?.();
+          } catch {/* ignored – healing counts as success regardless */}
+
+          return true;
+        } else {
+          // Record the failed healing attempt
+          try {
+            await this.healingMemory.addEvent(
+              this.driftInfo,
+              false,
+              beforeChanges || 'No changes detected',
+              output?.substring(0, 500) + (output && output.length > 500 ? '...' : '')
+            );
+          } catch (error) {
+            console.warn('⚠️  Failed to record failed healing event:', error);
+          }
         }
+      } catch (error) {
+        console.error('❌ Error running Claude Code:', error);
+        // Continue with the retry logic
       }
 
       if (attempt < this.maxAttempts) {

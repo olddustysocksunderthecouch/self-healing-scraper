@@ -66,14 +66,42 @@ Goal: Run scraper + healer on an hourly cadence and enforce code quality.
 
 ---
 
-## Phase 4 ▸ Containerisation & Deployment
+## Phase 4 ▸ Memory
 
-Goal: Deliver one-command start via Docker Compose and production-grade K8s manifests.
+Goal: Implement a memory system for the scraper and healing process to track history, enable smarter healing decisions, and preserve scraping results over time.
 
-- [ ] 4.1 Author **multi-stage Dockerfile** (builder → slim runtime) tagged `self-healing-scraper:latest`.
-- [ ] 4.2 Create **docker-compose.yml** exposing CLI as a service and mounting local volume for JSON output.
-- [ ] 4.3 Supply **Kubernetes CronJob** manifest under `deploy/k8s/cronjob.yaml`.
-- [ ] 4.4 Publish image via GitHub Container Registry on release tags.
+| Ref | Task                                                                                                         | Owner | Status |
+|-----|--------------------------------------------------------------------------------------------------------------|-------|--------|
+| 4.1 | Create **ScraperMemory** (`src/memory/ScraperMemory.ts`) to track and persist scraper performance history.   | core  | ☐ |
+|     | • Store data in JSONL files organized by scraper ID                                                           |       |        |
+|     | • Track drift occurrences with timestamps and affected fields                                                 |       |        |
+|     | • Calculate success/failure rates over time                                                                   |       |        |
+| 4.2 | Implement **ScrapeHistoryAdapter** interface and file-based implementation (`src/memory/fileHistory.ts`).     | core  | ☐ |
+|     | • Save all scrape results in a JSONL file with one entry per scrape                                           |       |        |
+|     | • Include timestamp, URL, scraper ID, and full result in each entry                                           |       |        |
+|     | • Support filtering/querying history by scraper ID, date range, and success status                            |       |        |
+| 4.3 | Add **HealingMemory** (`src/memory/HealingMemory.ts`) to record Claude's healing actions in a markdown file.  | core  | ☐ |
+|     | • Create a `HEALING_MEMORY.md` file for each scraper to store healing history                                 |       |        |
+|     | • Format each entry with timestamp, affected selectors, and Claude's reasoning                                |       |        |
+|     | • Track success/failure of healing attempts with before/after results                                         |       |        |
+|     | • Structure the markdown with headers and code blocks for easy human readability                              |       |        |
+| 4.4 | Enhance **HealingOrchestrator** to use the `HEALING_MEMORY.md` file for smart retry strategies.              | core  | ☐ |
+|     | • Read from `HEALING_MEMORY.md` to check previous successful fixes for similar issues                         |       |        |
+|     | • Include relevant sections of the memory file in Claude's prompt to inform healing                           |       |        |
+|     | • Parse markdown structure to extract selector patterns and previous solutions                                |       |        |
+|     | • Add option to revert to previous working version if multiple heal attempts fail                             |       |        |
+| 4.5 | Extend CLI with `--history` flag to display scraper performance statistics and past healing events.           | core  | ☐ |
+|     | • Show success rate over time                                                                                 |       |        |
+|     | • Display trend analysis of most common drift patterns                                                        |       |        |
+|     | • Visualize performance improvements after healing                                                            |       |        |
+| 4.6 | Create a **JSONL export utility** that exports all scrape results to a specified directory.                   | core  | ☐ |
+|     | • Support incremental exports (only new results since last export)                                            |       |        |
+|     | • Include metadata about healing events related to each scrape result                                         |       |        |
+|     | • Allow filtering by date range, scraper ID, and result status                                                |       |        |
+| 4.7 | Implement **in-memory caching** to optimize performance for frequently accessed history records.              | core  | ☐ |
+|     | • Cache recent scrape results and healing attempts                                                            |       |        |
+|     | • Use LRU (Least Recently Used) strategy for cache management                                                 |       |        |
+|     | • Provide configurable cache size limits                                                                      |       |        |
 
 ---
 
@@ -97,3 +125,14 @@ Goal: Finalise docs, contribution workflows, and project presentation.
 - [x] 6.3 Expand **README.md** with quick-start, docker instructions, and GIF demo. (2025-05-19)
 - [ ] 6.4 Add **ISSUE / PR templates** and **CODE_OF_CONDUCT.md** to `.github/`.
 - [ ] 6.5 Publish initial blog post & tweetstorm announcing v0.1.
+
+## Phase 7 ▸ Containerisation & Deployment
+
+Goal: Deliver one-command start via Docker Compose and production-grade K8s manifests.
+
+- [ ] 7.1 Author **multi-stage Dockerfile** (builder → slim runtime) tagged `self-healing-scraper:latest`.
+- [ ] 7.2 Create **docker-compose.yml** exposing CLI as a service and mounting local volume for JSON output.
+- [ ] 7.3 Supply **Kubernetes CronJob** manifest under `deploy/k8s/cronjob.yaml`.
+- [ ] 7.4 Publish image via GitHub Container Registry on release tags.
+
+---

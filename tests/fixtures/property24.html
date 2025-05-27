@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property24 Rental Listing</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .property-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .product-title {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .product-price {
+        font-size: 22px;
+        color: #e63946;
+        font-weight: bold;
+      }
+      .product-image {
+        width: 400px;
+        height: auto;
+        border-radius: 5px;
+      }
+      .product-description {
+        line-height: 1.5;
+        margin: 20px 0;
+      }
+      .property-details {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .property-feature {
+        padding: 5px;
+        background-color: #f8f9fa;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="property-header">
+        <h1 class="product-title">3 Bedroom Apartment in Walmer Estate</h1>
+        <div class="product-price">R12,500 per month</div>
+      </div>
+
+      <div class="property-image-container">
+        <img
+          class="product-image"
+          src="https://images.prop24.com/walmer-estate-apartment.jpg"
+          alt="3 Bedroom Apartment in Walmer Estate"
+        />
+      </div>
+
+      <div class="product-description">
+        This modern apartment in Walmer Estate offers 3 bedrooms, 2 bathrooms, and a spacious open-plan living area. 
+        The apartment includes a fully equipped kitchen, secure parking, and 24-hour security. 
+        Walking distance to shops, restaurants, and public transport. Available immediately.
+      </div>
+
+      <div class="property-details">
+        <div class="property-feature">3 Bedrooms</div>
+        <div class="property-feature">2 Bathrooms</div>
+        <div class="property-feature">1 Garage</div>
+        <div class="property-feature">Pet Friendly</div>
+        <div class="property-feature">Built-in Cupboards</div>
+        <div class="property-feature">Security System</div>
+      </div>
+    </div>
+  </body>
+</html>

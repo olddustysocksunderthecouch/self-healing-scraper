@@ -1,14 +1,15 @@
 import { setTimeout as delay } from 'timers/promises';
-import { CodexWrapper } from './codexWrapper.js';
+import { ClaudeWrapper } from './claudeWrapper.js';
+import { join } from 'path';
 
 /**
- * Healing orchestrator that coordinates multiple Codex runs with exponential
+ * Healing orchestrator that coordinates multiple Claude Code runs with exponential
  * back-off. It attempts to self-heal the repository in case of selector
- * drift. Upon first successful Codex exit (code 0) the orchestrator may run
+ * drift. Upon first successful Claude run (exit code 0) the orchestrator may run
  * an optional callback – by default it commits the changes.
  */
 export interface HealingOptions {
-  /** Maximum number of Codex attempts (default: 3) */
+  /** Maximum number of Claude attempts (default: 3) */
   maxAttempts?: number;
 
   /** Initial delay between attempts in milliseconds (default: 5 000 ms) */
@@ -18,7 +19,7 @@ export interface HealingOptions {
   backoffFactor?: number;
 
   /**
-   * Callback invoked after a successful Codex patch. If it throws, the error
+   * Callback invoked after a successful Claude patch. If it throws, the error
    * is swallowed and the orchestrator still reports success (healing
    * completed). Allows callers to git-commit or send Slack notifications.
    */
@@ -26,14 +27,14 @@ export interface HealingOptions {
 }
 
 export class HealingOrchestrator {
-  private readonly codex: CodexWrapper;
+  private readonly claude: ClaudeWrapper;
   private readonly maxAttempts: number;
   private readonly initialDelayMs: number;
   private readonly backoffFactor: number;
   private readonly postSuccess?: () => Promise<void>;
 
   constructor(
-    codex: CodexWrapper = new CodexWrapper(),
+    claude: ClaudeWrapper = new ClaudeWrapper(undefined, join(process.cwd(), 'CLAUDE.md')),
     {
       maxAttempts = Number.parseInt(process.env.HEAL_MAX_ATTEMPTS ?? '3', 10),
       initialDelayMs = Number.parseInt(process.env.HEAL_DELAY_MS ?? '5000', 10),
@@ -41,7 +42,7 @@ export class HealingOrchestrator {
       postSuccess,
     }: HealingOptions = {},
   ) {
-    this.codex = codex;
+    this.claude = claude;
     this.maxAttempts = Math.max(1, maxAttempts);
     this.initialDelayMs = Math.max(0, initialDelayMs);
     this.backoffFactor = Math.max(1, backoffFactor);
@@ -49,7 +50,7 @@ export class HealingOrchestrator {
   }
 
   /**
-   * Attempt to heal the codebase. Returns `true` if Codex managed to apply a
+   * Attempt to heal the codebase. Returns `true` if Claude managed to apply a
    * patch that passes tests.
    */
   async heal(): Promise<boolean> {
@@ -60,13 +61,26 @@ export class HealingOrchestrator {
       attempt += 1;
       console.log(`🔧  Healing attempt ${attempt}/${this.maxAttempts}…`);
 
-      // Run Codex; forward current process stdio through wrapper
-      // Exit code 0 means success.
-      // Any non-zero exit code is considered failure but we will retry.
-      const exitCode = await this.codex.run();
+      // Create a prompt for Claude Code to fix the selectors
+      const prompt = `
+The scraper has encountered selector drift. Please analyze the HTML fixture and update 
+the selectors in the scraper code to fix the issue. The HTML and current scraper code
+are provided below.
+
+Guidelines:
+1. Only modify the selectors, not the core functionality
+2. Ensure the updated selectors are specific and robust
+3. Run tests to verify your changes work
+4. Return the updated code as part of your response
+
+After making your changes, please run the tests to verify they pass.
+`;
+
+      // Run Claude; capture output and exit code
+      const { exitCode, output } = await this.claude.run(prompt);
 
       if (exitCode === 0) {
-        console.log('✅  Codex patch succeeded.');
+        console.log('✅  Claude Code patch succeeded.');
 
         try {
           await this.postSuccess?.();

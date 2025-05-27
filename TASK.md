@@ -25,6 +25,7 @@ Goal: Produce a working scraper for a single site with persistent output and bas
 - [x] 1.4 Implement **StorageAdapter** interface and provide **fileStore** default (`src/storage/fileStore.ts`).
 - [x] 1.5 Build **Validator** service (`src/validator/index.ts`) that flags N consecutive missing fields (env-configurable).
 - [x] 1.6 Wire components together in CLI entry-point `src/cli/selfheal.ts` (mode: scrape-only) and add smoke test.
+- [x] 1.7 Update example site to use Property24 rental listing (https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163) as the source for fixtures and tests. (2025-05-27)
 
 ---
 
@@ -34,17 +35,18 @@ Goal: Automatically patch broken scrapers when the **Validator** signals selecto
 
 | Ref | Task                                                                                                         | Owner | Status |
 |-----|--------------------------------------------------------------------------------------------------------------|-------|--------|
-| 2.1 | Create **CodexWrapper** (`src/healer/codexWrapper.ts`) that spawns `${CODEX_BIN:-codex} -a full-auto`,        | core  | ✓ |
-|     | streams stdout/stderr, and resolves with exit code.                                                          |       | |
+| 2.1 | Create **ClaudeWrapper** (`src/healer/claudeWrapper.ts`) that spawns `claude --dangerously-skip-permissions --output-format json`, | core  | ✓ |
+|     | streams stdout/stderr, and processes JSON output.                                                          |       | |
 | 2.2 | Implement **HealingOrchestrator** (`src/healer/healOrchestrator.ts`) with retry & exponential back-off,      | core  | ✓ |
 |     | configurable via env/args, and optional `postSuccess` callback (git auto-commit helper).                      |       | |
 | 2.3 | Extend CLI with `--heal` flag – on drift run orchestrator and propagate exit codes (0 success, 3 heal-fail). | core  | ✓ |
-| 2.4 | Add Jest tests: mock Codex process, validate retry/back-off & CLI integration.                                | core  | ✓ |
+| 2.4 | Add Jest tests: mock Claude process, validate retry/back-off & CLI integration.                               | core  | ✓ |
 | 2.5 | CI commit automation (`auto-heal:` prefix) will be tackled in Phase 3­ workflows – skipped for now.           | core  | ☐ |
-| 2.6 | Implement **`scraper-setup` CLI command** that:                                                            | core  | ☐ |
+| 2.6 | Create **CLAUDE.md** file with detailed instructions for Claude Code to follow when repairing scrapers.     | core  | ☐ |
+| 2.7 | Implement **`scraper-setup` CLI command** that:                                                            | core  | ☐ |
 |     | • Takes `<siteId>` and `<url>` (or infers siteId)                                                          |       | |
 |     | • Saves an HTML snapshot to `tests/fixtures/<siteId>.html`                                                 |       | |
-|     | • Invokes Codex to generate `src/scraper/<siteId>.ts` **and** Jest test skeleton                           |       | |
+|     | • Invokes Claude Code to generate `src/scraper/<siteId>.ts` **and** Jest test skeleton                     |       | |
 |     | • Auto-commits with `auto-heal:init:` prefix on success                                                    |       | |
 |     | • Skips generation if scraper file already exists (idempotent)                                            |       | |
 

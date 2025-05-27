@@ -1,12 +1,12 @@
 # Self‑Healing Scraper – Technical Specification
 
-**Version:** 0.1  **Date:** 19 May 2025  **Editors:** Adrian Bunge & Contributors
+**Version:** 0.1  **Date:** 19 May 2025  **Editors:** Adrian Bunge & Contributors
 
 ---
 
-## 1  Background & Purpose
+## 1  Background & Purpose
 
-Modern web pages evolve frequently, breaking fragile data‑extraction scripts and creating maintenance overhead. This project delivers a **fully‑autonomous, self‑healing web scraper** that detects selector drift, asks an LLM (OpenAI Codex CLI) to patch itself, validates the patch with unit tests, and commits the fix—without human intervention.
+Modern web pages evolve frequently, breaking fragile data‑extraction scripts and creating maintenance overhead. This project delivers a **fully‑autonomous, self‑healing web scraper** that detects selector drift, asks an LLM (Claude Code) to patch itself, validates the patch with unit tests, and commits the fix—without human intervention.
 
 Key goals:
 
@@ -17,7 +17,7 @@ Key goals:
 
 ---
 
-## 2  Architecture Overview
+## 2  Architecture Overview
 
 ```
 ┌────────────┐  hourly ┌────────┐ JSON  ┌────────────┐
@@ -33,7 +33,7 @@ Key goals:
        │         │HealingOrchestra │─────────▶ done
        │         └────┬────────────┘
        ▼              ▼
-   Codex CLI  ──patch+tests──▶ Jest ▶ commit ▶ push
+   claude code CLI  ──patch+tests──▶ Jest ▶ commit ▶ push
 ```
 
 ## Service Components
@@ -44,8 +44,8 @@ Key goals:
 | **Scraper**              | Puppeteer script → returns JSON                             | `src/scraper/<site>.ts`                   |
 | **Storage Adapter**      | Persist output + retrieve history                           | `fileStore` (JSON), `sqlStore` (Postgres) |
 | **Validator**            | Count consecutive missing fields                            | In‑memory Map (optionally Redis)          |
-| **Healing Orchestrator** | Retry → invoke Codex → gate on tests → commit               | `healOrchestrator.ts`                     |
-| **Codex Wrapper**        | Spawn `codex -a full-auto`, pass context, capture exit code | `codexWrapper.ts`                         |
+| **Healing Orchestrator** | Retry → invoke Claude Code → gate on tests → commit               | `healOrchestrator.ts`                     |
+| **Claude Code Wrapper**  | Spawn `claude --dangerously-skip-permissions --output-format json`, pass context, capture output | `claudeWrapper.ts`                         |
 | **CI Runner**            | Run `npm test`, block merge on red                          | GitHub Actions, local hook                |
 
 ## Service Descriptions
@@ -74,17 +74,20 @@ Monitors and validates scraped data by tracking consecutive missing fields. Uses
 Manages the self-healing process:
 
 1. Retries failed scrapes
-2. Invokes Codex for fixes
+2. Invokes Claude Code for fixes
 3. Validates changes through tests
 4. Commits successful fixes
 
-### Codex Wrapper
+### Claude Code Wrapper
 
-Interface to the Codex system:
+Interface to the Claude Code CLI system:
 
-- Spawns `codex -a full-auto` processes
-- Manages context passing
-- Tracks execution status
+- Spawns `claude` processes with autonomous flags
+- Uses `--dangerously-skip-permissions` to run without user interaction
+- Outputs structured data via `--output-format json`
+- Pipes context through command input
+- Parses and processes JSON responses
+- Manages error handling and retry logic
 
 ### CI Runner
 
@@ -96,43 +99,45 @@ Ensures code quality through:
 
 ---
 
-## 3  Standards & Conventions
+## 3  Standards & Conventions
 
-### 3.1 Code & Tooling
+### 3.1 Code & Tooling
 
 - **Language:** TypeScript 5, `"strict": true`.
 - **Runtime:** Node 20 LTS, Puppeteer 22 (bundled Chromium).
 - **Style:** ESLint Airbnb base + Prettier.
 - **Testing:** Jest + `@testing-library/dom` for selector assertions.
 - **Commits:** Conventional Commits; auto‑heal messages use `auto-heal:` prefix.
-- **LLM Guide:** `AGENTS.md` at repo root supplies system instructions (Always write tests, never remove existing ones, run `npm test` until green, etc.).
+- **LLM Guide:** `CLAUDE.md` at repo root supplies system instructions (Always write tests, never remove existing ones, run `npm test` until green, etc.).
 
-### 3.2 Security & Compliance
+### 3.2 Security & Compliance
 
-- Codex runs **network‑sandboxed**; only target URL is fetched by Puppeteer.
-- Secrets (e.g., `OPENAI_API_KEY`) injected via env vars or GitHub OIDC—not checked into git.
-- HTML snapshots truncated to ≤ 1 MB before entering LLM prompt.
+- Claude Code runs **network‑sandboxed**; only target URL is fetched by Puppeteer.
+- Secrets (e.g., `ANTHROPIC_API_KEY`) injected via env vars or GitHub OIDC—not checked into git.
+- HTML snapshots truncated to ≤ 1 MB before entering LLM prompt.
+- Uses `CLAUDE.md` in project root to maintain context and provide guidance to Claude Code.
+- Permissions skipping (`--dangerously-skip-permissions`) only used in automated CI environments.
 
-### 3.3 Repository Layout (excerpt)
+### 3.3 Repository Layout (excerpt)
 
 ```
 src/
   scraper/            ▶ site‑specific scrapers
   storage/            ▶ pluggable adapters (file, sql, …)
   validator/          ▶ drift detection logic
-  healer/             ▶ orchestration + Codex wrapper
+  healer/             ▶ orchestration + Claude Code wrapper
   cli/                ▶ `selfheal.ts` entry‑point
 .tests/
 .docker/
 .github/workflows/
-AGENTS.md
+CLAUDE.md
 ```
 
 ---
 
-## 4  Optimised for Community Adoption
+## 4  Optimised for Community Adoption
 
-### 4.1 One‑Command Start
+### 4.1 One‑Command Start
 
 ```bash
 # local machine
@@ -142,7 +147,7 @@ pnpm install && pnpm selfheal scrape
 docker compose up --build -d
 ```
 
-### 4.2 Extensible Plugin Interfaces
+### 4.2 Extensible Plugin Interfaces
 
 - **StorageAdapter**
 
@@ -165,34 +170,34 @@ docker compose up --build -d
 
   Generates scraper stub, fixture, and Jest tests—lowering onboarding friction.
 
-### 4.3 Containerised, but not Required
+### 4.3 Containerised, but not Required
 
-- Docker Compose uses multi‑stage build (node‑builder → slim‑runtime) for 250 MB image.
+- Docker Compose uses multi‑stage build (node‑builder → slim‑runtime) for 250 MB image.
 - Kubernetes CronJob YAML provided in `/deploy/k8s/` for production clusters.
 - Native execution remains first‑class for hobbyists.
 
-### 4.4 Open‑Source Hygiene
+### 4.4 Open‑Source Hygiene
 
-- **License:** Apache‑2.0 (compatible with Codex terms).
+- **License:** Apache‑2.0 (compatible with Claude Code terms).
 - **CONTRIBUTING.md** – PR flow, coding standards, CLA bot.
 - **Issue templates** – bug, feature request, site addition.
 - **Automated lint/test in CI** – keeps main branch healthy for everyone.
 
 ---
 
-## 5  Appendices
+## 5  Appendices
 
 ### A. Environment Variables
 
-| Name              | Purpose                             | Example                         |
-| ----------------- | ----------------------------------- | ------------------------------- |
-| `OPENAI_API_KEY`  | Auth for Codex CLI                  | `sk-…`                          |
-| `SCRAPE_URL`      | Target URL (or list)                | `https://example.com/product/1` |
-| `MISS_THRESHOLD`  | N consecutive misses before healing | `3`                             |
-| `STORAGE_ADAPTER` | `file`, `sql`, `mongo`, …           | `file`                          |
+| Name                | Purpose                             | Example                         |
+| ------------------- | ----------------------------------- | ------------------------------- |
+| `ANTHROPIC_API_KEY` | Auth for Claude Code CLI            | `sk-ant-api...`                 |
+| `SCRAPE_URL`        | Target URL (or list)                | `https://example.com/product/1` |
+| `MISS_THRESHOLD`    | N consecutive misses before healing | `3`                             |
+| `STORAGE_ADAPTER`   | `file`, `sql`, `mongo`, …           | `file`                          |
 
 ### B. Glossary
 
 - **Selector drift** – change in site HTML that causes previously valid CSS/XPath selectors to fail.
-- **Healing** – automated edit‑compile‑test‑commit cycle executed by Codex.
+- **Healing** – automated edit‑compile‑test‑commit cycle executed by Claude Code.
 - **Golden fixture** – static snapshot of HTML saved for regression tests.

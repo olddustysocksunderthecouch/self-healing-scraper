@@ -1,12 +1,12 @@
 # Self-Healing Scraper
 
-> **Self-Healing Scraper** is an opinionated TypeScript framework that **detects selector drift and automatically patches itself** using an LLM (OpenAI Codex CLI). Ship your scrapers once – they will look after themselves from then on.
+> **Self-Healing Scraper** is an opinionated TypeScript framework that **detects selector drift and automatically patches itself** using an LLM (Claude Code CLI). Ship your scrapers once – they will look after themselves from then on.
 
 ---
 
 ## ✨ Key Features
 
-• **Self-repairing selectors** – when the HTML layout of the target site changes, the built-in validator flags consecutive extraction failures, kicks off the healing orchestrator and lets Codex submit a pull-request style patch.
+• **Self-repairing selectors** – when the HTML layout of the target site changes, the built-in validator flags consecutive extraction failures, kicks off the healing orchestrator and lets Claude Code submit a pull-request style patch.
 
 • **Plug-and-play storage** – start with simple JSON-on-disk; swap in Postgres, DynamoDB, S3 or anything that implements the `StorageAdapter` interface.
 
@@ -26,8 +26,8 @@ Requirements: **Node 20 LTS** (managed automatically if you use [Volta](https://
 # 1. Install dependencies
 pnpm install
 
-# 2. Run the example scraper (example.com product page)
-pnpm scrape https://example.com/product/123
+# 2. Run the example scraper (Property24 rental listing)
+pnpm scrape https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163
 
 # → JSON result is printed and persisted under ~/.selfheal/data/exampleSite.json
 ```
@@ -45,7 +45,7 @@ Hook this exit code into your CI/CD (or the provided GitHub Action) to automatic
 ```bash
 docker compose up --build selfheal
 # or
-docker run -it self-healing-scraper:latest scrape https://example.com/product/123
+docker run -it self-healing-scraper:latest scrape https://www.property24.com/to-rent/walmer-estate/cape-town/western-cape/10163
 ```
 
 ---
@@ -57,7 +57,7 @@ src/
   scraper/            ▶ site-specific scrapers (exampleSite.ts, …)
   storage/            ▶ StorageAdapter implementations (fileStore, sqlStore, …)
   validator/          ▶ DriftValidator – detects missing fields
-  healer/             ▶ Healing orchestrator + Codex wrapper (coming soon)
+  healer/             ▶ Healing orchestrator + Claude Code wrapper
   cli/                ▶ selfheal.ts – single entry-point binary
 tests/                ▶ Jest unit & e2e tests (mirrors src/ structure)
 docs/                 ▶ Additional markdown docs
@@ -86,6 +86,35 @@ pnpm test:coverage  # Generate coverage report
 ```
 
 Pre-commit hooks run `pnpm lint` automatically. Push hooks execute the full test suite so that broken code never hits `main`.
+
+---
+
+## 🤖 Claude Code Integration
+
+The self-healing capability is powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code), Anthropic's CLI tool for Claude. When selector drift is detected:
+
+1. The healing orchestrator invokes Claude Code with specific flags:
+   - `--dangerously-skip-permissions` enables fully autonomous operation
+   - `--output-format json` provides structured responses for programmatic processing
+
+2. Claude analyzes the HTML fixture and updates the selectors in the scraper code
+
+3. The system verifies the fixes by running tests
+
+4. On success, changes are automatically committed with an `auto-heal:` prefix
+
+### Configuration
+
+To use Claude Code for self-healing:
+
+1. Install Claude Code CLI: [Installation Guide](https://docs.anthropic.com/en/docs/claude-code/cli-usage)
+
+2. Set your API key:
+   ```bash
+   export ANTHROPIC_API_KEY=your_api_key
+   ```
+
+3. Create a `CLAUDE.md` file in your project root with specific instructions for Claude
 
 ---
 

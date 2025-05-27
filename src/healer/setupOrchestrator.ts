@@ -333,12 +333,26 @@ The test should:
     console.log('🤖  Invoking Claude Code to generate scraper…');
     const success = await this.runClaude(siteId, snapshot, url);
 
-    if (success && this.commit) {
-      console.log('📝  Committing generated scraper…');
+    if (success) {
+      // Force reload of scrapers to include the new one
       try {
-        await gitAutoCommit(`initial ${siteId} scraper`);
-      } catch (err) {
-        console.warn('⚠️  Git commit failed:', err);
+        // Import the new scraper directly to ensure it's registered
+        await import(`../scraper/${siteId}.js`).catch(e => 
+          console.warn(`⚠️ Could not import new scraper directly: ${e.message}`)
+        );
+        
+        console.log(`✅ New ${siteId} scraper should now be available`);
+      } catch (error) {
+        console.warn(`⚠️ Could not load new scraper: ${error}`);
+      }
+      
+      if (this.commit) {
+        console.log('📝  Committing generated scraper…');
+        try {
+          await gitAutoCommit(`initial ${siteId} scraper`);
+        } catch (err) {
+          console.warn('⚠️  Git commit failed:', err);
+        }
       }
     }
 

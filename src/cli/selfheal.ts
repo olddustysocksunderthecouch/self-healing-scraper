@@ -39,7 +39,7 @@ async function main(): Promise<void> {
 
       // Check if URL can be handled by any registered scraper
       console.log(`Checking if any scraper can handle URL: ${url}`);
-      const { canHandle, scraperId } = canHandleUrl(url);
+      const { canHandle, scraperId } = await canHandleUrl(url);
       
       if (!canHandle) {
         console.log(`Warning: No pattern explicitly matches URL: ${url}`);
@@ -54,8 +54,22 @@ async function main(): Promise<void> {
           domain = url.split('/')[0];
         }
         
+        // Extract base domain for suggestion
+        const baseDomain = domain.replace(/^www\./, '').split('.')[0];
+        const suggestedScraperId = `${baseDomain}Scraper`;
+        
         console.log(`Attempting to find a scraper by domain: ${domain}`);
         console.log('Will use best-match scraper for this domain if available');
+        
+        // Check if a file exists that might be a scraper for this domain
+        const { existsSync } = require('fs');
+        const { join } = require('path');
+        const possibleScraperPath = join(process.cwd(), 'src', 'scraper', `${suggestedScraperId}.ts`);
+        
+        if (existsSync(possibleScraperPath)) {
+          console.log(`Found a scraper file at ${possibleScraperPath} but it's not loaded.`);
+          console.log(`Try running 'npm run build:quick' to compile it first.`);
+        }
       }
       
       if (scraperId) {
